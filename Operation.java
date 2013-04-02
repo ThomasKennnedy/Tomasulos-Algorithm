@@ -1,6 +1,6 @@
 
 ///
-/// THis class provides all Operation functionality.
+/// This class provides all Operation functionality.
 ///
 
 public class Operation{
