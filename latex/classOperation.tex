@@ -1,0 +1,200 @@
+\hypertarget{classOperation}{
+\section{Operation Class Reference}
+\label{classOperation}\index{Operation@{Operation}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classOperation_ab2788c0fe03cd2bcaff181c4dee97926}{Operation} (String \hyperlink{classOperation_a91a69611ab1dd4ca12de1abdd49c2b42}{opcode}, String operand\_\-1, String operand\_\-2, String operand\_\-3, String \hyperlink{classOperation_a3b56588030b54deb7ffb0c5f0a4ebe68}{comment})
+\item 
+\hyperlink{classOperation_a97023afc59e830213c45632782c003a9}{Operation} (String \hyperlink{classOperation_a91a69611ab1dd4ca12de1abdd49c2b42}{opcode}, String operand\_\-1, String operand\_\-2, String \hyperlink{classOperation_a3b56588030b54deb7ffb0c5f0a4ebe68}{comment})
+\item 
+\hyperlink{classOperation_ad4446a177e8fee8190c847711dd040e3}{Operation} (\hyperlink{classOperation}{Operation} to\_\-copy)
+\item 
+String \hyperlink{classOperation_a1fee9b845f368eaa45f8c3a59fdc6768}{getOpcode} ()
+\item 
+String \hyperlink{classOperation_aa1f781d95004579b19a32edd7cf13b53}{getComment} ()
+\item 
+String \hyperlink{classOperation_a532c5b1c649dfa9864279f545f5e0b8d}{getOperand} (int number)  throws Exception
+\item 
+int \hyperlink{classOperation_a8edbc7a9746ccdc715d0a859bbc6679e}{getNumberOperands} ()
+\item 
+String \hyperlink{classOperation_a1e310aee2b5aeefa8094d2197816af9b}{getOperands} ()
+\item 
+void \hyperlink{classOperation_ac8493946ebb2ff362b7a9826c515aef4}{setOpcode} (String \hyperlink{classOperation_a91a69611ab1dd4ca12de1abdd49c2b42}{opcode})
+\item 
+void \hyperlink{classOperation_a4bb7b2db5560ac84940f305207b31404}{setComment} (String \hyperlink{classOperation_a3b56588030b54deb7ffb0c5f0a4ebe68}{comment})
+\item 
+void \hyperlink{classOperation_af84aceab243ad1c694e749b83a233d1a}{setOperand} (int number, String operand\_\-in)  throws Exception
+\item 
+String \hyperlink{classOperation_a14f47977fe6f954977bbe1fc558c7174}{toString} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+String \hyperlink{classOperation_a91a69611ab1dd4ca12de1abdd49c2b42}{opcode}
+\begin{DoxyCompactList}\small\item\em Contains the opcode. \item\end{DoxyCompactList}\item 
+String \hyperlink{classOperation_a3b56588030b54deb7ffb0c5f0a4ebe68}{comment}
+\begin{DoxyCompactList}\small\item\em Stores the comment. \item\end{DoxyCompactList}\item 
+String\mbox{[}$\,$\mbox{]} \hyperlink{classOperation_ae5923860533d63c6a35d658b2683a994}{operands}
+\begin{DoxyCompactList}\small\item\em Stores all operands. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+THis class provides all \hyperlink{classOperation}{Operation} functionality. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classOperation_ab2788c0fe03cd2bcaff181c4dee97926}{
+\index{Operation@{Operation}!Operation@{Operation}}
+\index{Operation@{Operation}!Operation@{Operation}}
+\subsubsection[{Operation}]{\setlength{\rightskip}{0pt plus 5cm}Operation.Operation (
+\begin{DoxyParamCaption}
+\item[{String}]{opcode, }
+\item[{String}]{operand\_\-1, }
+\item[{String}]{operand\_\-2, }
+\item[{String}]{operand\_\-3, }
+\item[{String}]{comment}
+\end{DoxyParamCaption}
+)}}
+\label{classOperation_ab2788c0fe03cd2bcaff181c4dee97926}
+Construct an \hyperlink{classOperation}{Operation} object give 1 opcode, 3 operands and one comment. \hypertarget{classOperation_a97023afc59e830213c45632782c003a9}{
+\index{Operation@{Operation}!Operation@{Operation}}
+\index{Operation@{Operation}!Operation@{Operation}}
+\subsubsection[{Operation}]{\setlength{\rightskip}{0pt plus 5cm}Operation.Operation (
+\begin{DoxyParamCaption}
+\item[{String}]{opcode, }
+\item[{String}]{operand\_\-1, }
+\item[{String}]{operand\_\-2, }
+\item[{String}]{comment}
+\end{DoxyParamCaption}
+)}}
+\label{classOperation_a97023afc59e830213c45632782c003a9}
+Construct an \hyperlink{classOperation}{Operation} object give 1 opcode, 2 operands and one comment. \hypertarget{classOperation_ad4446a177e8fee8190c847711dd040e3}{
+\index{Operation@{Operation}!Operation@{Operation}}
+\index{Operation@{Operation}!Operation@{Operation}}
+\subsubsection[{Operation}]{\setlength{\rightskip}{0pt plus 5cm}Operation.Operation (
+\begin{DoxyParamCaption}
+\item[{{\bf Operation}}]{to\_\-copy}
+\end{DoxyParamCaption}
+)}}
+\label{classOperation_ad4446a177e8fee8190c847711dd040e3}
+Construct an \hyperlink{classOperation}{Operation} object given an existing \hyperlink{classOperation}{Operation} object. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classOperation_aa1f781d95004579b19a32edd7cf13b53}{
+\index{Operation@{Operation}!getComment@{getComment}}
+\index{getComment@{getComment}!Operation@{Operation}}
+\subsubsection[{getComment}]{\setlength{\rightskip}{0pt plus 5cm}String Operation.getComment (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classOperation_aa1f781d95004579b19a32edd7cf13b53}
+Return the comment. \hypertarget{classOperation_a8edbc7a9746ccdc715d0a859bbc6679e}{
+\index{Operation@{Operation}!getNumberOperands@{getNumberOperands}}
+\index{getNumberOperands@{getNumberOperands}!Operation@{Operation}}
+\subsubsection[{getNumberOperands}]{\setlength{\rightskip}{0pt plus 5cm}int Operation.getNumberOperands (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classOperation_a8edbc7a9746ccdc715d0a859bbc6679e}
+Return the number of operands \hypertarget{classOperation_a1fee9b845f368eaa45f8c3a59fdc6768}{
+\index{Operation@{Operation}!getOpcode@{getOpcode}}
+\index{getOpcode@{getOpcode}!Operation@{Operation}}
+\subsubsection[{getOpcode}]{\setlength{\rightskip}{0pt plus 5cm}String Operation.getOpcode (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classOperation_a1fee9b845f368eaa45f8c3a59fdc6768}
+Return the opcode -\/-\/ exempli gratia LOAD, SD, DADDI. \hypertarget{classOperation_a532c5b1c649dfa9864279f545f5e0b8d}{
+\index{Operation@{Operation}!getOperand@{getOperand}}
+\index{getOperand@{getOperand}!Operation@{Operation}}
+\subsubsection[{getOperand}]{\setlength{\rightskip}{0pt plus 5cm}String Operation.getOperand (
+\begin{DoxyParamCaption}
+\item[{int}]{number}
+\end{DoxyParamCaption}
+)  throws Exception}}
+\label{classOperation_a532c5b1c649dfa9864279f545f5e0b8d}
+Get the operand at the specified position. Positions start at \char`\"{}1\char`\"{}. Return an error if the position is invalid. \hypertarget{classOperation_a1e310aee2b5aeefa8094d2197816af9b}{
+\index{Operation@{Operation}!getOperands@{getOperands}}
+\index{getOperands@{getOperands}!Operation@{Operation}}
+\subsubsection[{getOperands}]{\setlength{\rightskip}{0pt plus 5cm}String Operation.getOperands (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classOperation_a1e310aee2b5aeefa8094d2197816af9b}
+Return a String containing all operands. \hypertarget{classOperation_a4bb7b2db5560ac84940f305207b31404}{
+\index{Operation@{Operation}!setComment@{setComment}}
+\index{setComment@{setComment}!Operation@{Operation}}
+\subsubsection[{setComment}]{\setlength{\rightskip}{0pt plus 5cm}void Operation.setComment (
+\begin{DoxyParamCaption}
+\item[{String}]{comment}
+\end{DoxyParamCaption}
+)}}
+\label{classOperation_a4bb7b2db5560ac84940f305207b31404}
+Set a comment \hypertarget{classOperation_ac8493946ebb2ff362b7a9826c515aef4}{
+\index{Operation@{Operation}!setOpcode@{setOpcode}}
+\index{setOpcode@{setOpcode}!Operation@{Operation}}
+\subsubsection[{setOpcode}]{\setlength{\rightskip}{0pt plus 5cm}void Operation.setOpcode (
+\begin{DoxyParamCaption}
+\item[{String}]{opcode}
+\end{DoxyParamCaption}
+)}}
+\label{classOperation_ac8493946ebb2ff362b7a9826c515aef4}
+Set the \hyperlink{classOperation}{Operation} opcode. \hypertarget{classOperation_af84aceab243ad1c694e749b83a233d1a}{
+\index{Operation@{Operation}!setOperand@{setOperand}}
+\index{setOperand@{setOperand}!Operation@{Operation}}
+\subsubsection[{setOperand}]{\setlength{\rightskip}{0pt plus 5cm}void Operation.setOperand (
+\begin{DoxyParamCaption}
+\item[{int}]{number, }
+\item[{String}]{operand\_\-in}
+\end{DoxyParamCaption}
+)  throws Exception}}
+\label{classOperation_af84aceab243ad1c694e749b83a233d1a}
+Set the operand at the specified position. Positions start at \char`\"{}1\char`\"{}. Return an error if the position is invalid. \hypertarget{classOperation_a14f47977fe6f954977bbe1fc558c7174}{
+\index{Operation@{Operation}!toString@{toString}}
+\index{toString@{toString}!Operation@{Operation}}
+\subsubsection[{toString}]{\setlength{\rightskip}{0pt plus 5cm}String Operation.toString (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classOperation_a14f47977fe6f954977bbe1fc558c7174}
+Return the string represeation of the \hyperlink{classOperation}{Operation} object. 
+
+\subsection{Member Data Documentation}
+\hypertarget{classOperation_a3b56588030b54deb7ffb0c5f0a4ebe68}{
+\index{Operation@{Operation}!comment@{comment}}
+\index{comment@{comment}!Operation@{Operation}}
+\subsubsection[{comment}]{\setlength{\rightskip}{0pt plus 5cm}String {\bf Operation.comment}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classOperation_a3b56588030b54deb7ffb0c5f0a4ebe68}
+
+
+Stores the comment. 
+
+\hypertarget{classOperation_a91a69611ab1dd4ca12de1abdd49c2b42}{
+\index{Operation@{Operation}!opcode@{opcode}}
+\index{opcode@{opcode}!Operation@{Operation}}
+\subsubsection[{opcode}]{\setlength{\rightskip}{0pt plus 5cm}String {\bf Operation.opcode}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classOperation_a91a69611ab1dd4ca12de1abdd49c2b42}
+
+
+Contains the opcode. 
+
+\hypertarget{classOperation_ae5923860533d63c6a35d658b2683a994}{
+\index{Operation@{Operation}!operands@{operands}}
+\index{operands@{operands}!Operation@{Operation}}
+\subsubsection[{operands}]{\setlength{\rightskip}{0pt plus 5cm}String \mbox{[}$\,$\mbox{]} {\bf Operation.operands}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classOperation_ae5923860533d63c6a35d658b2683a994}
+
+
+Stores all operands. 
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Operation_8java}{Operation.java}\end{DoxyCompactItemize}

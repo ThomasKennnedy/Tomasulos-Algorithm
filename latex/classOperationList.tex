@@ -1,0 +1,137 @@
+\hypertarget{classOperationList}{
+\section{OperationList Class Reference}
+\label{classOperationList}\index{OperationList@{OperationList}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classOperationList_a1ab8693ff3f4043e023c0f3e55b5a22b}{OperationList} ()
+\item 
+\hyperlink{classOperationList_a8f3be80cbd49542d00ce5f122ba7e06b}{OperationList} (\hyperlink{classOperationList}{OperationList} to\_\-copy)
+\item 
+ArrayList$<$ \hyperlink{classOperation}{Operation} $>$ \hyperlink{classOperationList_a8eab211c05128d5926984a11e0342d8c}{getOperationList} ()
+\item 
+\hyperlink{classOperation}{Operation} \hyperlink{classOperationList_a0a2b5d92ab9462e4bdbcb8bbc52e7445}{getOperation} (int num)  throws Exception
+\item 
+\hyperlink{classOperation}{Operation} \hyperlink{classOperationList_a97099cc539ae05decfdd605393a6d112}{getNextOperation} ()  throws Exception
+\item 
+boolean \hyperlink{classOperationList_af3d91752e3eb3a37b506e23a713537b8}{moreOperationsQueued} ()
+\item 
+void \hyperlink{classOperationList_a2a4d8bcf86f75195c0f3602c0f531d25}{addOperation} (\hyperlink{classOperation}{Operation} to\_\-add)
+\item 
+String \hyperlink{classOperationList_afa338da3a6aaeebc5207c666faf1da9d}{toString} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+ArrayList$<$ \hyperlink{classOperation}{Operation} $>$ \hyperlink{classOperationList_ad738b2ec75b157d945eea5dbdb6b2b9e}{op\_\-list}
+\begin{DoxyCompactList}\small\item\em The list op Operations. \item\end{DoxyCompactList}\item 
+int \hyperlink{classOperationList_abbc30401d74aa280541791832c128a2b}{curr\_\-op}
+\begin{DoxyCompactList}\small\item\em The current \hyperlink{classOperation}{Operation}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class provides all operation queueing and storage funtionality. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classOperationList_a1ab8693ff3f4043e023c0f3e55b5a22b}{
+\index{OperationList@{OperationList}!OperationList@{OperationList}}
+\index{OperationList@{OperationList}!OperationList@{OperationList}}
+\subsubsection[{OperationList}]{\setlength{\rightskip}{0pt plus 5cm}OperationList.OperationList (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classOperationList_a1ab8693ff3f4043e023c0f3e55b5a22b}
+Initialize the op\_\-list. \hypertarget{classOperationList_a8f3be80cbd49542d00ce5f122ba7e06b}{
+\index{OperationList@{OperationList}!OperationList@{OperationList}}
+\index{OperationList@{OperationList}!OperationList@{OperationList}}
+\subsubsection[{OperationList}]{\setlength{\rightskip}{0pt plus 5cm}OperationList.OperationList (
+\begin{DoxyParamCaption}
+\item[{{\bf OperationList}}]{to\_\-copy}
+\end{DoxyParamCaption}
+)}}
+\label{classOperationList_a8f3be80cbd49542d00ce5f122ba7e06b}
+Generate a new \hyperlink{classOperationList}{OperationList} from the specified \hyperlink{classOperationList}{OperationList}. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classOperationList_a2a4d8bcf86f75195c0f3602c0f531d25}{
+\index{OperationList@{OperationList}!addOperation@{addOperation}}
+\index{addOperation@{addOperation}!OperationList@{OperationList}}
+\subsubsection[{addOperation}]{\setlength{\rightskip}{0pt plus 5cm}void OperationList.addOperation (
+\begin{DoxyParamCaption}
+\item[{{\bf Operation}}]{to\_\-add}
+\end{DoxyParamCaption}
+)}}
+\label{classOperationList_a2a4d8bcf86f75195c0f3602c0f531d25}
+Add an operation to the \hyperlink{classOperationList}{OperationList} \hypertarget{classOperationList_a97099cc539ae05decfdd605393a6d112}{
+\index{OperationList@{OperationList}!getNextOperation@{getNextOperation}}
+\index{getNextOperation@{getNextOperation}!OperationList@{OperationList}}
+\subsubsection[{getNextOperation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Operation} OperationList.getNextOperation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)  throws Exception}}
+\label{classOperationList_a97099cc539ae05decfdd605393a6d112}
+Get the next \hyperlink{classOperation}{Operation} to be scheduled. \hypertarget{classOperationList_a0a2b5d92ab9462e4bdbcb8bbc52e7445}{
+\index{OperationList@{OperationList}!getOperation@{getOperation}}
+\index{getOperation@{getOperation}!OperationList@{OperationList}}
+\subsubsection[{getOperation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Operation} OperationList.getOperation (
+\begin{DoxyParamCaption}
+\item[{int}]{num}
+\end{DoxyParamCaption}
+)  throws Exception}}
+\label{classOperationList_a0a2b5d92ab9462e4bdbcb8bbc52e7445}
+Get an \hyperlink{classOperation}{Operation} given a position number. The first position is \char`\"{}1\char`\"{}. \hypertarget{classOperationList_a8eab211c05128d5926984a11e0342d8c}{
+\index{OperationList@{OperationList}!getOperationList@{getOperationList}}
+\index{getOperationList@{getOperationList}!OperationList@{OperationList}}
+\subsubsection[{getOperationList}]{\setlength{\rightskip}{0pt plus 5cm}ArrayList$<${\bf Operation}$>$ OperationList.getOperationList (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classOperationList_a8eab211c05128d5926984a11e0342d8c}
+Return an ArrayList$<$Operation$>$ that contains a copy of all Operations. \hypertarget{classOperationList_af3d91752e3eb3a37b506e23a713537b8}{
+\index{OperationList@{OperationList}!moreOperationsQueued@{moreOperationsQueued}}
+\index{moreOperationsQueued@{moreOperationsQueued}!OperationList@{OperationList}}
+\subsubsection[{moreOperationsQueued}]{\setlength{\rightskip}{0pt plus 5cm}boolean OperationList.moreOperationsQueued (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classOperationList_af3d91752e3eb3a37b506e23a713537b8}
+Returns true when there is at least one \hyperlink{classOperation}{Operation} that hs not been scheduled. Returns false if there is not an \hyperlink{classOperation}{Operation} to schedule. \hypertarget{classOperationList_afa338da3a6aaeebc5207c666faf1da9d}{
+\index{OperationList@{OperationList}!toString@{toString}}
+\index{toString@{toString}!OperationList@{OperationList}}
+\subsubsection[{toString}]{\setlength{\rightskip}{0pt plus 5cm}String OperationList.toString (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classOperationList_afa338da3a6aaeebc5207c666faf1da9d}
+Generates the string representation of the \hyperlink{classOperation}{Operation} Object. 
+
+\subsection{Member Data Documentation}
+\hypertarget{classOperationList_abbc30401d74aa280541791832c128a2b}{
+\index{OperationList@{OperationList}!curr\_\-op@{curr\_\-op}}
+\index{curr\_\-op@{curr\_\-op}!OperationList@{OperationList}}
+\subsubsection[{curr\_\-op}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf OperationList.curr\_\-op}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classOperationList_abbc30401d74aa280541791832c128a2b}
+
+
+The current \hyperlink{classOperation}{Operation}. 
+
+\hypertarget{classOperationList_ad738b2ec75b157d945eea5dbdb6b2b9e}{
+\index{OperationList@{OperationList}!op\_\-list@{op\_\-list}}
+\index{op\_\-list@{op\_\-list}!OperationList@{OperationList}}
+\subsubsection[{op\_\-list}]{\setlength{\rightskip}{0pt plus 5cm}ArrayList$<${\bf Operation}$>$ {\bf OperationList.op\_\-list}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classOperationList_ad738b2ec75b157d945eea5dbdb6b2b9e}
+
+
+The list op Operations. 
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{OperationList_8java}{OperationList.java}\end{DoxyCompactItemize}

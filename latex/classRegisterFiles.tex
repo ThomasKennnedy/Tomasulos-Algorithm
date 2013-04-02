@@ -1,0 +1,152 @@
+\hypertarget{classRegisterFiles}{
+\section{RegisterFiles Class Reference}
+\label{classRegisterFiles}\index{RegisterFiles@{RegisterFiles}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRegisterFiles_aef4ab4cab2d2cc79b9cbf651853f5349}{RegisterFiles} ()
+\item 
+\hyperlink{classRegisterFiles_a2aae18c5c9abcb311e8a425ab7215000}{RegisterFiles} (\hyperlink{classRegisterFiles}{RegisterFiles} to\_\-copy)
+\item 
+Hashtable$<$ String, String $>$ \hyperlink{classRegisterFiles_ad11babbe63b35dc5c0cde04158a79be7}{getIntegerRegisters} ()
+\item 
+Hashtable$<$ String, String $>$ \hyperlink{classRegisterFiles_a5e76f5637fa7975b365bb17c94b405bc}{getFPRegisters} ()
+\item 
+String \hyperlink{classRegisterFiles_aa31a4ef3fd261434e788bd0b5c7e5c71}{getRegister} (String r\_\-id)  throws Exception
+\item 
+void \hyperlink{classRegisterFiles_a8c750398bebe4a19b9d7db61f8affe69}{setRegister} (String r\_\-id, String val\_\-in)  throws Exception
+\item 
+String \hyperlink{classRegisterFiles_a72d8f3fe46917e2a365cbc255bfc4dc2}{toString} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final int \hyperlink{classRegisterFiles_acddf439e364d3aae0d80304b9a48cddc}{NUM\_\-INT\_\-REGISTERS} = 32
+\begin{DoxyCompactList}\small\item\em Total number of integer registers. \item\end{DoxyCompactList}\item 
+static final int \hyperlink{classRegisterFiles_aa00e6ad5b82f53a4b9afd7187f3a4245}{NUM\_\-FP\_\-REGISTERS} = 32
+\begin{DoxyCompactList}\small\item\em Total number of floating point registers. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Hashtable$<$ String, String $>$ \hyperlink{classRegisterFiles_a9a9b1e074fab69ab6201b5a06f8eaaa6}{registers\_\-int}
+\begin{DoxyCompactList}\small\item\em Consists of all integer registers. \item\end{DoxyCompactList}\item 
+Hashtable$<$ String, String $>$ \hyperlink{classRegisterFiles_a745f9139c6fa19ec3e13bef143ccf6ec}{registers\_\-fp}
+\begin{DoxyCompactList}\small\item\em Consists of all floating point registers. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class provides all register functionality for integer and floating point register files. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classRegisterFiles_aef4ab4cab2d2cc79b9cbf651853f5349}{
+\index{RegisterFiles@{RegisterFiles}!RegisterFiles@{RegisterFiles}}
+\index{RegisterFiles@{RegisterFiles}!RegisterFiles@{RegisterFiles}}
+\subsubsection[{RegisterFiles}]{\setlength{\rightskip}{0pt plus 5cm}RegisterFiles.RegisterFiles (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classRegisterFiles_aef4ab4cab2d2cc79b9cbf651853f5349}
+Constructs the register files; initializes all floating point and integer registers to \char`\"{}0\char`\"{}; \hypertarget{classRegisterFiles_a2aae18c5c9abcb311e8a425ab7215000}{
+\index{RegisterFiles@{RegisterFiles}!RegisterFiles@{RegisterFiles}}
+\index{RegisterFiles@{RegisterFiles}!RegisterFiles@{RegisterFiles}}
+\subsubsection[{RegisterFiles}]{\setlength{\rightskip}{0pt plus 5cm}RegisterFiles.RegisterFiles (
+\begin{DoxyParamCaption}
+\item[{{\bf RegisterFiles}}]{to\_\-copy}
+\end{DoxyParamCaption}
+)}}
+\label{classRegisterFiles_a2aae18c5c9abcb311e8a425ab7215000}
+Generates a copy of an existing \hyperlink{classRegisterFiles}{RegisterFiles} object. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classRegisterFiles_a5e76f5637fa7975b365bb17c94b405bc}{
+\index{RegisterFiles@{RegisterFiles}!getFPRegisters@{getFPRegisters}}
+\index{getFPRegisters@{getFPRegisters}!RegisterFiles@{RegisterFiles}}
+\subsubsection[{getFPRegisters}]{\setlength{\rightskip}{0pt plus 5cm}Hashtable$<$String, String$>$ RegisterFiles.getFPRegisters (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classRegisterFiles_a5e76f5637fa7975b365bb17c94b405bc}
+Returns a Hashtable that conatins a copy of the current floating point register file. \hypertarget{classRegisterFiles_ad11babbe63b35dc5c0cde04158a79be7}{
+\index{RegisterFiles@{RegisterFiles}!getIntegerRegisters@{getIntegerRegisters}}
+\index{getIntegerRegisters@{getIntegerRegisters}!RegisterFiles@{RegisterFiles}}
+\subsubsection[{getIntegerRegisters}]{\setlength{\rightskip}{0pt plus 5cm}Hashtable$<$String, String$>$ RegisterFiles.getIntegerRegisters (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classRegisterFiles_ad11babbe63b35dc5c0cde04158a79be7}
+Returns a Hashtable that conatins a copy of the current integer register file. \hypertarget{classRegisterFiles_aa31a4ef3fd261434e788bd0b5c7e5c71}{
+\index{RegisterFiles@{RegisterFiles}!getRegister@{getRegister}}
+\index{getRegister@{getRegister}!RegisterFiles@{RegisterFiles}}
+\subsubsection[{getRegister}]{\setlength{\rightskip}{0pt plus 5cm}String RegisterFiles.getRegister (
+\begin{DoxyParamCaption}
+\item[{String}]{r\_\-id}
+\end{DoxyParamCaption}
+)  throws Exception}}
+\label{classRegisterFiles_aa31a4ef3fd261434e788bd0b5c7e5c71}
+Returns the current value of the specified register. An \char`\"{}Invalid register ID\char`\"{} exception is thrown if the specified register does not exist. \hypertarget{classRegisterFiles_a8c750398bebe4a19b9d7db61f8affe69}{
+\index{RegisterFiles@{RegisterFiles}!setRegister@{setRegister}}
+\index{setRegister@{setRegister}!RegisterFiles@{RegisterFiles}}
+\subsubsection[{setRegister}]{\setlength{\rightskip}{0pt plus 5cm}void RegisterFiles.setRegister (
+\begin{DoxyParamCaption}
+\item[{String}]{r\_\-id, }
+\item[{String}]{val\_\-in}
+\end{DoxyParamCaption}
+)  throws Exception}}
+\label{classRegisterFiles_a8c750398bebe4a19b9d7db61f8affe69}
+Sets a new value for the specified register. An \char`\"{}Invalid register ID\char`\"{} exception is thrown if the specified register does not exist. \hypertarget{classRegisterFiles_a72d8f3fe46917e2a365cbc255bfc4dc2}{
+\index{RegisterFiles@{RegisterFiles}!toString@{toString}}
+\index{toString@{toString}!RegisterFiles@{RegisterFiles}}
+\subsubsection[{toString}]{\setlength{\rightskip}{0pt plus 5cm}String RegisterFiles.toString (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classRegisterFiles_a72d8f3fe46917e2a365cbc255bfc4dc2}
+Generates the string representation of the \hyperlink{classRegisterFiles}{RegisterFiles} Object. 
+
+\subsection{Member Data Documentation}
+\hypertarget{classRegisterFiles_aa00e6ad5b82f53a4b9afd7187f3a4245}{
+\index{RegisterFiles@{RegisterFiles}!NUM\_\-FP\_\-REGISTERS@{NUM\_\-FP\_\-REGISTERS}}
+\index{NUM\_\-FP\_\-REGISTERS@{NUM\_\-FP\_\-REGISTERS}!RegisterFiles@{RegisterFiles}}
+\subsubsection[{NUM\_\-FP\_\-REGISTERS}]{\setlength{\rightskip}{0pt plus 5cm}final int {\bf RegisterFiles.NUM\_\-FP\_\-REGISTERS} = 32\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classRegisterFiles_aa00e6ad5b82f53a4b9afd7187f3a4245}
+
+
+Total number of floating point registers. 
+
+\hypertarget{classRegisterFiles_acddf439e364d3aae0d80304b9a48cddc}{
+\index{RegisterFiles@{RegisterFiles}!NUM\_\-INT\_\-REGISTERS@{NUM\_\-INT\_\-REGISTERS}}
+\index{NUM\_\-INT\_\-REGISTERS@{NUM\_\-INT\_\-REGISTERS}!RegisterFiles@{RegisterFiles}}
+\subsubsection[{NUM\_\-INT\_\-REGISTERS}]{\setlength{\rightskip}{0pt plus 5cm}final int {\bf RegisterFiles.NUM\_\-INT\_\-REGISTERS} = 32\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classRegisterFiles_acddf439e364d3aae0d80304b9a48cddc}
+
+
+Total number of integer registers. 
+
+\hypertarget{classRegisterFiles_a745f9139c6fa19ec3e13bef143ccf6ec}{
+\index{RegisterFiles@{RegisterFiles}!registers\_\-fp@{registers\_\-fp}}
+\index{registers\_\-fp@{registers\_\-fp}!RegisterFiles@{RegisterFiles}}
+\subsubsection[{registers\_\-fp}]{\setlength{\rightskip}{0pt plus 5cm}Hashtable$<$String, String$>$ {\bf RegisterFiles.registers\_\-fp}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classRegisterFiles_a745f9139c6fa19ec3e13bef143ccf6ec}
+
+
+Consists of all floating point registers. 
+
+\hypertarget{classRegisterFiles_a9a9b1e074fab69ab6201b5a06f8eaaa6}{
+\index{RegisterFiles@{RegisterFiles}!registers\_\-int@{registers\_\-int}}
+\index{registers\_\-int@{registers\_\-int}!RegisterFiles@{RegisterFiles}}
+\subsubsection[{registers\_\-int}]{\setlength{\rightskip}{0pt plus 5cm}Hashtable$<$String, String$>$ {\bf RegisterFiles.registers\_\-int}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classRegisterFiles_a9a9b1e074fab69ab6201b5a06f8eaaa6}
+
+
+Consists of all integer registers. 
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{RegisterFiles_8java}{RegisterFiles.java}\end{DoxyCompactItemize}
