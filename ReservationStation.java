@@ -85,6 +85,11 @@ public class ReservationStation{
 	public void setVk(Long i){
 		vk=i;
 	}
-
+	
+	public scheduleInstruction(Operation op){
+		this.busy= true;
+	
+	// rest schedule code goes here.
+	}
 	
 
