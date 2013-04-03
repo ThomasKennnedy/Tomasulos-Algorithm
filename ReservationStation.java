@@ -1,6 +1,6 @@
 public class ReservationStation{
     public String sname;       //name of reservation station
-    private boolean busy;      //is station holding an operationg
+    private boolean busy;      //is station holding an operation
     private Operation operation;  //type of operation
     private long vj;           //value of operand
     private long vk;           //value of operand
@@ -10,8 +10,8 @@ public class ReservationStation{
     public long result;       //used to hold result 
     
 
-    public boolean resultReady;   //flag indicating result is ready to be written
-    public boolean resultWritten;  //flag indicating the result has been written
+    private boolean resultReady;   //flag indicating result is ready to be written
+    private boolean resultWritten;  //flag indicating the result has been written
 
     public ReservationStation(String sname){
         this.sname = sname;
@@ -29,15 +29,15 @@ public class ReservationStation{
         operation = null;
         Vj = Vk = A = 0;
         Qj = Qk = null;
-        resultReady = false;
-        resultWritten = false;
+        resultready = false;
+        resultwritten = false;
     }
 
     //determines whether the operands are available and therefore ready
     //for execution
     public boolean isReady(){
-        return (isbusy == true && Qj == null && Qk == null && 
-                resultReady == false);
+        return (busy == true && qj == null && qk == null && 
+                resultready == false);
     }
 
 	// getters methods
@@ -61,12 +61,16 @@ public class ReservationStation{
                 return A;
         }
 
-	public Operation getOperation(){
-		return operation;
-	}
-
 	public boolean isBusy(){
 		return busy;
+	}
+	
+	public boolean isResultReady(){
+		return resultready;
+	}
+
+	public boolean isResultWriiten(){
+		return resultwritten;
 	}
 
 	//setter methods
@@ -78,11 +82,11 @@ public class ReservationStation{
 		qk=sname;
 	}
 
-	public void setVj(Long i){
+	public void setVj(long i){
 		vj=i;
 	}
 
-	public void setVk(Long i){
+	public void setVk(long i){
 		vk=i;
 	}
 	
@@ -92,4 +96,4 @@ public class ReservationStation{
 	// rest schedule code goes here.
 	}
 	
-
+}
