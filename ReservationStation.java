@@ -7,7 +7,8 @@ public class ReservationStation{
     private String qj;         //name of reservation station producing Vj
     private String qk;         //name of reservation station producing Vk
     private long A;            //used to hold immediate field or off address
-    public long result;       //used to hold result 
+    public String result;       //used to hold result 
+    private long duration;
     
 
     private boolean resultReady;   //flag indicating result is ready to be written
