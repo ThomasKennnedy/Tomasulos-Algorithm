@@ -1,11 +1,11 @@
 public abstract class ReservationStation {
 	protected String sname;       //name of reservation station
-    protected boolean busy;      //is station holding an operation
-    protected Operation operation;  //type of operation
+   	protected boolean busy;      //is station holding an operation
+	protected Operation operation;  //type of operation
 	protected String result;       //used to hold result
-    protected long duration;
+    	protected long duration;
 	protected boolean resultReady;   //flag indicating result is ready to be written
-    protected boolean resultWritten;  //flag indicating the result has been written
+    	protected boolean resultWritten;  //flag indicating the result has been written
 	
 	abstract void clear();    //after result is written, clear the reservation station
 	
