@@ -1,23 +1,27 @@
+///
+/// This class provides all ALUStation functionality.
+///
+
 public class ALUStation extends ReservationStation{
     
-    private String vj;           //value of operand
-    private String vk;           //value of operand
-    private String qj;         //name of reservation station producing Vj
-    private String qk;         //name of reservation station producing Vk
-    private String A;            //used to hold immediate field or off address
+    private String vj;          ///<value of operand
+    private String vk;          ///<value of operand
+    private String qj;          ///<name of reservation station producing Vj
+    private String qk;         	///<name of reservation station producing Vk
+    private String A;           ///<used to hold immediate field or off address
     
-
+	///
+    /// Calls superclass constructor and initializes vj,vk,qj and qk
+    ///
     public void ALUStation(String sname){
-        sname = sname;
-        busy = false;
-        operation = null;
+        super(sname);
         vj = vk = A = null;
         qj = qk = null;
-        resultReady = false;
-        resultWritten = false;
     }
-
-    //after result is written, clear the reservation station
+    
+    ///
+    /// Function to clear the reservation Station
+    ///
     public void clear(){
         busy = false;
         operation = null;
@@ -26,58 +30,94 @@ public class ALUStation extends ReservationStation{
         resultready = false;
         resultwritten = false;
     }
-
-    //determines whether the operands are available and therefore ready
-    //for execution
+    
+	///
+    /// Function to determine whether operands are available and therefore ready for execution
+    ///
     public boolean isReady(){
-        return (busy == true && qj == null && qk == null && 
+        return (busy == true && qj == null && qk == null &&
                 resultready == false);
     }
 	
+	///
+    /// Function to schedule the instruction
+    ///
 	public scheduleInstruction(Operation op){
 		this.busy= true;
-
-	// rest schedule code goes here.
+        
+        // rest schedule code goes here.
 	}
-
-	// getters methods
+	
+	///
+    /// Function returns the value vj
+    ///
 	public String getVj(){
 		return vj;
 	}
-
+    
+	///
+    /// Function returns the value vk
+    ///
 	public String getVk(){
 		return vk;
 	}
-
+    
+	///
+    /// Function returns the value qj
+    ///
 	public String getQj(){
 		return qj;
 	}
-
+    
+	///
+    /// Function returns the value qk
+    ///
 	public String getQk(){
 		return qk;
 	}
-
+    
+	///
+    /// Function returns the value A
+    ///
 	public String getA(){
-                return A;
+        return A;
     }
-
-	//setter methods
+    
+	///
+    /// Function to set the value of qj
+    ///
 	public void setQj(String sname){
 		qj=sname;
 	}
-
+    
+	///
+    /// Function to set the value of qk
+    ///
 	public void setQk(String sname){
 		qk=sname;
 	}
-
+    
+	///
+    /// Function to set the value of vj
+    ///
 	public void setVj(String i){
 		vj=i;
 	}
-
+	
+	///
+    /// Function to set the value of vk
+    ///
 	public void setVk(String i){
 		vk=i;
 	}
-
 	
-
+	///
+    /// Function to set the value of A
+    ///
+	public void setA(String i){
+		A=i;
+	}
+    
+	
+    
 }
