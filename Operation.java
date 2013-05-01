@@ -26,8 +26,19 @@ public class Operation{
      /// Construct an Operation object give 1 opcode, 2 operands and a boolean.
      ///     
      public Operation( String opcode, String operand_1, String operand_2, boolean has_comment ){
+          //break apart the second operand
+          String temp = operand_2; //temporary string    
+          String operand_3;
+          
+          int temp_index;          // temporary index  
+          temp_index = temp.indexOf("(");
+          
+          operand_3 = temp.substring( temp_index+1, temp.indexOf(")") );
+          operand_2 = temp.substring( 0 , temp_index );
+          
+          
           this.opcode      = opcode;
-          this.operands    = new String[]{ operand_1, operand_2};
+          this.operands    = new String[]{ operand_1, operand_2, operand_3};
           this.comment     = comment;
           this.has_comment = has_comment;
      }

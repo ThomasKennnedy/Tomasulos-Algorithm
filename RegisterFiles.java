@@ -21,18 +21,18 @@ public class RegisterFiles{
           registers_fp  = new LinkedHashMap<String, String>();
           
           //Initialize R0
-               registers_int.put( "R0", "R0" );
+          //registers_int.put( "R0", "R0" );
           
           //Initialize the Integer Registers R1 to Rn
           for( int i = 0; i < NUM_INT_REGISTERS; i++ ){
-               String temp_reg =  "R" + ( ( 2*i ) + 1 );
-               registers_int.put( temp_reg, temp_reg  );
+               String temp_reg =  "R" + ( i + 1 );
+               registers_int.put( temp_reg, ""  );
           }
           
           //Initialize the FP Registers f0 to Fn
           for( int i = 0; i < NUM_FP_REGISTERS; i++ ){
                String temp_reg =  "F" + (  2*i  );
-               registers_fp.put( temp_reg, temp_reg );
+               registers_fp.put( temp_reg, "" );
           }
      }
      
@@ -66,8 +66,8 @@ public class RegisterFiles{
      ///Returns the current value of the specified register. An "Invalid register ID" exception is thrown if 
      ///the specified register does not exist. 
      ///
-     public String getRegister( String r_id ) throws Exception{
-          String to_return;
+     public String getRegister( String r_id ) /*throws Exception*/{
+          String to_return="";
           
           if( r_id.charAt(0) == 'R' ){
                to_return = registers_int.get( r_id );
@@ -75,12 +75,16 @@ public class RegisterFiles{
           else if( r_id.charAt(0) == 'F' ){
                to_return = registers_fp.get( r_id );
           }
-          else{
+          /*else{
                throw new Exception(){
                     public String toString(){
                          return "Invalid Register ID.";
                     }
                };
+          }*/
+          
+          if( to_return.equals("") ){
+               to_return = r_id;
           }
           
           return to_return;
@@ -90,20 +94,20 @@ public class RegisterFiles{
      ///Sets a new value for the specified register. An "Invalid register ID" exception is thrown if 
      ///the specified register does not exist. 
      ///
-     public void setRegister( String r_id, String val_in ) throws Exception{
+     public void setRegister( String r_id, String val_in ) /*throws Exception*/{
           if( r_id.charAt(0) == 'R' && registers_int.containsKey( r_id ) ){
                registers_int.put( r_id, val_in );
           }
           else if( r_id.charAt(0) == 'F' && registers_int.containsKey( r_id )){
                registers_fp.put( r_id, val_in );
-          }
+          }/*
           else{
                throw new Exception(){
                     public String toString(){
                          return "Invalid Register ID.";
                     }
                };
-          }
+          }*/
      }
      
      ///

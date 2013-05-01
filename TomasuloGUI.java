@@ -396,8 +396,8 @@ public class TomasuloGUI extends JFrame {
           
           //Update Integer Table Values
           for( Map.Entry<String, String> int_entry : temp_int_reg.entrySet() ){
-               reg_model.setValueAt( int_entry.getKey(), temp_it_index, 0 );
-               reg_model.setValueAt( int_entry.getValue(), temp_it_index, 1 );
+               reg_model.setValueAt( int_entry.getKey(), temp_it_index, 2 );
+               reg_model.setValueAt( int_entry.getValue(), temp_it_index, 3 );
                
                temp_it_index++;
           }
@@ -405,8 +405,8 @@ public class TomasuloGUI extends JFrame {
           temp_it_index = 0;
           //Update Integer Table Values
           for( Map.Entry<String, String> fp_entry : temp_fp_reg.entrySet() ){
-               reg_model.setValueAt( fp_entry.getKey(), temp_it_index, 2 );
-               reg_model.setValueAt( fp_entry.getValue(), temp_it_index, 3 );
+               reg_model.setValueAt( fp_entry.getKey(), temp_it_index, 0 );
+               reg_model.setValueAt( fp_entry.getValue(), temp_it_index, 1 );
                
                temp_it_index++;
           }

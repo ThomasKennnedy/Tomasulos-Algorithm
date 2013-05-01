@@ -3,12 +3,16 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Simulation{
      private OperationList operations;
      private RegisterFiles registers;
      private ALUStation[] alu_rs;
      private MemStation[] mem_rs;
+     
+     private HashMap<String, Integer[] > instruction_to_station; ///< Mapping of instructions to Reservation Stations
      
      private Clock clock;
 
@@ -23,11 +27,13 @@ public class Simulation{
      
           OperationFileParser file_parser = new OperationFileParser( data_file );
           
+          //Iniatialize containers for instructions and registers
           operations = new OperationList();
           registers = new RegisterFiles();
                     
           file_parser.parseFile( operations );
           
+          //Create and intialize Reservation Stations
           alu_rs = new ALUStation[7];
           mem_rs = new MemStation[4];
           
@@ -44,6 +50,28 @@ public class Simulation{
           mem_rs[2] = new MemStation("Store1");
           mem_rs[3] = new MemStation("Store2");
           
+          //Create Mapping of instructions to the appropiate Reservation Stations
+          HashMap<String, Integer[] > instruction_to_station = new HashMap<String, Integer[] >();
+          //Memory Indices
+          instruction_to_station.put( "L.D", new Integer[]{0,1} );
+          instruction_to_station.put( "LD", new Integer[]{0,1} );
+          instruction_to_station.put( "S.D", new Integer[]{2,3} );
+          instruction_to_station.put( "SD", new Integer[]{2,3} );
+          
+          //ALU Indecies
+          instruction_to_station.put( "DADDI", new Integer[]{0} );
+          instruction_to_station.put( "DADD", new Integer[]{1,2} );
+          instruction_to_station.put( "ADDD", new Integer[]{1,2} );
+          instruction_to_station.put( "DSUB", new Integer[]{1,2} );
+          instruction_to_station.put( "SUBD", new Integer[]{1,2} );
+          instruction_to_station.put( "MULD", new Integer[]{3,4} );
+          instruction_to_station.put( "MUL.D", new Integer[]{3,4} );
+          instruction_to_station.put( "MULTD", new Integer[]{3,4} );
+          instruction_to_station.put( "DIVD", new Integer[]{5,6} );
+          instruction_to_station.put( "DIV.D", new Integer[]{5,6} );
+          
+          
+          //indicate that the simulation has been initialized
           is_initialized = true;
      }
      
@@ -102,6 +130,12 @@ public class Simulation{
           if( op_scheduled ){
                operations.increment();
           }        */  
+                    
+          if( operations.getOperation( 1 ).hasComment() ){
+               parseComment( operations.getOperation( 1 ).getComment() );
+          }
+          
+          mem_rs[0].scheduleInstruction( operations.getOperation( 1 ), registers );
           operations.increment();
           clock.increment();
      }
@@ -125,4 +159,34 @@ public class Simulation{
      public ALUStation[] getALUStations(){
           return alu_rs;
      }
+     
+     //Utility Functions
+     
+     ///
+     ///Parse the comment and update the Register Files Accordingly
+     ///
+     private void parseComment(String comment){
+          String[] split_1; //split on ","
+          String[] split_2; //split on "="
+          
+          split_1 = comment.split(",");
+          
+          //Parse each register assignent in comment
+          for( String split_1_sub : split_1 ){
+               split_2 = split_1_sub.trim().split("=");               
+               registers.setRegister( split_2[0].trim(), split_2[1].trim() );
+          }
+          
+          
+          
+          
+     }
+     
+     
+     
+     
+     
+     
+     
+     
 }

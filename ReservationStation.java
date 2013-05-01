@@ -35,7 +35,7 @@ public abstract class ReservationStation {
 	///
     /// Abstract Function to schedule the instruction
     ///
-	abstract void scheduleInstruction(Operation op);
+	abstract void scheduleInstruction(Operation op, RegisterFiles reg_in);
 	
 	///
     /// Function return the value of resultready

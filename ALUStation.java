@@ -42,7 +42,7 @@ public class ALUStation extends ReservationStation{
 	///
     /// Function to schedule the instruction
     ///
-	public void scheduleInstruction(Operation op){
+	public void scheduleInstruction(Operation op, RegisterFiles reg_in){
 		this.busy= true;
         
         // rest schedule code goes here.
