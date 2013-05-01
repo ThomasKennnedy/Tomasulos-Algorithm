@@ -60,6 +60,13 @@ public class OperationList {
      }
      
      ///
+     ///Get the last Operation in the list.
+     ///
+     public Operation getLastOperation(){
+          return op_list.get( op_list.size() - 1 );
+     }     
+     
+     ///
      ///Returns true when there is at least one Operation that hs not been scheduled. 
      ///Returns false if there is not an Operation to schedule.
      ///     
@@ -78,6 +85,12 @@ public class OperationList {
      ///Generates the string representation of the Operation Object.
      ///     
      public String toString(){
-          return "# Operations: " + op_list.size();
+          String to_return = "# Operations: " + op_list.size();
+          
+          for( Operation to_print : op_list ){
+               to_return += "\n" + to_print;
+          }
+          
+          return to_return;
      }
 }

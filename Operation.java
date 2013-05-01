@@ -4,28 +4,32 @@
 ///
 
 public class Operation{
-     private String opcode;     ///< Contains the opcode.
-     private String comment;    ///< Stores the comment.
-     private String[] operands; ///< Stores all operands.
+     private String opcode;       ///< Contains the opcode.
+     private String comment;      ///< Stores the comment.
+     private String[] operands;   ///< Stores all operands.
+     
+     private boolean has_comment; ///< Specifies the existance of a comment
      
      //public Operation(){}
      
      ///
-     /// Construct an Operation object give 1 opcode, 3 operands and one comment.
+     /// Construct an Operation object give 1 opcode, 3 operands and a boolean.
      ///
-     public Operation( String opcode, String operand_1, String operand_2, String operand_3, String comment ){
-          this.opcode   = opcode;
-          this.operands = new String[]{ operand_1, operand_2, operand_3 };
-          this.comment  = comment;
+     public Operation( String opcode, String operand_1, String operand_2, String operand_3, boolean has_comment){
+          this.opcode      = opcode;
+          this.operands    = new String[]{ operand_1, operand_2, operand_3 };
+          this.comment     = "";
+          this.has_comment = has_comment;
      }     
 
      ///
-     /// Construct an Operation object give 1 opcode, 2 operands and one comment.
+     /// Construct an Operation object give 1 opcode, 2 operands and a boolean.
      ///     
-     public Operation( String opcode, String operand_1, String operand_2, String comment ){
-          this.opcode   = opcode;
-          this.operands = new String[]{ operand_1, operand_2};
-          this.comment  = comment;
+     public Operation( String opcode, String operand_1, String operand_2, boolean has_comment ){
+          this.opcode      = opcode;
+          this.operands    = new String[]{ operand_1, operand_2};
+          this.comment     = comment;
+          this.has_comment = has_comment;
      }
           
      ///
@@ -38,6 +42,13 @@ public class Operation{
           System.arraycopy( to_copy.operands, 0, this.operands, 0, to_copy.operands.length );
           
           this.comment  = to_copy.comment;          
+     }
+     
+     ///
+     /// Return whether a comment exists
+     ///
+     public boolean hasComment(){
+          return has_comment;
      }
      
      ///
@@ -130,7 +141,10 @@ public class Operation{
           for( int i =0; i < operands.length; i++){
                to_return += " " + operands[i];
           }          
-          to_return += " " + comment;
+          
+          if( has_comment ){
+               to_return += " ; " + comment;
+          }
           
           return to_return;
      }
