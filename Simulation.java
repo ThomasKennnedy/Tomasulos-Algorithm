@@ -1,62 +1,71 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+import java.io.*;
 
 public class Simulation{
      private OperationList operations;
      private RegisterFiles registers;
-     private ALUStations alu_rs[8];
-     private MemStations mem_rs[4];
+     private ALUStation[] alu_rs;
+     private MemStation[] mem_rs;
      
      private Clock clock;
 
-     private bool is_initialized;
+     private boolean is_initialized;
      
      public Simulation(){
           is_initialized = false;
      }
      
-     public initialize(String filename){
+     public void initialize(File data_file) throws Exception{
           clock = Clock.getInstance();
      
-          OperationFileParser file_parser = new OperationFileParser( filename );
+          OperationFileParser file_parser = new OperationFileParser( data_file );
           
           operations = new OperationList();
           registers = new RegisterFiles();
                     
-          file_parser.parseFile( operations, registers );
-
-          alu_rs[0] = new ALUStation("ADD1")
-          alu_rs[1] = new ALUStation("ADD2")
-          alu_rs[2] = new ALUStation("SUB1")
-          alu_rs[3] = new ALUStation("MUL2")
-          alu_rs[4] = new ALUStation("MUL1")
-          alu_rs[5] = new ALUStation("ADD2")
-          alu_rs[6] = new ALUStation("ADD1")
-          alu_rs[7] = new ALUStation("ADD2")
-          alu_rs[7] = new ALUStation("ADD2")
+          file_parser.parseFile( operations );
           
-          mem_rs[0] = new MemStation("LOAD1");
-          mem_rs[1] = new MemStation("LOAD2");
-          mem_rs[2] = new MemStation("STORE1");
-          mem_rs[3] = new MemStation("STORE2");
+          alu_rs = new ALUStation[9];
+          mem_rs = new MemStation[4];
+          
+          alu_rs[0] = new ALUStation("Int1");
+          alu_rs[0] = new ALUStation("Add1");
+          alu_rs[1] = new ALUStation("Add2");
+          alu_rs[2] = new ALUStation("Sub1");
+          alu_rs[3] = new ALUStation("Mul2");
+          alu_rs[4] = new ALUStation("Mul1");
+          alu_rs[5] = new ALUStation("Add2");
+          alu_rs[6] = new ALUStation("Add1");
+          alu_rs[7] = new ALUStation("Add2");
+          alu_rs[7] = new ALUStation("Add2");
+          
+          mem_rs[0] = new MemStation("Load1");
+          mem_rs[1] = new MemStation("Load2");
+          mem_rs[2] = new MemStation("Store1");
+          mem_rs[3] = new MemStation("Store2");
           
           is_initialized = true;
      }
      
-     public bool isComplete(){
-          bool complete = false;          
+     public boolean isComplete(){
+          boolean complete = false;          
           complete = !( operations.moreOperationsQueued() );
           
-          for( int i = 0; i < mem_rs.size && complete; i++ ){
+          for( int i = 0; i < mem_rs.length && complete; i++ ){
                complete = mem_rs[i].isReady() ;
           }
           
-          for( int i = 0; i < alu_rs.size && complete; i++ ){
+          for( int i = 0; i < alu_rs.length && complete; i++ ){
                complete = alu_rs[i].isReady() ;
           }
           
           return complete;          
      }
      
-     public void performStep(){
+     public void performStep(){/*
           Operation to_schedule;
           bool op_scheduled = false;
           
@@ -95,10 +104,10 @@ public class Simulation{
           
           if( op_scheduled ){
                operations.increment();
-          }          
+          }        */  
      }
      
-     public Clock getCurrentCycle(){
+     public int getCurrentCycle(){
           return clock.get();
      }     
      
@@ -106,15 +115,15 @@ public class Simulation{
           return operations;
      }
 
-     public registerFiles getRegisterFiles(){
+     public RegisterFiles getRegisterFiles(){
           return registers;
      }
      
-     public MemStations getMemStations(){
+     public MemStation[] getMemStations(){
           return mem_rs;
      }
      
-     public ALUStations getALUStations(){
+     public ALUStation[] getALUStations(){
           return alu_rs;
      }
 }

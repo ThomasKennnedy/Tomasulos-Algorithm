@@ -13,7 +13,7 @@ public class ALUStation extends ReservationStation{
 	///
     /// Calls superclass constructor and initializes vj,vk,qj and qk
     ///
-    public void ALUStation(String sname){
+    public ALUStation(String sname){
         super(sname);
         vj = vk = A = null;
         qj = qk = null;
@@ -27,8 +27,8 @@ public class ALUStation extends ReservationStation{
         operation = null;
         vj = vk = A = null;
         qj = qk = null;
-        resultready = false;
-        resultwritten = false;
+        resultReady = false;
+        resultWritten = false;
     }
     
 	///
@@ -36,13 +36,13 @@ public class ALUStation extends ReservationStation{
     ///
     public boolean isReady(){
         return (busy == true && qj == null && qk == null &&
-                resultready == false);
+                resultReady == false);
     }
 	
 	///
     /// Function to schedule the instruction
     ///
-	public scheduleInstruction(Operation op){
+	public void scheduleInstruction(Operation op){
 		this.busy= true;
         
         // rest schedule code goes here.
@@ -117,7 +117,7 @@ public class ALUStation extends ReservationStation{
 	public void setA(String i){
 		A=i;
 	}
-    
+
 	
     
 }

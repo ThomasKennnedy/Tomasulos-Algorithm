@@ -13,7 +13,10 @@ public class TestModules{
      public static void main( String args[] ){
           OperationList test_list = new OperationList();
           OperationFileParser test_parser = new OperationFileParser( new File( "test-input/a1.in"  ) );
+          RegisterFiles test_regs = new RegisterFiles();
           
+          //Parse a test input file
+          System.out.println("Operation Test");
           try{
                test_parser.parseFile( test_list );
                
@@ -22,6 +25,10 @@ public class TestModules{
           catch(Exception e){
                System.out.println( e );
           }
+          
+          System.out.println("Register Files Test");
+          System.out.println( test_regs );
+          
           
      }
 

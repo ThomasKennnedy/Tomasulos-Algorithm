@@ -3,14 +3,25 @@
 ///
 
 public abstract class ReservationStation {
-	protected String sname;				///< name of reservation station
-    protected boolean busy;				///< flag indicating whether station holding an operation
-    protected Operation operation;  	///< type of operation
-	protected String result;			///< used to hold result
-    protected long duration;			///< holds the durations of the instruction
-	protected boolean resultReady;		///< flag indicating result is ready to be written
-    protected boolean resultWritten;	///< flag indicating the result has been written
-	
+     protected String sname;			///< name of reservation station
+     protected boolean busy;			///< flag indicating whether station holding an operation
+     protected Operation operation;  	///< type of operation
+     protected String result;			///< used to hold result
+     protected long duration;			///< holds the durations of the instruction
+     protected boolean resultReady;	///< flag indicating result is ready to be written
+     protected boolean resultWritten;	///< flag indicating the result has been written
+
+	///
+    /// Construct an Reservationstation object and initialize sname,busy and operation
+    ///
+	public ReservationStation(String sname){
+		sname = sname;
+        busy = false;
+        operation = null;
+		resultReady = false;
+        resultWritten = false;
+	}
+
 	///
     /// Abstract function to clear the reservation station
     ///
@@ -24,31 +35,20 @@ public abstract class ReservationStation {
 	///
     /// Abstract Function to schedule the instruction
     ///
-	abstract scheduleInstruction(Operation op);
-	
-	///
-    /// Construct an Reservationstation object and initialize sname,busy and operation
-    ///
-	public void ReservationStation(String sname){
-		sname = sname;
-        busy = false;
-        operation = null;
-		resultReady = false;
-        resultWritten = false;
-	}
+	abstract void scheduleInstruction(Operation op);
 	
 	///
     /// Function return the value of resultready
     ///
 	public boolean isResultReady(){
-		return resultready;
+		return resultReady;
 	}
     
 	///
     /// Function returns the value of resultwritten
     ///
 	public boolean isResultWritten(){
-		return resultwritten;
+		return resultWritten;
 	}
 	
 	///
@@ -68,7 +68,7 @@ public abstract class ReservationStation {
 	///
     /// Function sets the value of duration
     ///
-	public void setDuration(string d){
+	public void setDuration(long d){
 		duration = d;
 	}
     

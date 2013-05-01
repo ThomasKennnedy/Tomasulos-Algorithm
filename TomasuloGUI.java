@@ -39,7 +39,7 @@ public class TomasuloGUI extends JFrame {
      JTextField file_field;
      
      //Simulation Object
-     //Simulation sim_instance; //the Simulation Wrapper Object
+     Simulation sim_instance; //the Simulation Wrapper Object
      
      //File Objects
      final JFileChooser file_dialog = new JFileChooser();
@@ -91,7 +91,7 @@ public class TomasuloGUI extends JFrame {
           op_model.setColumnIdentifiers( new Object[]{"Instruction"," ", "j", "k", "Issue", "Complete", "Write"} );                  
           //add instruction rows
           for( int i = 1; i <= 7; i++){
-               op_model.addRow( new Object[]{("op"+i), "F"+(i*2), "F"+(i*4), "F"+(i*8), " ", " ", " "} );
+               op_model.addRow( new Object[]{ " ", " ", " ", " ", " ", " ", " "} );
           }
 
           //Create The Reservation Station Table Model
@@ -298,14 +298,43 @@ public class TomasuloGUI extends JFrame {
                               instructions_file = file_dialog.getSelectedFile();
                               file_field.setText( instructions_file.getName() );
                               
-                              load_button.setEnabled( false );
-                              step_button.setEnabled( true );
+
+                              
+                              //construct the simulation
+                              sim_instance = new Simulation();
+                              try{
+                                   sim_instance.initialize( instructions_file );                             
+                                   load_button.setEnabled( false );
+                                   step_button.setEnabled( true );
+                              }
+                              catch(Exception ex){
+                                   javax.swing.JOptionPane.showMessageDialog( new JFrame(), ex.toString() );
+                              }
                          }
                          
-                         //add instruction rows
-                         for( int i = 1; i <= 7; i++){
-                              op_model.addRow( new Object[]{("op"+i), "F"+(i*2), "F"+(i*4), "F"+(i*8), " ", " ", " "} );
+                         OperationList update_list = sim_instance.getOperationList();
+                         
+                         //add additional instruction rows if needed
+                         while( op_model.getRowCount() < update_list.getNumberOfOperations() ) {
+                              op_model.addRow( new Object[]{ " ", " ", " ", " ", " ", " ", " "} );
                          }
+                         
+                         //Update the table with the instructions
+                         for( int i = 0; i < update_list.getNumberOfOperations(); i++){
+                              Operation it_op = update_list.getOperation( i+1 );
+                              //Opcode 
+                              op_model.setValueAt( it_op.getOpcode(), i, 0);
+                              //Operands
+                              op_model.setValueAt( it_op.getOperand(1), i, 1);
+                              op_model.setValueAt( it_op.getOperand(2), i, 2);
+                              if( it_op.getNumberOfOperands() > 2 ){
+                                   op_model.setValueAt( it_op.getOperand(3), i, 3);
+                              }
+                              //Issue Number
+                              op_model.setValueAt( (i+1), i, 4);
+                              
+                         } 
+                         
                          //add Register Rows
                          for( int i = 7; i < 15; i++ ){          
                               reg_model.addRow(new Object[]{ "F"+(i*2), ""+i , "R"+((2*i)+1), ""+i  });

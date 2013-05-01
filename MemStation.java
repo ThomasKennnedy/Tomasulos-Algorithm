@@ -9,9 +9,9 @@ public class MemStation extends ReservationStation{
 	///
     /// Calls superclass constructor and initializes address
     ///
-	public void MemStation(String sname){
-        super(sname);
-        address = null;
+	public MemStation(String sname){
+          super(sname);
+          address = null;
     }
     
 	///
@@ -21,8 +21,8 @@ public class MemStation extends ReservationStation{
         busy = false;
         operation = null;
 		address = null;
-        resultready = false;
-        resultwritten = false;
+        resultReady = false;
+        resultWritten = false;
     }
     
 	///
@@ -30,7 +30,7 @@ public class MemStation extends ReservationStation{
     ///
 	public boolean isReady(){
         return (busy == true && address==null &&
-                resultready == false);
+                resultReady == false);
     }
 	
 	///
@@ -50,7 +50,7 @@ public class MemStation extends ReservationStation{
 	///
     /// Function to schedule the instruction
     ///
-	public scheduleInstruction(Operation op){
+	public void scheduleInstruction(Operation op){
 		this.busy= true;
         // rest schedule code goes here.
 	}

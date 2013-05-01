@@ -10,7 +10,7 @@ public class Operation{
      
      private boolean has_comment; ///< Specifies the existance of a comment
      
-     //public Operation(){}
+     public Operation(){}
      
      ///
      /// Construct an Operation object give 1 opcode, 3 operands and a boolean.
@@ -67,24 +67,15 @@ public class Operation{
      
      ///
      ///Get the operand at the specified position. Positions start at "1".
-     ///Return an error if the position is invalid.
      ///
-     public String getOperand( int number ) throws Exception{          
-          if( number < 1 || number > operands.length ){
-               throw new Exception(){
-                    public String toString(){
-                         return "Error: Retrieval of Invalid Operand";
-                    }
-               };
-          }         
-          
+     public String getOperand( int number ){   
           return operands[ number - 1 ];
      }
      
      ///
      ///Return the number of operands
      ///
-     public int getNumberOperands(){
+     public int getNumberOfOperands(){
           return operands.length;
      }
      

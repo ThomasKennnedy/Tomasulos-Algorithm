@@ -1,4 +1,9 @@
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+import java.io.*;
 
 ///
 /// This class provides all operation queueing and storage funtionality.
@@ -32,14 +37,7 @@ public class OperationList {
      ///
      ///Get an Operation given a position number. The first position is "1". 
      ///
-     public Operation getOperation( int num ) throws Exception{
-          if( num > op_list.size() ){
-               throw new Exception(){
-                    public String toString(){
-                         return "OperationList: Invalid Operation Number";  
-                    }
-               };
-          }
+     public Operation getOperation( int num ) {
           return op_list.get( num - 1 );
      }
      
@@ -75,10 +73,17 @@ public class OperationList {
      }
      
      ///
-     ///Add an operation to the OperationList
+     ///Add an operation to the OperationList.
      ///
      public void addOperation( Operation to_add ){
           op_list.add( to_add );
+     }
+     
+     ///
+     ///Return the number of operations in the list.
+     ///
+     public int getNumberOfOperations(){
+          return op_list.size();
      }
      
      ///
