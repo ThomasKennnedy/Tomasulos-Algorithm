@@ -18,11 +18,11 @@ public class MemStation extends ReservationStation{
      /// Function to clear the reservation Station
      ///
      public void clear(){
-        busy = false;
-        operation = null;
-          address = null;
-        resultReady = false;
-        resultWritten = false;
+          busy = false;
+          operation = null;
+          address = "";
+          resultReady = false;
+          resultWritten = false;
      }
 
      ///
@@ -39,7 +39,7 @@ public class MemStation extends ReservationStation{
      public String getAddress(){
           return address;
      }
-
+     
      ///
      /// Function sets the value of address
      ///
@@ -50,8 +50,14 @@ public class MemStation extends ReservationStation{
      ///
      /// Function to schedule the instruction
      ///
-     public void scheduleInstruction(Operation op, RegisterFiles reg_in){
+     public void scheduleInstruction(Operation op, RegisterFiles reg_in, int cycles){
+          this.operation = op;
           this.busy= true;
-          address =  reg_in.getRegister( op.getOperand(2) )+ "+" + reg_in.getRegister(  op.getOperand(3) );
+          this.duration = cycles;
+          //Create the address descriptor
+          this.address =  reg_in.getRegister( op.getOperand(2) )+ "+" + reg_in.getRegister(  op.getOperand(3) );
+          
+          //set the operation as scheduled
+          operation.setScheduled();
      }
 }

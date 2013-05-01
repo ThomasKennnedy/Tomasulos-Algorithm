@@ -84,7 +84,7 @@ public class TomasuloGUI extends JFrame {
           
           //Create the status elements
           status_panel.setLayout( new FlowLayout() ); 
-          clocks_field =  new JTextField("", 8);
+          clocks_field =  new JTextField("0", 8);
           clocks_field.setEnabled( false );
           //instr_label =  new JLabel("Instructions: ");  
           
@@ -317,31 +317,21 @@ public class TomasuloGUI extends JFrame {
                               catch(Exception ex){
                                    javax.swing.JOptionPane.showMessageDialog( new JFrame(), ex.toString() );
                               }
-                         }
+                         }                  
                          
+                         //Add additional instruction rows if needed
+                         //this only needs to run once as the number instructions 
+                         //remains constant                         
                          OperationList update_list = sim_instance.getOperationList();
                          
-                         //add additional instruction rows if needed
                          while( op_model.getRowCount() < update_list.getNumberOfOperations() ) {
                               op_model.addRow( new Object[]{ " ", " ", " ", " ", " ", " ", " "} );
                          }
                          
-                         //Populate Operations table with the instructions
-                         for( int i = 0; i < update_list.getNumberOfOperations(); i++){
-                              Operation it_op = update_list.getOperation( i+1 );
-                              //Opcode 
-                              op_model.setValueAt( it_op.getOpcode(), i, 0);
-                              //Operands
-                              op_model.setValueAt( it_op.getOperand(1), i, 1);
-                              op_model.setValueAt( it_op.getOperand(2), i, 2);
-                              if( it_op.getNumberOfOperands() > 2 ){
-                                   op_model.setValueAt( it_op.getOperand(3), i, 3);
-                              }
-                              //Issue Number
-                              op_model.setValueAt( (i+1), i, 4);                              
-                         } 
+                         
                          
                          //Populate the tables
+                         updateInstructionTable();
                          updateRegisterTable();  
                          updateMemTable();
                          updateALUTable();
@@ -360,6 +350,7 @@ public class TomasuloGUI extends JFrame {
                          //update clock
                          clocks_field.setText( ""+sim_instance.getCurrentCycle() );
                          //update tables
+                         updateInstructionTable();
                          updateRegisterTable();
                          updateMemTable();
                          updateALUTable();
@@ -376,6 +367,36 @@ public class TomasuloGUI extends JFrame {
           );   
             
           pack();
+     }
+     
+     ///
+     /// Instruction Table Update Helper
+     ///
+     private void updateInstructionTable(){
+          OperationList update_list = sim_instance.getOperationList();
+     
+          //Populate Operations table with the instructions
+          for( int i = 0; i < update_list.getNumberOfOperations(); i++){
+               Operation it_op = update_list.getOperation( i+1 );
+               //obtain the write time
+               int write_time = it_op.getWriteTime();
+               
+               //Opcode 
+               op_model.setValueAt( it_op.getOpcode(), i, 0);
+               //Operands
+               op_model.setValueAt( it_op.getOperand(1), i, 1);
+               op_model.setValueAt( it_op.getOperand(2), i, 2);
+               
+               if( it_op.getNumberOfOperands() > 2 ){
+                    op_model.setValueAt( it_op.getOperand(3), i, 3);
+               }
+               
+               op_model.setValueAt( it_op.getExecution(), i, 5);
+               op_model.setValueAt( (write_time == -1 ? " " : write_time ), i, 6);
+               
+               //Issue Number - display once the instruction has been scheduled
+               op_model.setValueAt( (it_op.isScheduled() ? (i+1) : " " ), i, 4);                              
+          } 
      }
      
      ///

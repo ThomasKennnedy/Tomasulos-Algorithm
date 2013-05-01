@@ -42,10 +42,18 @@ public class ALUStation extends ReservationStation{
 	///
     /// Function to schedule the instruction
     ///
-	public void scheduleInstruction(Operation op, RegisterFiles reg_in){
-		this.busy= true;
-        
-        // rest schedule code goes here.
+	public void scheduleInstruction(Operation op, RegisterFiles reg_in, int cycles){
+          this.operation = op;
+          this.busy= true;
+          this.duration = cycles;          
+
+          
+          
+          // rest schedule code goes here.
+          
+          
+          //set the operation as scheduled
+          operation.setScheduled();
 	}
 	
 	///
@@ -82,7 +90,7 @@ public class ALUStation extends ReservationStation{
 	public String getA(){
         return A;
     }
-    
+     
 	///
     /// Function to set the value of qj
     ///

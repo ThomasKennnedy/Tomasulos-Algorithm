@@ -59,7 +59,7 @@ public class OperationFileParser{
 
                     //Split/Prse the operation & operands
                     split_2 = (split_1[0].trim()).split("\\s+");
-                    operation = split_2[0];
+                    operation = split_2[0].trim();
 
                     operands = new String[ (split_2.length - 1) ];
                     

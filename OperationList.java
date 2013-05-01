@@ -18,6 +18,7 @@ public class OperationList {
      ///
      public OperationList(){
           op_list = new ArrayList<Operation>();
+          curr_op = 1;
      }
 
      ///
@@ -25,6 +26,7 @@ public class OperationList {
      ///
      public OperationList( OperationList to_copy ){
           this.op_list = new ArrayList<Operation>( to_copy.op_list );
+          this.curr_op = to_copy.curr_op;
      }
      
      ///

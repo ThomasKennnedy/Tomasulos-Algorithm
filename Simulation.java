@@ -51,14 +51,14 @@ public class Simulation{
           mem_rs[3] = new MemStation("Store2");
           
           //Create Mapping of instructions to the appropiate Reservation Stations
-          HashMap<String, Integer[] > instruction_to_station = new HashMap<String, Integer[] >();
+          instruction_to_station = new HashMap<String, Integer[] >();
           //Memory Indices
           instruction_to_station.put( "L.D", new Integer[]{0,1} );
           instruction_to_station.put( "LD", new Integer[]{0,1} );
           instruction_to_station.put( "S.D", new Integer[]{2,3} );
           instruction_to_station.put( "SD", new Integer[]{2,3} );
           
-          //ALU Indecies
+          //ALU Indices
           instruction_to_station.put( "DADDI", new Integer[]{0} );
           instruction_to_station.put( "DADD", new Integer[]{1,2} );
           instruction_to_station.put( "ADDD", new Integer[]{1,2} );
@@ -70,6 +70,7 @@ public class Simulation{
           instruction_to_station.put( "DIVD", new Integer[]{5,6} );
           instruction_to_station.put( "DIV.D", new Integer[]{5,6} );
           
+          //System.out.println( instruction_to_station );
           
           //indicate that the simulation has been initialized
           is_initialized = true;
@@ -90,54 +91,82 @@ public class Simulation{
           return complete;          
      }
      
-     public void performStep(){/*
+     public void performStep(){
           Operation to_schedule;
-          bool op_scheduled = false;
+          boolean op_scheduled = false;
+          
+          //increment the clock
+          clock.increment();
           
           //Update Reservation Stations
-          for( MemStation it : mem_rs ){
-               if( !it.isWaiting() ){
+          for( ALUStation it : alu_rs ){
+               if( it.isResultReady() ){
+                    //broadcast( it.getResult() );
+                    it.getResult();
+               }
+
+               if( it.isReady() && it.isBusy()){
                     it.performCycle();
                }
                
-               if( it.isResultReady() ){
-                    broadcast( it.getResult() );
+               if( it.isResultWritten() ){
                     it.clear();
                }    
           }          
           for( MemStation it : mem_rs ){
-               if( !it.isWaiting() ){
+               //Integer Operations are guranteed to be complete before
+               //a memory stations requires a register
+               if( it.isResultReady() ){
+                    //broadcast( it.getResult() );
+                    it.getResult();
+               }
+               
+               if( it.isBusy() ){
                     it.performCycle();
                }
                
-               if( it.isResultReady() ){
-                    broadcast( it.getResult() );
+               if( it.isResultWritten() ){
                     it.clear();
                }    
           }
           
-          //Operation Scheduling
-          to_schedule =  operations.getNextOperation();
-          
-          
-          for( int i = 0; i < rs_list.size && op_scheduled; i++ ){
-               if( rs_list[i].isSupportedInstruction(to_schedule.getOpCode()) && rs_list[i].isReady()){
-                    rs_list[i].scheduleInstruction( to_schedule )
-                    op_scheduled = true;
+          //Get an instruction from the head of the list
+          //if the list has not been exhausted
+          if( operations.moreOperationsQueued() ){
+               to_schedule =  operations.getNextOperation();
+               
+               //Parse the Instruction Comment
+               if( to_schedule.hasComment() ){
+                    parseComment( to_schedule.getComment() );
                }
+               
+               //Determine which set of Reservations Station(s) are 
+               //appropiate for an instruction
+               Integer[] rs_indices = instruction_to_station.get( to_schedule.getOpcode() );
+               //Memory Stations
+               if( classify( to_schedule.getOpcode() ) ){
+                    for( int i = rs_indices[0]; i <= rs_indices[ (rs_indices.length-1) ] && !op_scheduled; i ++){
+                    //for( int i = 0; i <= 1 && !op_scheduled; i ++){
+                         if( !mem_rs[i].isBusy() ){
+                              mem_rs[i].scheduleInstruction( to_schedule, registers, 2 );
+                              op_scheduled = true;
+                         }
+                    }
+               }
+               //ALU Stations
+               else{
+                    for( int i = rs_indices[0]; i <= rs_indices[ (rs_indices.length-1) ] && !op_scheduled; i ++){
+                         if( !alu_rs[i].isBusy() ){
+                              alu_rs[i].scheduleInstruction( to_schedule, registers, 1 );
+                              op_scheduled = true;
+                         }
+                    }  
+               }
+               
+               if( op_scheduled ){
+                    operations.increment();
+               }         
           }
-          
-          if( op_scheduled ){
-               operations.increment();
-          }        */  
-                    
-          if( operations.getOperation( 1 ).hasComment() ){
-               parseComment( operations.getOperation( 1 ).getComment() );
-          }
-          
-          mem_rs[0].scheduleInstruction( operations.getOperation( 1 ), registers );
-          operations.increment();
-          clock.increment();
      }
      
      public int getCurrentCycle(){
@@ -176,12 +205,16 @@ public class Simulation{
                split_2 = split_1_sub.trim().split("=");               
                registers.setRegister( split_2[0].trim(), split_2[1].trim() );
           }
-          
-          
-          
-          
      }
      
+     ///
+     ///Classify an Instruction as Memory or Other
+     ///
+     private boolean classify( String opcode ){
+          return( opcode.equals("L.D") || opcode.equals("LD") ||
+                  opcode.equals("S.D") || opcode.equals("SD") );
+         
+     }
      
      
      

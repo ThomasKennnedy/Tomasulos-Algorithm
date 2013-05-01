@@ -7,8 +7,11 @@ public class Operation{
      private String opcode;       ///< Contains the opcode.
      private String comment;      ///< Stores the comment.
      private String[] operands;   ///< Stores all operands.
+     private int exec_start, exec_end;///< start and end of executions respectively
+     private int time_write;
      
      private boolean has_comment; ///< Specifies the existance of a comment
+     private boolean scheduled;    ///< Set to true when the instruction has been scheduled
      
      public Operation(){}
      
@@ -20,6 +23,8 @@ public class Operation{
           this.operands    = new String[]{ operand_1, operand_2, operand_3 };
           this.comment     = "";
           this.has_comment = has_comment;
+          exec_start = exec_end = time_write = -1;
+          scheduled = false;
      }     
 
      ///
@@ -41,6 +46,9 @@ public class Operation{
           this.operands    = new String[]{ operand_1, operand_2, operand_3};
           this.comment     = comment;
           this.has_comment = has_comment;
+          
+          exec_start = exec_end = time_write = -1;
+          scheduled = false;
      }
           
      ///
@@ -102,7 +110,52 @@ public class Operation{
           to_return += operands[operands.length - 1];
           
           return to_return;
-     }     
+     } 
+     
+     ///
+     ///Get execution start
+     ///
+     public int getExecStart(){
+          return exec_start;
+     }
+     
+     ///
+     ///Get execution end
+     ///
+     public int getExecEnd(){
+          return exec_end;
+     }
+     
+     ///
+     ///Get execution description
+     ///
+     public String getExecution(){
+          String to_return = "";
+          
+          if( exec_start > 0 ){
+               to_return += exec_start;
+               
+               if( exec_end > -1 ){
+                    to_return += "--" + exec_end;
+               }
+          }
+          
+          return to_return;
+     }
+     
+     ///
+     ///Get the time the result was written
+     ///
+     public int getWriteTime(){
+          return time_write;
+     }   
+
+     ///
+     /// Return whether the instruction has been scheduled
+     ///
+     boolean isScheduled(){
+          return scheduled;
+     }
      
      ///
      ///Set the Operation opcode.
@@ -135,10 +188,38 @@ public class Operation{
      }   
      
      ///
+     ///Set execution start
+     ///
+     public void setExecStart( int n ){
+          exec_start = n;
+     }
+     
+     ///
+     ///Set execution end
+     ///
+     public void setExecEnd( int n ){
+          exec_end = n;
+     }
+     
+     ///
+     ///Set the time the result was written
+     ///
+     public void setWriteTime( int n ){
+          time_write = n;
+     }
+     
+     ///
+     /// Set the scheduled flag
+     ///
+     void setScheduled(){
+          scheduled = true;
+     }
+     
+     ///
      ///Return the string represeation of the Operation object.
      ///
      public String toString(){
-          String to_return = opcode;
+          String to_return = ""+opcode;
           
           for( int i =0; i < operands.length; i++){
                to_return += " " + operands[i];
