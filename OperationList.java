@@ -45,11 +45,6 @@ public class OperationList {
      ///Get the next Operation to be scheduled.
      ///
      public Operation getNextOperation(){
-          if( curr_op > op_list.size() ){
-
-          } 
-          
-          
           return op_list.get( curr_op - 1 );
      }
      

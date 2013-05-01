@@ -144,11 +144,13 @@ public class TomasuloGUI extends JFrame {
           //Disallow editing of table fields
           op_table.setEnabled( false );
           rs_table.setEnabled( false );
+          mrs_table.setEnabled( false );
           reg_table.setEnabled( false );
           
           //Disable the reorganization of columns
           op_table.getTableHeader().setReorderingAllowed(false);
           rs_table.getTableHeader().setReorderingAllowed(false);
+          mrs_table.getTableHeader().setReorderingAllowed(false);
           reg_table.getTableHeader().setReorderingAllowed(false);
           
           //Set Instruction Table Column Widths
@@ -342,6 +344,7 @@ public class TomasuloGUI extends JFrame {
                          //Populate the tables
                          updateRegisterTable();  
                          updateMemTable();
+                         updateALUTable();
                          
 
                     }
@@ -354,9 +357,20 @@ public class TomasuloGUI extends JFrame {
                          sim_instance.performStep();
                          
                          //update UI
+                         //update clock
                          clocks_field.setText( ""+sim_instance.getCurrentCycle() );
+                         //update tables
                          updateRegisterTable();
                          updateMemTable();
+                         updateALUTable();
+                         
+                         //Check if the simulation has finished
+                         if( sim_instance.isComplete() ){
+                              javax.swing.JOptionPane.showMessageDialog( new JFrame(), "Simulation Complete" );
+                              step_button.setEnabled( false );
+                         }
+                         
+                         
                     }
                }
           );   
@@ -397,6 +411,7 @@ public class TomasuloGUI extends JFrame {
                temp_it_index++;
           }
      }
+     
      ///
      /// MemStations Table Update Helper
      ///
@@ -412,6 +427,29 @@ public class TomasuloGUI extends JFrame {
                mrs_model.setValueAt( temp_ms[i].getName(), i, 0 );
                mrs_model.setValueAt( busy_desc, i, 1 );
                mrs_model.setValueAt( temp_ms[i].getAddress(), i, 2 );
+          }
+     }
+
+     ///
+     /// ALUStations Table Update Helper
+     ///
+     private void updateALUTable(){   
+          //Get a copy of the memory stations
+          ALUStation[] temp_alu = sim_instance.getALUStations();
+          
+          //Update the table with current values for the stations
+          for( int i =0; i < temp_alu.length; i++ ){
+               //generate a meaningfull representation of busy
+               String busy_desc = (temp_alu[i].isBusy() ? "Yes" : "No" );
+          
+               rs_model.setValueAt( "place", i, 0 );
+               rs_model.setValueAt( temp_alu[i].getName(), i, 1 );
+               rs_model.setValueAt( busy_desc, i, 2 );
+               rs_model.setValueAt( "place", i, 3 );
+               rs_model.setValueAt( temp_alu[i].getVj(), i, 4 );
+               rs_model.setValueAt( temp_alu[i].getVk(), i, 5 );
+               rs_model.setValueAt( temp_alu[i].getQj(), i, 6 );
+               rs_model.setValueAt( temp_alu[i].getQk(), i, 7 );               
           }
      }
      

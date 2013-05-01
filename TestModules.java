@@ -26,9 +26,16 @@ public class TestModules{
                System.out.println( e );
           }
           
-          System.out.println("Register Files Test");
-          System.out.println( test_regs );
+          //Resercation Stations
           
+          MemStation mem_test =  new MemStation("Load1");
+          ALUStation alu_test =  new ALUStation("Add1");
+          
+          System.out.println("Reservation Station Test");
+          System.out.println( mem_test.getName() );
+          System.out.println( alu_test.getName() );
+          
+
           
      }
 

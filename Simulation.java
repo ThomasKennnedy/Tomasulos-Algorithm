@@ -28,19 +28,16 @@ public class Simulation{
                     
           file_parser.parseFile( operations );
           
-          alu_rs = new ALUStation[9];
+          alu_rs = new ALUStation[7];
           mem_rs = new MemStation[4];
           
           alu_rs[0] = new ALUStation("Int1");
-          alu_rs[0] = new ALUStation("Add1");
-          alu_rs[1] = new ALUStation("Add2");
-          alu_rs[2] = new ALUStation("Sub1");
-          alu_rs[3] = new ALUStation("Mul2");
-          alu_rs[4] = new ALUStation("Mul1");
-          alu_rs[5] = new ALUStation("Add2");
-          alu_rs[6] = new ALUStation("Add1");
-          alu_rs[7] = new ALUStation("Add2");
-          alu_rs[7] = new ALUStation("Add2");
+          alu_rs[1] = new ALUStation("Add1");
+          alu_rs[2] = new ALUStation("Add2");
+          alu_rs[3] = new ALUStation("Mul1");
+          alu_rs[4] = new ALUStation("Mul2");
+          alu_rs[5] = new ALUStation("Div1");
+          alu_rs[6] = new ALUStation("Div2");
           
           mem_rs[0] = new MemStation("Load1");
           mem_rs[1] = new MemStation("Load2");
@@ -55,11 +52,11 @@ public class Simulation{
           complete = !( operations.moreOperationsQueued() );
           
           for( int i = 0; i < mem_rs.length && complete; i++ ){
-               complete = mem_rs[i].isReady() ;
+               complete = !mem_rs[i].isBusy() ;
           }
           
           for( int i = 0; i < alu_rs.length && complete; i++ ){
-               complete = alu_rs[i].isReady() ;
+               complete = !alu_rs[i].isBusy() ;
           }
           
           return complete;          

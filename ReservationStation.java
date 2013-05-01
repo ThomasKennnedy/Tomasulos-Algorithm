@@ -11,15 +11,15 @@ public abstract class ReservationStation {
      protected boolean resultReady;	///< flag indicating result is ready to be written
      protected boolean resultWritten;	///< flag indicating the result has been written
 
-	///
-    /// Construct an Reservationstation object and initialize sname,busy and operation
-    ///
+     ///
+     /// Construct an Reservationstation object and initialize sname,busy and operation
+     ///
 	public ReservationStation(String sname){
-		sname = sname;
-        busy = false;
-        operation = null;
+          this.sname = sname;
+          busy = false;
+          operation = null;
 		resultReady = false;
-        resultWritten = false;
+          resultWritten = false;
 	}
 
 	///
