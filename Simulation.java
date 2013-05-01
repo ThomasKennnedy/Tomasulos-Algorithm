@@ -105,6 +105,8 @@ public class Simulation{
           if( op_scheduled ){
                operations.increment();
           }        */  
+          operations.increment();
+          clock.increment();
      }
      
      public int getCurrentCycle(){

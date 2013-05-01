@@ -44,15 +44,11 @@ public class OperationList {
      ///
      ///Get the next Operation to be scheduled.
      ///
-     public Operation getNextOperation() throws Exception{
+     public Operation getNextOperation(){
           if( curr_op > op_list.size() ){
-               throw new Exception(){
-                    public String toString(){
-                         return "OperationList: Operations Exhausted";  
-                    }
-               };
+
           } 
-          curr_op++;
+          
           
           return op_list.get( curr_op - 1 );
      }
@@ -84,6 +80,13 @@ public class OperationList {
      ///
      public int getNumberOfOperations(){
           return op_list.size();
+     }
+     
+     ///
+     ///Set the iterator to the next Operation in the List
+     ///
+     public void increment(){
+          curr_op++;
      }
      
      ///

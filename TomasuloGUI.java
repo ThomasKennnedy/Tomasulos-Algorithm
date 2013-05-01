@@ -4,6 +4,10 @@ import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.Dimension;
 import javax.swing.border.TitledBorder;
+import java.util.Enumeration;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import java.io.*;
 import java.net.*;
@@ -79,7 +83,7 @@ public class TomasuloGUI extends JFrame {
           
           //Create the status elements
           status_panel.setLayout( new FlowLayout() ); 
-          clocks_label =  new JLabel("Clock: ");
+          clocks_label =  new JLabel("0");
           //instr_label =  new JLabel("Instructions: ");  
           
           //Add the status elements  
@@ -123,12 +127,11 @@ public class TomasuloGUI extends JFrame {
           reg_model.addColumn("Int");
           reg_model.addColumn("Value");
           
-          //reg_model.addColumn("Clock");
+          //Ad Initial Register Table Rows
           for( int i = 0; i < 14; i++ ){          
-               reg_model.addRow(new Object[]{ "F"+(i*2), ""+i , "R"+((2*i)+1), ""+i  });
-          }          
-          
-          
+               reg_model.addRow(new Object[]{ " ", " " , " ", " " });
+          }        
+                    
           //Create the tables
           op_table  = new JTable(op_model);
           rs_table  = new JTable(rs_model);
@@ -319,7 +322,7 @@ public class TomasuloGUI extends JFrame {
                               op_model.addRow( new Object[]{ " ", " ", " ", " ", " ", " ", " "} );
                          }
                          
-                         //Update the table with the instructions
+                         //Populate Operations table with the instructions
                          for( int i = 0; i < update_list.getNumberOfOperations(); i++){
                               Operation it_op = update_list.getOperation( i+1 );
                               //Opcode 
@@ -331,14 +334,13 @@ public class TomasuloGUI extends JFrame {
                                    op_model.setValueAt( it_op.getOperand(3), i, 3);
                               }
                               //Issue Number
-                              op_model.setValueAt( (i+1), i, 4);
-                              
+                              op_model.setValueAt( (i+1), i, 4);                              
                          } 
                          
-                         //add Register Rows
-                         for( int i = 7; i < 15; i++ ){          
-                              reg_model.addRow(new Object[]{ "F"+(i*2), ""+i , "R"+((2*i)+1), ""+i  });
-                         }    
+                         //Populate the Registers Table
+                         updateRegisterTable();                        
+                         
+
                     }
                }
           );          
@@ -346,7 +348,9 @@ public class TomasuloGUI extends JFrame {
           step_button.addActionListener(
                new ActionListener(){
                     public void actionPerformed(ActionEvent e){
- 
+                         sim_instance.performStep();
+                         
+                         //clocks_label.setText( ""+sim_instance.getCurrentCycle() );
                     }
                }
           );   
@@ -354,7 +358,39 @@ public class TomasuloGUI extends JFrame {
           pack();
      }
      
+     ///
+     /// Register Table Update Helper
+     ///
+     private void updateRegisterTable(){
+          int temp_it_index = 0; // tempory index tracker
      
+          //Get the Integer Registers
+          Map<String, String> temp_int_reg = sim_instance.getRegisterFiles().getIntegerRegisters();
+          //Get the FP Registers
+          Map<String, String> temp_fp_reg = sim_instance.getRegisterFiles().getFPRegisters();
+          
+          //add rows if needed
+          while( (temp_int_reg.size() > reg_model.getRowCount()) || (temp_fp_reg.size() > reg_model.getRowCount()) ){
+               reg_model.addRow( new Object[]{ " ", " ", " ", " "} );
+          }
+          
+          //Update Integer Table Values
+          for( Map.Entry<String, String> int_entry : temp_int_reg.entrySet() ){
+               reg_model.setValueAt( int_entry.getKey(), temp_it_index, 0 );
+               reg_model.setValueAt( int_entry.getValue(), temp_it_index, 1 );
+               
+               temp_it_index++;
+          }
+          
+          temp_it_index = 0;
+          //Update Integer Table Values
+          for( Map.Entry<String, String> fp_entry : temp_fp_reg.entrySet() ){
+               reg_model.setValueAt( fp_entry.getKey(), temp_it_index, 2 );
+               reg_model.setValueAt( fp_entry.getValue(), temp_it_index, 3 );
+               
+               temp_it_index++;
+          }
+     }
         
      public static void main(String args[])
      {

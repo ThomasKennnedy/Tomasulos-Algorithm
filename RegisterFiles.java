@@ -7,8 +7,8 @@ import java.util.LinkedHashMap;
 ///
 
 public class RegisterFiles{
-     public static final int NUM_INT_REGISTERS = 16;  ///< Total number of integer registers-- not including R0.
-     public static final int NUM_FP_REGISTERS  = 16;  ///< Total number of floating point registers.
+     public static final int NUM_INT_REGISTERS = 32;  ///< Total number of integer registers-- not including R0.
+     public static final int NUM_FP_REGISTERS  = 32;  ///< Total number of floating point registers.
 
      private LinkedHashMap<String, String> registers_int; ///< Consists of all integer registers.
      private LinkedHashMap<String, String> registers_fp;  ///< Consists of all floating point registers.
@@ -24,7 +24,7 @@ public class RegisterFiles{
                registers_int.put( "R0", "R0" );
           
           //Initialize the Integer Registers R1 to Rn
-          for( int i = 0; i <= NUM_INT_REGISTERS; i++ ){
+          for( int i = 0; i < NUM_INT_REGISTERS; i++ ){
                String temp_reg =  "R" + ( ( 2*i ) + 1 );
                registers_int.put( temp_reg, temp_reg  );
           }
