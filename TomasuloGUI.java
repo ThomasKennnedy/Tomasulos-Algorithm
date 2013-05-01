@@ -18,7 +18,7 @@ public class TomasuloGUI extends JFrame {
      JPanel content_panel;     
      
      JLabel file_label;
-     JLabel clocks_label;
+     
      //JLabel instr_label;
      
      //Tables
@@ -41,6 +41,7 @@ public class TomasuloGUI extends JFrame {
      JButton all_steps_button;
      
      JTextField file_field;
+     JTextField clocks_field;
      
      //Simulation Object
      Simulation sim_instance; //the Simulation Wrapper Object
@@ -83,11 +84,12 @@ public class TomasuloGUI extends JFrame {
           
           //Create the status elements
           status_panel.setLayout( new FlowLayout() ); 
-          clocks_label =  new JLabel("0");
+          clocks_field =  new JTextField("", 8);
+          clocks_field.setEnabled( false );
           //instr_label =  new JLabel("Instructions: ");  
           
           //Add the status elements  
-          status_panel.add(clocks_label);
+          status_panel.add(clocks_field);
           //status_panel.add(instr_label);
                     
           //Create the Instructions Table Model
@@ -337,8 +339,9 @@ public class TomasuloGUI extends JFrame {
                               op_model.setValueAt( (i+1), i, 4);                              
                          } 
                          
-                         //Populate the Registers Table
-                         updateRegisterTable();                        
+                         //Populate the tables
+                         updateRegisterTable();  
+                         updateMemTable();
                          
 
                     }
@@ -350,7 +353,10 @@ public class TomasuloGUI extends JFrame {
                     public void actionPerformed(ActionEvent e){
                          sim_instance.performStep();
                          
-                         //clocks_label.setText( ""+sim_instance.getCurrentCycle() );
+                         //update UI
+                         clocks_field.setText( ""+sim_instance.getCurrentCycle() );
+                         updateRegisterTable();
+                         updateMemTable();
                     }
                }
           );   
@@ -391,7 +397,27 @@ public class TomasuloGUI extends JFrame {
                temp_it_index++;
           }
      }
-        
+     ///
+     /// MemStations Table Update Helper
+     ///
+     private void updateMemTable(){   
+          //Get a copy of the memory stations
+          MemStation[] temp_ms = sim_instance.getMemStations();
+          
+          //Update the table with current values for the stations
+          for( int i =0; i < temp_ms.length; i++ ){
+               //generate a meaningfull representation of busy
+               String busy_desc = (temp_ms[i].isBusy() ? "Yes" : "No" );
+          
+               mrs_model.setValueAt( temp_ms[i].getName(), i, 0 );
+               mrs_model.setValueAt( busy_desc, i, 1 );
+               mrs_model.setValueAt( temp_ms[i].getAddress(), i, 2 );
+          }
+     }
+     
+     ///
+     /// The main function
+     ///
      public static void main(String args[])
      {
           new TomasuloGUI().setVisible(true);
