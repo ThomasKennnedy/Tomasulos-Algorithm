@@ -98,7 +98,7 @@ public class RegisterFiles{
           if( r_id.charAt(0) == 'R' && registers_int.containsKey( r_id ) ){
                registers_int.put( r_id, val_in );
           }
-          else if( r_id.charAt(0) == 'F' && registers_int.containsKey( r_id )){
+          else if( r_id.charAt(0) == 'F' && registers_fp.containsKey( r_id )){
                registers_fp.put( r_id, val_in );
           }/*
           else{
@@ -108,6 +108,8 @@ public class RegisterFiles{
                     }
                };
           }*/
+          
+          //System.out.println( r_id + " " + val_in );
      }
      
      ///

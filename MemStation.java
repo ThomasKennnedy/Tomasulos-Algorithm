@@ -56,6 +56,7 @@ public class MemStation extends ReservationStation{
           this.duration = cycles;
           //Create the address descriptor
           this.address =  reg_in.getRegister( op.getOperand(2) )+ "+" + reg_in.getRegister(  op.getOperand(3) );
+          result = "M(" + this.address + ")";
           
           //set the operation as scheduled
           operation.setScheduled();

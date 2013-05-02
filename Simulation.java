@@ -13,6 +13,8 @@ public class Simulation{
      private MemStation[] mem_rs;
      
      private HashMap<String, Integer[] > instruction_to_station; ///< Mapping of instructions to Reservation Stations
+     private HashMap<String, Integer > instruction_to_time; ///< Mapping of instructions to Execution Time
+     private HashMap<String, String> alias_to_register;   ///< Mapping of placeholder to Register
      
      private Clock clock;
 
@@ -70,6 +72,29 @@ public class Simulation{
           instruction_to_station.put( "DIVD", new Integer[]{5,6} );
           instruction_to_station.put( "DIV.D", new Integer[]{5,6} );
           
+          //Create a mapping of instructions to execution time
+          instruction_to_time = new HashMap<String, Integer>();
+          //Memory Instructions
+          instruction_to_time.put( "L.D", new Integer(2) );
+          instruction_to_time.put( "LD", new Integer(2) );
+          instruction_to_time.put( "S.D", new Integer(2) );
+          instruction_to_time.put( "SD", new Integer(2) );
+          
+          //ALU Instructions
+          instruction_to_time.put( "DADDI", new Integer(1) );
+          instruction_to_time.put( "DADD", new Integer(4) );
+          instruction_to_time.put( "ADDD", new Integer(4) );
+          instruction_to_time.put( "DSUB", new Integer(4) );
+          instruction_to_time.put( "SUBD", new Integer(4) );
+          instruction_to_time.put( "MULD", new Integer(7) );
+          instruction_to_time.put( "MUL.D", new Integer(7) );
+          instruction_to_time.put( "MULTD", new Integer(7) );
+          instruction_to_time.put( "DIVD", new Integer(25) );
+          instruction_to_time.put( "DIV.D", new Integer(25) );
+          
+          //Mapping of aliases to Registers
+          alias_to_register = new HashMap<String, String>(); 
+          
           //System.out.println( instruction_to_station );
           
           //indicate that the simulation has been initialized
@@ -101,7 +126,7 @@ public class Simulation{
           //Update Reservation Stations
           for( ALUStation it : alu_rs ){
                if( it.isResultReady() ){
-                    //broadcast( it.getResult() );
+                    broadcast( it.getName(), it.getResult() );
                     it.getResult();
                }
 
@@ -117,7 +142,7 @@ public class Simulation{
                //Integer Operations are guranteed to be complete before
                //a memory stations requires a register
                if( it.isResultReady() ){
-                    //broadcast( it.getResult() );
+                    broadcast( it.getName(), it.getResult() );
                     it.getResult();
                }
                
@@ -150,6 +175,12 @@ public class Simulation{
                          if( !mem_rs[i].isBusy() ){
                               mem_rs[i].scheduleInstruction( to_schedule, registers, 2 );
                               op_scheduled = true;
+                              
+                              //Set the placeholder if the instruction is not a store
+                              if( !isStore( to_schedule.getOpcode() ) ){
+                                   registers.setRegister( to_schedule.getOperand(1), mem_rs[i].getName() );
+                                   alias_to_register.put( mem_rs[i].getName(), to_schedule.getOperand(1) );
+                              }
                          }
                     }
                }
@@ -157,8 +188,15 @@ public class Simulation{
                else{
                     for( int i = rs_indices[0]; i <= rs_indices[ (rs_indices.length-1) ] && !op_scheduled; i ++){
                          if( !alu_rs[i].isBusy() ){
-                              alu_rs[i].scheduleInstruction( to_schedule, registers, 1 );
+                              alu_rs[i].scheduleInstruction( to_schedule, registers, 
+                                                             instruction_to_time.get( to_schedule.getOpcode() ) );
                               op_scheduled = true;
+                              
+                              //Set the placeholder if the instruction is not an Integer Op
+                              //if( i !=0 ){                              
+                                   registers.setRegister( to_schedule.getOperand(1), alu_rs[i].getName() );   
+                                   alias_to_register.put(  alu_rs[i].getName(), to_schedule.getOperand(1) );
+                              //}
                          }
                     }  
                }
@@ -216,10 +254,45 @@ public class Simulation{
          
      }
      
+     ///
+     ///Classify the message as Store or Otther
+     ///
+     private boolean isStore( String opcode ){
+           return ( opcode.equals("S.D") || opcode.equals("SD") );
+     }
      
-     
-     
-     
-     
+     ///
+     /// Broadcast the Result to all Reservation Stations
+     /// Update the Register File
+     ///
+     private void broadcast( String alias, String result ){
+          String register; // the register to update
+          
+          //broadcast to all Reservation Stations
+          for( ALUStation it : alu_rs ){
+               if( it.getQj().equals(alias) ){
+                    it.setVj(result);
+                    it.setQj(null);
+               }
+               if( it.getQk().equals(alias) ){
+                    it.setVk(result);
+                    it.setQk(null);
+               }
+          }    
+          /*
+          for( MemStation it : mem_rs ){          
+          }          
+          */
+
+          //Update the Registers
+          if( alias_to_register.containsKey( alias ) ){
+
+               register = alias_to_register.get( alias );
+               registers.setRegister( register, result );
+               alias_to_register.remove( alias );
+          }
+          
+          
+     }
      
 }

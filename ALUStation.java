@@ -46,11 +46,22 @@ public class ALUStation extends ReservationStation{
           this.operation = op;
           this.busy= true;
           this.duration = cycles;          
-
           
+          result = "R(" + op.getOperand(2) + "," + op.getOperand(3) + ")";
           
-          // rest schedule code goes here.
+          if( isPlaceHolder(reg_in.getRegister(operation.getOperand(2))) ){
+               qj = reg_in.getRegister( operation.getOperand(2) );
+          }
+          else{
+               vj = reg_in.getRegister( operation.getOperand(2) );
+          }
           
+          if( isPlaceHolder(reg_in.getRegister(operation.getOperand(3))) ) {
+               qk = reg_in.getRegister( operation.getOperand(3) );
+          }
+          else{
+               vk = reg_in.getRegister( operation.getOperand(3) );
+          }
           
           //set the operation as scheduled
           operation.setScheduled();
@@ -60,28 +71,28 @@ public class ALUStation extends ReservationStation{
     /// Function returns the value vj
     ///
 	public String getVj(){
-		return vj;
+		return ( vj==null ? "" : vj );
 	}
     
 	///
     /// Function returns the value vk
     ///
 	public String getVk(){
-		return vk;
+		return ( vk==null ? "" : vk );
 	}
     
 	///
     /// Function returns the value qj
     ///
 	public String getQj(){
-		return qj;
+		return ( qj==null ? "" : qj );
 	}
     
 	///
     /// Function returns the value qk
     ///
 	public String getQk(){
-		return qk;
+		return ( qk==null ? "" : qk );
 	}
     
 	///
@@ -110,6 +121,13 @@ public class ALUStation extends ReservationStation{
     ///
 	public void setVj(String i){
 		vj=i;
+          
+          if( vk != null ){
+               result = "R(" + vj + "," + vk + ")";
+          }
+          else{
+               result = "R(" + vj + "," + operation.getOperand(3) + ")";
+          }
 	}
 	
 	///
@@ -117,6 +135,13 @@ public class ALUStation extends ReservationStation{
     ///
 	public void setVk(String i){
 		vk=i;
+          
+          if( vj != null ){
+               result = "R(" + vj + "," + vk + ")";
+          }
+          else{
+               result = "R(" + operation.getOperand(2) + "," + vk + ")";
+          }
 	}
 	
 	///
@@ -126,6 +151,25 @@ public class ALUStation extends ReservationStation{
 		A=i;
 	}
 
+     ///
+     /// Return an operation type descriptor
+     ///
+     public String getOperation(){
+          return (operation !=null ? operation.getOpcode(): " ");
+     }
+     
+     ///
+     /// Utility funtion toc check if the Register Value is an alias
+     ///
+     private boolean isPlaceHolder( String to_check ){
+          return ( to_check.equals("Add1") || to_check.equals("Add2") || 
+                   to_check.equals("Mul1") || to_check.equals("Mul1") ||
+                   to_check.equals("Div1") || to_check.equals("Div2") ||
+                   to_check.equals("Load1")|| to_check.equals("Load2")||
+                   to_check.equals("Int1") );
+                 
+     }
+     
 	
     
 }
