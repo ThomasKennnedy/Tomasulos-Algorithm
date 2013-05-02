@@ -4,14 +4,17 @@
 ///
 
 public class Operation{
-     private String opcode;       ///< Contains the opcode.
-     private String comment;      ///< Stores the comment.
-     private String[] operands;   ///< Stores all operands.
+     private String opcode;           ///< Contains the opcode.
+     private String comment;          ///< Stores the comment.
+     private String[] operands;       ///< Stores all operands.
      private int exec_start, exec_end;///< start and end of executions respectively
-     private int time_write;
+     private int time_write;          ///< Write time
+     private int issue;               ///< issue number
+     
      
      private boolean has_comment; ///< Specifies the existance of a comment
      private boolean scheduled;    ///< Set to true when the instruction has been scheduled
+     
      
      public Operation(){}
      
@@ -25,6 +28,7 @@ public class Operation{
           this.has_comment = has_comment;
           exec_start = exec_end = time_write = -1;
           scheduled = false;
+          issue = 0;
      }     
 
      ///
@@ -49,6 +53,7 @@ public class Operation{
           
           exec_start = exec_end = time_write = -1;
           scheduled = false;
+          issue = 0;
      }
           
      ///
@@ -60,7 +65,8 @@ public class Operation{
           this.operands = new String[ to_copy.operands.length ];
           System.arraycopy( to_copy.operands, 0, this.operands, 0, to_copy.operands.length );
           
-          this.comment  = to_copy.comment;          
+          this.comment  = to_copy.comment;    
+          this.issue = to_copy.issue;          
      }
      
      ///
@@ -124,6 +130,13 @@ public class Operation{
      ///
      public int getExecEnd(){
           return exec_end;
+     }
+     
+     ///
+     ///Get the issue number
+     ///
+     public int getIssueNum(){
+          return issue;
      }
      
      ///
@@ -213,6 +226,13 @@ public class Operation{
      ///
      void setScheduled(){
           scheduled = true;
+     }
+     
+     ///
+     /// Set the issue number
+     ///
+     public void setIssueNum( int i ){
+          issue = i;
      }
      
      ///

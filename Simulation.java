@@ -6,24 +6,35 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public class Simulation{
-     private OperationList operations;
-     private RegisterFiles registers;
-     private ALUStation[] alu_rs;
-     private MemStation[] mem_rs;
-     
-     private HashMap<String, Integer[] > instruction_to_station; ///< Mapping of instructions to Reservation Stations
-     private HashMap<String, Integer > instruction_to_time; ///< Mapping of instructions to Execution Time
-     private HashMap<String, String> alias_to_register;   ///< Mapping of placeholder to Register
-     
-     private Clock clock;
+///
+/// This class contains all simulation logic.
+///
 
-     private boolean is_initialized;
+public class Simulation{
+     private OperationList operations;                            ///< List of instructions
+     private RegisterFiles registers;                             ///< Register Files
+     private ALUStation[] alu_rs;                                 ///< ALU and Integer Reservation Stations
+     private MemStation[] mem_rs;                                 ///< Memory Reservation Stations
      
+     private HashMap<String, Integer[] > instruction_to_station;  ///< Mapping of instructions to Reservation Stations
+     private HashMap<String, Integer > instruction_to_time;       ///< Mapping of instructions to Execution Time
+     private HashMap<String, String> alias_to_register;           ///< Mapping of placeholder to Register
+     
+     private HashMap<String, Integer> memory_buffer;               ///< Mapping of operation issue numbers to ,emory locations
+     
+     private Clock clock;                                         ///< Clock Cycle Object
+     private boolean is_initialized;                              ///< Whether the Simulation Instance is initialized
+     
+     ///
+     /// Simulation Constructor
+     ///
      public Simulation(){
           is_initialized = false;
      }
      
+     ///
+     /// Initialize the simulation
+     ///
      public void initialize(File data_file) throws Exception{
           clock = Clock.getInstance();
      
@@ -62,13 +73,17 @@ public class Simulation{
           
           //ALU Indices
           instruction_to_station.put( "DADDI", new Integer[]{0} );
+          instruction_to_station.put( "DADDUI", new Integer[]{0} );
           instruction_to_station.put( "DADD", new Integer[]{1,2} );
           instruction_to_station.put( "ADDD", new Integer[]{1,2} );
+          instruction_to_station.put( "ADD.D", new Integer[]{1,2} );
           instruction_to_station.put( "DSUB", new Integer[]{1,2} );
           instruction_to_station.put( "SUBD", new Integer[]{1,2} );
+          instruction_to_station.put( "SUB.D", new Integer[]{1,2} );
           instruction_to_station.put( "MULD", new Integer[]{3,4} );
           instruction_to_station.put( "MUL.D", new Integer[]{3,4} );
           instruction_to_station.put( "MULTD", new Integer[]{3,4} );
+          instruction_to_station.put( "MULT.D", new Integer[]{3,4} );
           instruction_to_station.put( "DIVD", new Integer[]{5,6} );
           instruction_to_station.put( "DIV.D", new Integer[]{5,6} );
           
@@ -82,25 +97,33 @@ public class Simulation{
           
           //ALU Instructions
           instruction_to_time.put( "DADDI", new Integer(1) );
+          instruction_to_time.put( "DADDUI", new Integer(1) );
           instruction_to_time.put( "DADD", new Integer(4) );
           instruction_to_time.put( "ADDD", new Integer(4) );
+          instruction_to_time.put( "ADD.D", new Integer(4) );
           instruction_to_time.put( "DSUB", new Integer(4) );
           instruction_to_time.put( "SUBD", new Integer(4) );
+          instruction_to_time.put( "SUB.D", new Integer(4) );
           instruction_to_time.put( "MULD", new Integer(7) );
           instruction_to_time.put( "MUL.D", new Integer(7) );
           instruction_to_time.put( "MULTD", new Integer(7) );
+          instruction_to_time.put( "MULT.D", new Integer(7) );
           instruction_to_time.put( "DIVD", new Integer(25) );
           instruction_to_time.put( "DIV.D", new Integer(25) );
           
           //Mapping of aliases to Registers
           alias_to_register = new HashMap<String, String>(); 
           
-          //System.out.println( instruction_to_station );
+          //Initalize the Memory Buffer
+          memory_buffer = new HashMap<String, Integer>(); 
           
           //indicate that the simulation has been initialized
           is_initialized = true;
      }
      
+     ///
+     /// Returns true when the simulation has finished
+     ///
      public boolean isComplete(){
           boolean complete = false;          
           complete = !( operations.moreOperationsQueued() );
@@ -116,6 +139,9 @@ public class Simulation{
           return complete;          
      }
      
+     ///
+     /// Perform one time step
+     ///
      public void performStep(){
           Operation to_schedule;
           boolean op_scheduled = false;
@@ -134,10 +160,11 @@ public class Simulation{
                }    
           }          
           for( MemStation it : mem_rs ){
-               if( it.isResultReady() ){
+               if( it.isResultReady()   ){
                     broadcast( it.getName(), it.getResult() );
                }               
                if( it.isResultWritten() ){
+                    //System.out.prtinln
                     it.clear();
                }    
           }
@@ -149,7 +176,7 @@ public class Simulation{
                }         
           }          
           for( MemStation it : mem_rs ){               
-               if(  it.isReady() && it.isBusy() ){
+               if( it.isBusy() && it.hasPriority( memory_buffer ) &&   it.isReady()   ){
                     it.performCycle();
                }
 
@@ -175,11 +202,14 @@ public class Simulation{
                               mem_rs[i].scheduleInstruction( to_schedule, registers, 2 );
                               op_scheduled = true;
                               
-                              //Set the placeholder if the instruction is not a store
+                              //Set the placeholder in the Register Files
+                              //if the instruction is not a store
                               if( !MemStation.isStore( to_schedule.getOpcode() ) ){
                                    registers.setRegister( to_schedule.getOperand(1), mem_rs[i].getName() );
                                    alias_to_register.put( mem_rs[i].getName(), to_schedule.getOperand(1) );
+                                   
                               }
+                              mem_rs[i].hasPriority( memory_buffer );
                          }
                     }
                }
@@ -199,26 +229,41 @@ public class Simulation{
                
                if( op_scheduled ){
                     operations.increment();
-               }         
+               }  
           }
      }
      
+     ///
+     /// Return the current clock cycle
+     ///
      public int getCurrentCycle(){
           return clock.get();
      }     
      
+     ///
+     /// Return the Instruction List
+     ///
      public OperationList getOperationList(){
           return operations;
      }
 
+     ///
+     ///Return the Regieter Files
+     ///
      public RegisterFiles getRegisterFiles(){
           return registers;
      }
      
+     ///
+     /// Return the Memory Reservation Stations
+     ///
      public MemStation[] getMemStations(){
           return mem_rs;
      }
      
+     ///
+     /// Return the ALU Reservation Stations
+     ///
      public ALUStation[] getALUStations(){
           return alu_rs;
      }
@@ -257,6 +302,11 @@ public class Simulation{
      private void broadcast( String alias, String result ){
           String register; // the register to update
           
+          //remove the mapping from the memory buffer
+          if( memory_buffer.containsKey( result ) ){
+               memory_buffer.remove( result );
+          }
+          
           //broadcast to all Reservation Stations
           for( ALUStation it : alu_rs ){
                if( it.getQj().equals(alias) ){
@@ -278,9 +328,14 @@ public class Simulation{
 
           //Update the Registers
           if( alias_to_register.containsKey( alias ) ){
-
+               
+               //ger the register that is mapped to the alias
                register = alias_to_register.get( alias );
-               registers.setRegister( register, result );
+               
+               //overwrite the current register valu if the station name matched the alias
+               if( alias.equals( registers.getRegister( register ) ) ){
+                    registers.setRegister( register, result );
+               }
                alias_to_register.remove( alias );
           }
           

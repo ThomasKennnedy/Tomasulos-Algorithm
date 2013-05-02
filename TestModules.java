@@ -8,6 +8,9 @@ import javax.swing.border.TitledBorder;
 import java.io.*;
 import java.net.*;
 
+///
+/// This class contaisn all moduling testing.
+///
 public class TestModules{
      
      public static void main( String args[] ){
@@ -26,8 +29,7 @@ public class TestModules{
                System.out.println( e );
           }
           
-          //Resercation Stations
-          
+          //Reservation Stations          
           MemStation mem_test =  new MemStation("Load1");
           ALUStation alu_test =  new ALUStation("Add1");
           

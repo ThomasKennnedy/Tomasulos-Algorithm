@@ -7,7 +7,7 @@ public class ALUStation extends ReservationStation{
     private String vj;          ///<value of operand
     private String vk;          ///<value of operand
     private String qj;          ///<name of reservation station producing Vj
-    private String qk;         	///<name of reservation station producing Vk
+    private String qk;          ///<name of reservation station producing Vk
     private String A;           ///<used to hold immediate field or off address
     
 	///

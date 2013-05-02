@@ -35,6 +35,7 @@ public class OperationFileParser{
           String[] split_1, split_2, operands;
           String op_portion, comment_portion = "";
           String line, operation;
+          int issue = 0;
           
           boolean comment_exists;
           
@@ -44,6 +45,9 @@ public class OperationFileParser{
                
                //only process non-empty lines
                if( line != null && !line.equals("") ){
+                    //increment the issue_number
+                    issue++;
+                    
                     //Check for comment
                     if( line.indexOf( ";" ) >= 0 ){
                          split_1         = line.split(";");                  
@@ -88,7 +92,9 @@ public class OperationFileParser{
                     
                     if( comment_exists ){
                          oplist.getLastOperation().setComment( comment_portion );
-                    }                    
+                    }           
+
+                    oplist.getLastOperation().setIssueNum( issue );
                }
 
               

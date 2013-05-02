@@ -12,44 +12,45 @@ import java.util.Map;
 import java.io.*;
 import java.net.*;
 
+///
+/// This class provides all GUI functionality.
+///
 public class TomasuloGUI extends JFrame {
-     JPanel control_panel;
-     JPanel status_panel;
-     JPanel content_panel;     
+     JPanel control_panel; ///< Container panel for controls
+     JPanel status_panel;  ///< Container panel for status
      
-     JLabel file_label;
-     
-     //JLabel instr_label;
+     JLabel file_label; ///< Filename label
      
      //Tables
-     JTable op_table;
-     JTable rs_table;  ///< ALU Reservatio Stations
-     JTable mrs_table; ///< Memory Reservations Stations
-     JTable irs_table; ///< Integer Resercation Stations
-     JTable reg_table;
+     JTable op_table;  ///< Instructions Table
+     JTable rs_table;  ///< ALU Reservation Station Table
+     JTable mrs_table; ///< Memory Reservations Station Table
+     JTable irs_table; ///< Integer Reservation Station Table
+     JTable reg_table; ///< Register File Table
      
      //Table Models
-     DefaultTableModel op_model;
-     DefaultTableModel rs_model;
-     DefaultTableModel mrs_model;
-     DefaultTableModel irs_model;
-     DefaultTableModel reg_model;     
+     DefaultTableModel op_model;  ///< Instructions Table Model
+     DefaultTableModel rs_model;  ///< ALU Reservation Station Table Model
+     DefaultTableModel mrs_model; ///< Memory Reservations Station Table Mdoel
+     DefaultTableModel irs_model; ///< Integer Reservation Station Table Model
+     DefaultTableModel reg_model; ///< Register File Table Model
      
-     JButton file_button; 
-     JButton load_button;
-     JButton step_button;
-     JButton all_steps_button;
+     JButton load_button; ///< Load button
+     JButton step_button; ///< Step button
      
      JTextField file_field;
-     JTextField clocks_field;
+     JTextField clocks_field; ///< Clock display field
      
      //Simulation Object
-     Simulation sim_instance; //the Simulation Wrapper Object
+     Simulation sim_instance; ///< Simulation Wrapper Object
      
      //File Objects
-     final JFileChooser file_dialog = new JFileChooser();
-     File instructions_file;
+     final JFileChooser file_dialog = new JFileChooser(); ///< File selection dialog
+     File instructions_file; ///< Instructions File object
 
+     ///
+     /// The GUI Constructor
+     ///
      public TomasuloGUI(){
           super("Tomsulo's Simulation");
           setLocation(50,75);
@@ -62,7 +63,6 @@ public class TomasuloGUI extends JFrame {
           //create the container panels
 	     control_panel = new JPanel();
 	     status_panel = new JPanel();
-          content_panel = new JPanel();          
           
           //Create the control elements
           file_label       = new JLabel("Input File:");
@@ -395,7 +395,7 @@ public class TomasuloGUI extends JFrame {
                op_model.setValueAt( (write_time == -1 ? " " : write_time ), i, 6);
                
                //Issue Number - display once the instruction has been scheduled
-               op_model.setValueAt( (it_op.isScheduled() ? (i+1) : " " ), i, 4);                              
+               op_model.setValueAt( (it_op.isScheduled() ? it_op.getIssueNum() : " " ), i, 4);                              
           } 
      }
      

@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.ArrayList;
+
 ///
 /// This class provides all MemStation functionality.
 ///
@@ -6,7 +9,7 @@ public class MemStation extends ReservationStation{
     
      private String address;		///< Address to be stored or loaded from memory
      private String[] addr_comp;   ///< Components used in computing the final address, and the register for stores [3]
-     private boolean is_store;        ///< True indicates that the current operation is a store
+     private boolean is_store;     ///< True indicates that the current operation is a store
 
      ///
      /// Calls superclass constructor and initializes address
@@ -137,6 +140,27 @@ public class MemStation extends ReservationStation{
      ///
      private void setStore(){
           is_store = isStore( operation.getOpcode() );
+     }
+     
+     ///
+     /// Checks if the station has memory access priority
+     ///
+     public boolean hasPriority( HashMap<String, Integer> memory_buffer ){
+          boolean  to_return = false;
+          
+          if( memory_buffer.containsKey( result )){              
+               if( memory_buffer.get( result ).intValue() >= ( operation.getIssueNum() ) ){
+                    to_return = true;
+               }
+          }    
+          else{
+               if( operation != null ){
+                    memory_buffer.put( result, new Integer( operation.getIssueNum() ) );
+                    to_return = true;
+               }
+          }
+          
+          return to_return;
      }
      
      ///

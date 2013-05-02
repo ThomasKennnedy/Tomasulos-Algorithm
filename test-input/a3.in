@@ -1,0 +1,12 @@
+L.D        F2,  0(R2)	              ;R2=224
+DADDUI     R2,  R2,      #-16         ;R4=220
+L.D        F4,  4(R4)
+SUB.D      F0,  F2,      F4
+DIV.D      F4,  F2,      F0
+S.D        F4,  16(R2)          
+S.D        F2,  4(R4)
+DADDUI     R2,  R2,      #16 
+L.D        F6,  0(R2)          
+
+
+
