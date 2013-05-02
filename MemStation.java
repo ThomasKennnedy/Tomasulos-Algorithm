@@ -5,7 +5,8 @@
 public class MemStation extends ReservationStation{
     
      private String address;		///< Address to be stored or loaded from memory
-     private String[] addr_comp;    ///< Components used in computing the final address
+     private String[] addr_comp;   ///< Components used in computing the final address, and the register for stores [3]
+     private boolean is_store;        ///< True indicates that the current operation is a store
 
      ///
      /// Calls superclass constructor and initializes address
@@ -13,9 +14,11 @@ public class MemStation extends ReservationStation{
      public MemStation(String sname){
           super(sname);
           address = null;
-          addr_comp = new String[2];
+          addr_comp = new String[3];
           addr_comp[0] = "";
           addr_comp[1] = "";
+          addr_comp[2] = "";
+          is_store = false;
      }
 
      ///
@@ -30,6 +33,8 @@ public class MemStation extends ReservationStation{
           result = "";
           addr_comp[0] = "";
           addr_comp[1] = "";
+          addr_comp[2] = "";
+          is_store = false;
      }
 
      ///
@@ -37,7 +42,8 @@ public class MemStation extends ReservationStation{
      ///
      public boolean isReady(){
         return ( !resultReady  && !isPlaceHolder(addr_comp[0]) &&
-                !isPlaceHolder(addr_comp[1]));
+                !isPlaceHolder(addr_comp[1]) && 
+                ( !is_store || (is_store && !isPlaceHolder(addr_comp[2])) ) ); // force store to wait for register value
      }
 
      ///
@@ -53,7 +59,14 @@ public class MemStation extends ReservationStation{
      public void setAddress(String address){
           address = address;
      }
-
+     
+     ///
+     /// Return whether the currently scheduled operation is a store
+     ///
+     public boolean isStore(){
+          return is_store;
+     }
+     
      ///
      /// Function to schedule the instruction
      ///
@@ -64,11 +77,15 @@ public class MemStation extends ReservationStation{
           //Set the address components
           addr_comp[0] = reg_in.getRegister( op.getOperand(2) );
           addr_comp[1] = reg_in.getRegister(  op.getOperand(3) );
+          addr_comp[2] = reg_in.getRegister(  op.getOperand(1) ); // the register being read-store or written-load
           
           updateAddress();
           
           //set the operation as scheduled
           operation.setScheduled();
+          
+          //Classify the Instruction as load or store
+          setStore();
      }
      
      ///
@@ -83,7 +100,12 @@ public class MemStation extends ReservationStation{
                addr_comp[1] = value;
           }
           
-          updateAddress();     
+          //replace the register placeholder - only imporant for stores
+          if( addr_comp[2].equals(alias) ){
+               addr_comp[2] = value;
+          }
+          
+          updateAddress();            
      }
      
      
@@ -108,5 +130,19 @@ public class MemStation extends ReservationStation{
           
           }
           address = result;
+     }
+     
+     ///
+     /// Utility funtion to set the message as load or store
+     ///
+     private void setStore(){
+          is_store = isStore( operation.getOpcode() );
+     }
+     
+     ///
+     ///Static Function Classify the message as Store or Otther
+     ///
+     public static boolean isStore( String opcode ){
+           return ( opcode.equals("S.D") || opcode.equals("SD") );
      }
 }

@@ -123,17 +123,12 @@ public class Simulation{
           //increment the clock
           clock.increment();
           
-          //Update Reservation Stations
+          //Broadcast Reservation Station Results
           for( ALUStation it : alu_rs ){
                if( it.isResultReady() ){
                     it.finalizeResult();
                     broadcast( it.getName(), it.getResult() );
-               }
-
-               if( it.isReady() && it.isBusy()){
-                    it.performCycle();
-               }
-               
+               }               
                if( it.isResultWritten() ){
                     it.clear();
                }    
@@ -141,15 +136,23 @@ public class Simulation{
           for( MemStation it : mem_rs ){
                if( it.isResultReady() ){
                     broadcast( it.getName(), it.getResult() );
-               }
-               
-               if(  it.isReady() && it.isBusy() ){
-                    it.performCycle();
-               }
-               
+               }               
                if( it.isResultWritten() ){
                     it.clear();
                }    
+          }
+          
+          //Update Reservation Stations -- perform cycle
+          for( ALUStation it : alu_rs ){
+               if( it.isReady() && it.isBusy()){
+                    it.performCycle();
+               }         
+          }          
+          for( MemStation it : mem_rs ){               
+               if(  it.isReady() && it.isBusy() ){
+                    it.performCycle();
+               }
+
           }
           
           //Get an instruction from the head of the list
@@ -168,13 +171,12 @@ public class Simulation{
                //Memory Stations
                if( classify( to_schedule.getOpcode() ) ){
                     for( int i = rs_indices[0]; i <= rs_indices[ (rs_indices.length-1) ] && !op_scheduled; i ++){
-                    //for( int i = 0; i <= 1 && !op_scheduled; i ++){
                          if( !mem_rs[i].isBusy() ){
                               mem_rs[i].scheduleInstruction( to_schedule, registers, 2 );
                               op_scheduled = true;
                               
                               //Set the placeholder if the instruction is not a store
-                              if( !isStore( to_schedule.getOpcode() ) ){
+                              if( !MemStation.isStore( to_schedule.getOpcode() ) ){
                                    registers.setRegister( to_schedule.getOperand(1), mem_rs[i].getName() );
                                    alias_to_register.put( mem_rs[i].getName(), to_schedule.getOperand(1) );
                               }
@@ -188,12 +190,9 @@ public class Simulation{
                               alu_rs[i].scheduleInstruction( to_schedule, registers, 
                                                              instruction_to_time.get( to_schedule.getOpcode() ) );
                               op_scheduled = true;
-                              
-                              //Set the placeholder if the instruction is not an Integer Op
-                              //if( i !=0 ){                              
-                                   registers.setRegister( to_schedule.getOperand(1), alu_rs[i].getName() );   
-                                   alias_to_register.put(  alu_rs[i].getName(), to_schedule.getOperand(1) );
-                              //}
+                            
+                              registers.setRegister( to_schedule.getOperand(1), alu_rs[i].getName() );   
+                              alias_to_register.put(  alu_rs[i].getName(), to_schedule.getOperand(1) );
                          }
                     }  
                }
@@ -249,14 +248,7 @@ public class Simulation{
           return( opcode.equals("L.D") || opcode.equals("LD") ||
                   opcode.equals("S.D") || opcode.equals("SD") );
          
-     }
-     
-     ///
-     ///Classify the message as Store or Otther
-     ///
-     private boolean isStore( String opcode ){
-           return ( opcode.equals("S.D") || opcode.equals("SD") );
-     }
+     }     
      
      ///
      /// Broadcast the Result to all Reservation Stations
