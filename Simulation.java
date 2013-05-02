@@ -126,8 +126,8 @@ public class Simulation{
           //Update Reservation Stations
           for( ALUStation it : alu_rs ){
                if( it.isResultReady() ){
+                    it.finalizeResult();
                     broadcast( it.getName(), it.getResult() );
-                    it.getResult();
                }
 
                if( it.isReady() && it.isBusy()){
@@ -139,14 +139,11 @@ public class Simulation{
                }    
           }          
           for( MemStation it : mem_rs ){
-               //Integer Operations are guranteed to be complete before
-               //a memory stations requires a register
                if( it.isResultReady() ){
                     broadcast( it.getName(), it.getResult() );
-                    it.getResult();
                }
                
-               if( it.isBusy() ){
+               if(  it.isReady() && it.isBusy() ){
                     it.performCycle();
                }
                
@@ -279,10 +276,13 @@ public class Simulation{
                     it.setQk(null);
                }
           }    
-          /*
-          for( MemStation it : mem_rs ){          
+          
+          for( MemStation it : mem_rs ){  
+               if( it.isBusy() ) {
+                    it.updateAddrComponents( alias, result );        
+               }
           }          
-          */
+          
 
           //Update the Registers
           if( alias_to_register.containsKey( alias ) ){

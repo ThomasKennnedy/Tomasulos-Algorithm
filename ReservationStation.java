@@ -117,4 +117,16 @@ public abstract class ReservationStation {
                operation.setExecEnd( Clock.getInstance().get() );
           }
      }
+     
+     ///
+     /// Utility function toc check if the Register Value is an alias
+     ///
+     protected boolean isPlaceHolder( String to_check ){
+          return ( to_check.equals("Add1") || to_check.equals("Add2") || 
+                   to_check.equals("Mul1") || to_check.equals("Mul1") ||
+                   to_check.equals("Div1") || to_check.equals("Div2") ||
+                   to_check.equals("Load1")|| to_check.equals("Load2")||
+                   to_check.equals("Int1") );
+                 
+     }
 }

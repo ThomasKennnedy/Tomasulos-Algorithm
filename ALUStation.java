@@ -20,7 +20,7 @@ public class ALUStation extends ReservationStation{
     }
     
     ///
-    /// Function to clear the reservation Station
+    /// Function to clear the Reservation Station
     ///
     public void clear(){
         busy = false;
@@ -35,8 +35,7 @@ public class ALUStation extends ReservationStation{
     /// Function to determine whether operands are available and therefore ready for execution
     ///
     public boolean isReady(){
-        return (busy == true && qj == null && qk == null &&
-                resultReady == false);
+        return (busy && qj == null && qk == null && !resultReady );
     }
 	
 	///
@@ -45,7 +44,7 @@ public class ALUStation extends ReservationStation{
 	public void scheduleInstruction(Operation op, RegisterFiles reg_in, int cycles){
           this.operation = op;
           this.busy= true;
-          this.duration = cycles;          
+          this.duration = cycles;       
           
           result = "R(" + op.getOperand(2) + "," + op.getOperand(3) + ")";
           
@@ -121,13 +120,6 @@ public class ALUStation extends ReservationStation{
     ///
 	public void setVj(String i){
 		vj=i;
-          
-          if( vk != null ){
-               result = "R(" + vj + "," + vk + ")";
-          }
-          else{
-               result = "R(" + vj + "," + operation.getOperand(3) + ")";
-          }
 	}
 	
 	///
@@ -135,13 +127,6 @@ public class ALUStation extends ReservationStation{
     ///
 	public void setVk(String i){
 		vk=i;
-          
-          if( vj != null ){
-               result = "R(" + vj + "," + vk + ")";
-          }
-          else{
-               result = "R(" + operation.getOperand(2) + "," + vk + ")";
-          }
 	}
 	
 	///
@@ -152,24 +137,45 @@ public class ALUStation extends ReservationStation{
 	}
 
      ///
+     /// Finalize the result - perform integer parsing if necessary
+     ///
+     void finalizeResult(){
+          boolean is_int1, is_int2; //boolean flags that hold true if the operands are integers
+          int temp_int1, temp_int2; //temporary integers to hold the intermediate parsing results
+          
+          //default result if the parsing fails
+          result = "R(" + vj + "," + vk + ")";
+     
+          //attempt to parse the values as integers
+          try{
+               //parse vj
+               if( vj.startsWith("#") ){
+                    vj = vj.substring(1);
+               }
+               
+               temp_int1 = Integer.parseInt( vj );
+               is_int1 = true;
+               
+               //parse vk
+               if( vk.startsWith("#") ){
+                    vk = vk.substring(1);
+               }
+               
+               temp_int2 = Integer.parseInt( vk );
+               is_int2 = true;
+               
+               result = ""+( temp_int1 + temp_int2 );
+          }
+          catch( Exception e ){
+          
+          }
+     }
+
+     ///
      /// Return an operation type descriptor
      ///
      public String getOperation(){
           return (operation !=null ? operation.getOpcode(): " ");
      }
-     
-     ///
-     /// Utility funtion toc check if the Register Value is an alias
-     ///
-     private boolean isPlaceHolder( String to_check ){
-          return ( to_check.equals("Add1") || to_check.equals("Add2") || 
-                   to_check.equals("Mul1") || to_check.equals("Mul1") ||
-                   to_check.equals("Div1") || to_check.equals("Div2") ||
-                   to_check.equals("Load1")|| to_check.equals("Load2")||
-                   to_check.equals("Int1") );
-                 
-     }
-     
-	
     
 }
