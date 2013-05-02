@@ -1,0 +1,228 @@
+\hypertarget{classSimulation}{\section{\-Simulation \-Class \-Reference}
+\label{classSimulation}\index{\-Simulation@{\-Simulation}}
+}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSimulation_aa24c4314fd1e140a1b9ad5feb06c6fb0}{\-Simulation} ()
+\item 
+void \hyperlink{classSimulation_a104eb3d562c22b1b10511adff57f4b4d}{initialize} (\-File data\-\_\-file)  throws Exception
+\item 
+boolean \hyperlink{classSimulation_ac47aeddaac1229f921bd8644aff688a9}{is\-Complete} ()
+\item 
+void \hyperlink{classSimulation_a6aa2ea799b5276681e8eb7c941c29d98}{perform\-Step} ()
+\item 
+int \hyperlink{classSimulation_a0cc18516e5b9e6f05b657d65adbb9f7b}{get\-Current\-Cycle} ()
+\item 
+\hyperlink{classOperationList}{\-Operation\-List} \hyperlink{classSimulation_a1cff8890330ebfd903d0e7bbef784a45}{get\-Operation\-List} ()
+\item 
+\hyperlink{classRegisterFiles}{\-Register\-Files} \hyperlink{classSimulation_affe7128840546c078763f7e21c3dac47}{get\-Register\-Files} ()
+\item 
+\hyperlink{classMemStation}{\-Mem\-Station}\mbox{[}$\,$\mbox{]} \hyperlink{classSimulation_a2f73acac6cc327ccd7721a797b8bdf6c}{get\-Mem\-Stations} ()
+\item 
+\hyperlink{classALUStation}{\-A\-L\-U\-Station}\mbox{[}$\,$\mbox{]} \hyperlink{classSimulation_a717866287d7c9ad508105400cd58a704}{get\-A\-L\-U\-Stations} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classSimulation_a24ef9f4425a72b53e78d79f2496f00a2}{parse\-Comment} (\-String comment)
+\item 
+boolean \hyperlink{classSimulation_a50ecd57c05305f3a27255b25d5c29188}{classify} (\-String opcode)
+\item 
+void \hyperlink{classSimulation_acb55c33781847629f2523d0aa58e6f71}{broadcast} (\-String alias, \-String result)
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classOperationList}{\-Operation\-List} \hyperlink{classSimulation_a9569c59ef6447bb109d924ab08b952db}{operations}
+\begin{DoxyCompactList}\small\item\em \-List of instructions. \end{DoxyCompactList}\item 
+\hyperlink{classRegisterFiles}{\-Register\-Files} \hyperlink{classSimulation_a72082ebb1736f61f976fb4795c6446a6}{registers}
+\begin{DoxyCompactList}\small\item\em \-Register \-Files. \end{DoxyCompactList}\item 
+\hyperlink{classALUStation}{\-A\-L\-U\-Station}\mbox{[}$\,$\mbox{]} \hyperlink{classSimulation_a088d8379681674f73ff28d67fa15c4b1}{alu\-\_\-rs}
+\begin{DoxyCompactList}\small\item\em \-A\-L\-U and \-Integer \-Reservation \-Stations. \end{DoxyCompactList}\item 
+\hyperlink{classMemStation}{\-Mem\-Station}\mbox{[}$\,$\mbox{]} \hyperlink{classSimulation_a2d7653a8b926b1950e545b4ddf99525a}{mem\-\_\-rs}
+\begin{DoxyCompactList}\small\item\em \-Memory \-Reservation \-Stations. \end{DoxyCompactList}\item 
+\-Hash\-Map$<$ \-String, \-Integer\mbox{[}$\,$\mbox{]} $>$ \hyperlink{classSimulation_aa1da0fd99a66e4f3290cab75db0498ba}{instruction\-\_\-to\-\_\-station}
+\begin{DoxyCompactList}\small\item\em \-Mapping of instructions to \-Reservation \-Stations. \end{DoxyCompactList}\item 
+\-Hash\-Map$<$ \-String, \-Integer $>$ \hyperlink{classSimulation_aefb6ae75923bda2ea63a2789c6ea1387}{instruction\-\_\-to\-\_\-time}
+\begin{DoxyCompactList}\small\item\em \-Mapping of instructions to \-Execution \-Time. \end{DoxyCompactList}\item 
+\-Hash\-Map$<$ \-String, \-String $>$ \hyperlink{classSimulation_a4ba6804e72f9296ddbaf07334c656267}{alias\-\_\-to\-\_\-register}
+\begin{DoxyCompactList}\small\item\em \-Mapping of placeholder to \-Register. \end{DoxyCompactList}\item 
+\-Hash\-Map$<$ \-String, \-Integer $>$ \hyperlink{classSimulation_ad6a6dd370a3221f0b89718c9b64e3dad}{memory\-\_\-buffer}
+\begin{DoxyCompactList}\small\item\em \-Mapping of operation issue numbers to ,emory locations. \end{DoxyCompactList}\item 
+\hyperlink{classClock}{\-Clock} \hyperlink{classSimulation_af485d36c87120ad92b39bbea3e363cda}{clock}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classClock}{\-Clock} \-Cycle \-Object. \end{DoxyCompactList}\item 
+boolean \hyperlink{classSimulation_a7c5a3018517be8966e7242ada10d5ba0}{is\-\_\-initialized}
+\begin{DoxyCompactList}\small\item\em \-Whether the \hyperlink{classSimulation}{\-Simulation} \-Instance is initialized. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-This class contains all simulation logic. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classSimulation_aa24c4314fd1e140a1b9ad5feb06c6fb0}{\index{\-Simulation@{\-Simulation}!\-Simulation@{\-Simulation}}
+\index{\-Simulation@{\-Simulation}!Simulation@{\-Simulation}}
+\subsubsection[{\-Simulation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Simulation.\-Simulation} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_aa24c4314fd1e140a1b9ad5feb06c6fb0}
+\hyperlink{classSimulation}{\-Simulation} \-Constructor 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classSimulation_acb55c33781847629f2523d0aa58e6f71}{\index{\-Simulation@{\-Simulation}!broadcast@{broadcast}}
+\index{broadcast@{broadcast}!Simulation@{\-Simulation}}
+\subsubsection[{broadcast}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Simulation.\-broadcast} (
+\begin{DoxyParamCaption}
+\item[{\-String}]{alias, }
+\item[{\-String}]{result}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classSimulation_acb55c33781847629f2523d0aa58e6f71}
+\-Broadcast the \-Result to all \-Reservation \-Stations \-Update the \-Register \-File \hypertarget{classSimulation_a50ecd57c05305f3a27255b25d5c29188}{\index{\-Simulation@{\-Simulation}!classify@{classify}}
+\index{classify@{classify}!Simulation@{\-Simulation}}
+\subsubsection[{classify}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf \-Simulation.\-classify} (
+\begin{DoxyParamCaption}
+\item[{\-String}]{opcode}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classSimulation_a50ecd57c05305f3a27255b25d5c29188}
+\-Classify an \-Instruction as \-Memory or \-Other \hypertarget{classSimulation_a717866287d7c9ad508105400cd58a704}{\index{\-Simulation@{\-Simulation}!get\-A\-L\-U\-Stations@{get\-A\-L\-U\-Stations}}
+\index{get\-A\-L\-U\-Stations@{get\-A\-L\-U\-Stations}!Simulation@{\-Simulation}}
+\subsubsection[{get\-A\-L\-U\-Stations}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-A\-L\-U\-Station} \mbox{[}$\,$\mbox{]} {\bf \-Simulation.\-get\-A\-L\-U\-Stations} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_a717866287d7c9ad508105400cd58a704}
+\-Return the \-A\-L\-U \-Reservation \-Stations \hypertarget{classSimulation_a0cc18516e5b9e6f05b657d65adbb9f7b}{\index{\-Simulation@{\-Simulation}!get\-Current\-Cycle@{get\-Current\-Cycle}}
+\index{get\-Current\-Cycle@{get\-Current\-Cycle}!Simulation@{\-Simulation}}
+\subsubsection[{get\-Current\-Cycle}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-Simulation.\-get\-Current\-Cycle} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_a0cc18516e5b9e6f05b657d65adbb9f7b}
+\-Return the current clock cycle \hypertarget{classSimulation_a2f73acac6cc327ccd7721a797b8bdf6c}{\index{\-Simulation@{\-Simulation}!get\-Mem\-Stations@{get\-Mem\-Stations}}
+\index{get\-Mem\-Stations@{get\-Mem\-Stations}!Simulation@{\-Simulation}}
+\subsubsection[{get\-Mem\-Stations}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Mem\-Station} \mbox{[}$\,$\mbox{]} {\bf \-Simulation.\-get\-Mem\-Stations} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_a2f73acac6cc327ccd7721a797b8bdf6c}
+\-Return the \-Memory \-Reservation \-Stations \hypertarget{classSimulation_a1cff8890330ebfd903d0e7bbef784a45}{\index{\-Simulation@{\-Simulation}!get\-Operation\-List@{get\-Operation\-List}}
+\index{get\-Operation\-List@{get\-Operation\-List}!Simulation@{\-Simulation}}
+\subsubsection[{get\-Operation\-List}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Operation\-List} {\bf \-Simulation.\-get\-Operation\-List} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_a1cff8890330ebfd903d0e7bbef784a45}
+\-Return the \-Instruction \-List \hypertarget{classSimulation_affe7128840546c078763f7e21c3dac47}{\index{\-Simulation@{\-Simulation}!get\-Register\-Files@{get\-Register\-Files}}
+\index{get\-Register\-Files@{get\-Register\-Files}!Simulation@{\-Simulation}}
+\subsubsection[{get\-Register\-Files}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Register\-Files} {\bf \-Simulation.\-get\-Register\-Files} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_affe7128840546c078763f7e21c3dac47}
+\-Return the \-Regieter \-Files \hypertarget{classSimulation_a104eb3d562c22b1b10511adff57f4b4d}{\index{\-Simulation@{\-Simulation}!initialize@{initialize}}
+\index{initialize@{initialize}!Simulation@{\-Simulation}}
+\subsubsection[{initialize}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Simulation.\-initialize} (
+\begin{DoxyParamCaption}
+\item[{\-File}]{data\-\_\-file}
+\end{DoxyParamCaption}
+)  throws \-Exception}}\label{classSimulation_a104eb3d562c22b1b10511adff57f4b4d}
+\-Initialize the simulation \hypertarget{classSimulation_ac47aeddaac1229f921bd8644aff688a9}{\index{\-Simulation@{\-Simulation}!is\-Complete@{is\-Complete}}
+\index{is\-Complete@{is\-Complete}!Simulation@{\-Simulation}}
+\subsubsection[{is\-Complete}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf \-Simulation.\-is\-Complete} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_ac47aeddaac1229f921bd8644aff688a9}
+\-Returns true when the simulation has finished \hypertarget{classSimulation_a24ef9f4425a72b53e78d79f2496f00a2}{\index{\-Simulation@{\-Simulation}!parse\-Comment@{parse\-Comment}}
+\index{parse\-Comment@{parse\-Comment}!Simulation@{\-Simulation}}
+\subsubsection[{parse\-Comment}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Simulation.\-parse\-Comment} (
+\begin{DoxyParamCaption}
+\item[{\-String}]{comment}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classSimulation_a24ef9f4425a72b53e78d79f2496f00a2}
+\-Parse the comment and update the \-Register \-Files \-Accordingly \hypertarget{classSimulation_a6aa2ea799b5276681e8eb7c941c29d98}{\index{\-Simulation@{\-Simulation}!perform\-Step@{perform\-Step}}
+\index{perform\-Step@{perform\-Step}!Simulation@{\-Simulation}}
+\subsubsection[{perform\-Step}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Simulation.\-perform\-Step} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_a6aa2ea799b5276681e8eb7c941c29d98}
+\-Perform one time step 
+
+\subsection{\-Member \-Data \-Documentation}
+\hypertarget{classSimulation_a4ba6804e72f9296ddbaf07334c656267}{\index{\-Simulation@{\-Simulation}!alias\-\_\-to\-\_\-register@{alias\-\_\-to\-\_\-register}}
+\index{alias\-\_\-to\-\_\-register@{alias\-\_\-to\-\_\-register}!Simulation@{\-Simulation}}
+\subsubsection[{alias\-\_\-to\-\_\-register}]{\setlength{\rightskip}{0pt plus 5cm}\-Hash\-Map$<$\-String, \-String$>$ {\bf \-Simulation.\-alias\-\_\-to\-\_\-register}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classSimulation_a4ba6804e72f9296ddbaf07334c656267}
+
+
+\-Mapping of placeholder to \-Register. 
+
+\hypertarget{classSimulation_a088d8379681674f73ff28d67fa15c4b1}{\index{\-Simulation@{\-Simulation}!alu\-\_\-rs@{alu\-\_\-rs}}
+\index{alu\-\_\-rs@{alu\-\_\-rs}!Simulation@{\-Simulation}}
+\subsubsection[{alu\-\_\-rs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-A\-L\-U\-Station} \mbox{[}$\,$\mbox{]} {\bf \-Simulation.\-alu\-\_\-rs}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classSimulation_a088d8379681674f73ff28d67fa15c4b1}
+
+
+\-A\-L\-U and \-Integer \-Reservation \-Stations. 
+
+\hypertarget{classSimulation_af485d36c87120ad92b39bbea3e363cda}{\index{\-Simulation@{\-Simulation}!clock@{clock}}
+\index{clock@{clock}!Simulation@{\-Simulation}}
+\subsubsection[{clock}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Clock} {\bf \-Simulation.\-clock}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classSimulation_af485d36c87120ad92b39bbea3e363cda}
+
+
+\hyperlink{classClock}{\-Clock} \-Cycle \-Object. 
+
+\hypertarget{classSimulation_aa1da0fd99a66e4f3290cab75db0498ba}{\index{\-Simulation@{\-Simulation}!instruction\-\_\-to\-\_\-station@{instruction\-\_\-to\-\_\-station}}
+\index{instruction\-\_\-to\-\_\-station@{instruction\-\_\-to\-\_\-station}!Simulation@{\-Simulation}}
+\subsubsection[{instruction\-\_\-to\-\_\-station}]{\setlength{\rightskip}{0pt plus 5cm}\-Hash\-Map$<$\-String, \-Integer\mbox{[}$\,$\mbox{]} $>$ {\bf \-Simulation.\-instruction\-\_\-to\-\_\-station}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classSimulation_aa1da0fd99a66e4f3290cab75db0498ba}
+
+
+\-Mapping of instructions to \-Reservation \-Stations. 
+
+\hypertarget{classSimulation_aefb6ae75923bda2ea63a2789c6ea1387}{\index{\-Simulation@{\-Simulation}!instruction\-\_\-to\-\_\-time@{instruction\-\_\-to\-\_\-time}}
+\index{instruction\-\_\-to\-\_\-time@{instruction\-\_\-to\-\_\-time}!Simulation@{\-Simulation}}
+\subsubsection[{instruction\-\_\-to\-\_\-time}]{\setlength{\rightskip}{0pt plus 5cm}\-Hash\-Map$<$\-String, \-Integer $>$ {\bf \-Simulation.\-instruction\-\_\-to\-\_\-time}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classSimulation_aefb6ae75923bda2ea63a2789c6ea1387}
+
+
+\-Mapping of instructions to \-Execution \-Time. 
+
+\hypertarget{classSimulation_a7c5a3018517be8966e7242ada10d5ba0}{\index{\-Simulation@{\-Simulation}!is\-\_\-initialized@{is\-\_\-initialized}}
+\index{is\-\_\-initialized@{is\-\_\-initialized}!Simulation@{\-Simulation}}
+\subsubsection[{is\-\_\-initialized}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf \-Simulation.\-is\-\_\-initialized}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classSimulation_a7c5a3018517be8966e7242ada10d5ba0}
+
+
+\-Whether the \hyperlink{classSimulation}{\-Simulation} \-Instance is initialized. 
+
+\hypertarget{classSimulation_a2d7653a8b926b1950e545b4ddf99525a}{\index{\-Simulation@{\-Simulation}!mem\-\_\-rs@{mem\-\_\-rs}}
+\index{mem\-\_\-rs@{mem\-\_\-rs}!Simulation@{\-Simulation}}
+\subsubsection[{mem\-\_\-rs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Mem\-Station} \mbox{[}$\,$\mbox{]} {\bf \-Simulation.\-mem\-\_\-rs}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classSimulation_a2d7653a8b926b1950e545b4ddf99525a}
+
+
+\-Memory \-Reservation \-Stations. 
+
+\hypertarget{classSimulation_ad6a6dd370a3221f0b89718c9b64e3dad}{\index{\-Simulation@{\-Simulation}!memory\-\_\-buffer@{memory\-\_\-buffer}}
+\index{memory\-\_\-buffer@{memory\-\_\-buffer}!Simulation@{\-Simulation}}
+\subsubsection[{memory\-\_\-buffer}]{\setlength{\rightskip}{0pt plus 5cm}\-Hash\-Map$<$\-String, \-Integer$>$ {\bf \-Simulation.\-memory\-\_\-buffer}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classSimulation_ad6a6dd370a3221f0b89718c9b64e3dad}
+
+
+\-Mapping of operation issue numbers to ,emory locations. 
+
+\hypertarget{classSimulation_a9569c59ef6447bb109d924ab08b952db}{\index{\-Simulation@{\-Simulation}!operations@{operations}}
+\index{operations@{operations}!Simulation@{\-Simulation}}
+\subsubsection[{operations}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Operation\-List} {\bf \-Simulation.\-operations}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classSimulation_a9569c59ef6447bb109d924ab08b952db}
+
+
+\-List of instructions. 
+
+\hypertarget{classSimulation_a72082ebb1736f61f976fb4795c6446a6}{\index{\-Simulation@{\-Simulation}!registers@{registers}}
+\index{registers@{registers}!Simulation@{\-Simulation}}
+\subsubsection[{registers}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Register\-Files} {\bf \-Simulation.\-registers}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classSimulation_a72082ebb1736f61f976fb4795c6446a6}
+
+
+\-Register \-Files. 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Simulation_8java}{\-Simulation.\-java}\end{DoxyCompactItemize}

@@ -1,83 +1,71 @@
-\hypertarget{classOperationFileParser}{
-\section{OperationFileParser Class Reference}
-\label{classOperationFileParser}\index{OperationFileParser@{OperationFileParser}}
+\hypertarget{classOperationFileParser}{\section{\-Operation\-File\-Parser \-Class \-Reference}
+\label{classOperationFileParser}\index{\-Operation\-File\-Parser@{\-Operation\-File\-Parser}}
 }
-\subsection*{Public Member Functions}
+\subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classOperationFileParser_aae642f641952d9299ae1d18c2a98e257}{OperationFileParser} ()
+\hyperlink{classOperationFileParser_aae642f641952d9299ae1d18c2a98e257}{\-Operation\-File\-Parser} ()
 \item 
-\hyperlink{classOperationFileParser_ab3cf3d1b41d42f6ce2a843fbe11a5f9a}{OperationFileParser} (String \hyperlink{classOperationFileParser_a02c7ed52d4be7f9a23054eebcff0a96e}{filename})
+\hyperlink{classOperationFileParser_a72d440d15d9a5006fc7f4906a7ffa0ac}{\-Operation\-File\-Parser} (\-File file\-\_\-in)
 \item 
-void \hyperlink{classOperationFileParser_af360317f51081606c8fb05b658be8d00}{parseFile} (\hyperlink{classOperationList}{OperationList} oplist, \hyperlink{classRegisterFiles}{RegisterFiles} reg\_\-files)  throws Exception
+void \hyperlink{classOperationFileParser_a2cd6d5ec8a1c1124ea27e3810ec8ac8c}{parse\-File} (\hyperlink{classOperationList}{\-Operation\-List} oplist)  throws Exception
 \item 
-String \hyperlink{classOperationFileParser_af6e91ca0ed2166c6b75ad12574dc5341}{toString} ()
+\-String \hyperlink{classOperationFileParser_af6e91ca0ed2166c6b75ad12574dc5341}{to\-String} ()
 \end{DoxyCompactItemize}
-\subsection*{Private Attributes}
+\subsection*{\-Private \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-String \hyperlink{classOperationFileParser_a02c7ed52d4be7f9a23054eebcff0a96e}{filename}
-\begin{DoxyCompactList}\small\item\em The input filename. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\-File \hyperlink{classOperationFileParser_a176adcf1b7c4ff076e46053f40ccdfce}{data\-\_\-file}
+\begin{DoxyCompactList}\small\item\em \-The input file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-This class provides all file parsing funtionality. Given an input file, one \hyperlink{classOperationList}{OperationList} and one \hyperlink{classRegisterFiles}{RegisterFiles} will be generated. 
+\subsection{\-Detailed \-Description}
+\-This class provides all file parsing funtionality. \-Given an input file, one \hyperlink{classOperationList}{\-Operation\-List} and one \hyperlink{classRegisterFiles}{\-Register\-Files} will be generated. 
 
-\subsection{Constructor \& Destructor Documentation}
-\hypertarget{classOperationFileParser_aae642f641952d9299ae1d18c2a98e257}{
-\index{OperationFileParser@{OperationFileParser}!OperationFileParser@{OperationFileParser}}
-\index{OperationFileParser@{OperationFileParser}!OperationFileParser@{OperationFileParser}}
-\subsubsection[{OperationFileParser}]{\setlength{\rightskip}{0pt plus 5cm}OperationFileParser.OperationFileParser (
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classOperationFileParser_aae642f641952d9299ae1d18c2a98e257}{\index{\-Operation\-File\-Parser@{\-Operation\-File\-Parser}!\-Operation\-File\-Parser@{\-Operation\-File\-Parser}}
+\index{\-Operation\-File\-Parser@{\-Operation\-File\-Parser}!OperationFileParser@{\-Operation\-File\-Parser}}
+\subsubsection[{\-Operation\-File\-Parser}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Operation\-File\-Parser.\-Operation\-File\-Parser} (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}
-\label{classOperationFileParser_aae642f641952d9299ae1d18c2a98e257}
-Set the input file to the default value of \char`\"{}a.in\char`\"{}. \hypertarget{classOperationFileParser_ab3cf3d1b41d42f6ce2a843fbe11a5f9a}{
-\index{OperationFileParser@{OperationFileParser}!OperationFileParser@{OperationFileParser}}
-\index{OperationFileParser@{OperationFileParser}!OperationFileParser@{OperationFileParser}}
-\subsubsection[{OperationFileParser}]{\setlength{\rightskip}{0pt plus 5cm}OperationFileParser.OperationFileParser (
+)}}\label{classOperationFileParser_aae642f641952d9299ae1d18c2a98e257}
+\-Set the input file to the default value of \char`\"{}a.\-in\char`\"{}. \hypertarget{classOperationFileParser_a72d440d15d9a5006fc7f4906a7ffa0ac}{\index{\-Operation\-File\-Parser@{\-Operation\-File\-Parser}!\-Operation\-File\-Parser@{\-Operation\-File\-Parser}}
+\index{\-Operation\-File\-Parser@{\-Operation\-File\-Parser}!OperationFileParser@{\-Operation\-File\-Parser}}
+\subsubsection[{\-Operation\-File\-Parser}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Operation\-File\-Parser.\-Operation\-File\-Parser} (
 \begin{DoxyParamCaption}
-\item[{String}]{filename}
+\item[{\-File}]{file\-\_\-in}
 \end{DoxyParamCaption}
-)}}
-\label{classOperationFileParser_ab3cf3d1b41d42f6ce2a843fbe11a5f9a}
-Set the input file to the specified filename. 
+)}}\label{classOperationFileParser_a72d440d15d9a5006fc7f4906a7ffa0ac}
+\-Set the input file to the specified filename. 
 
-\subsection{Member Function Documentation}
-\hypertarget{classOperationFileParser_af360317f51081606c8fb05b658be8d00}{
-\index{OperationFileParser@{OperationFileParser}!parseFile@{parseFile}}
-\index{parseFile@{parseFile}!OperationFileParser@{OperationFileParser}}
-\subsubsection[{parseFile}]{\setlength{\rightskip}{0pt plus 5cm}void OperationFileParser.parseFile (
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classOperationFileParser_a2cd6d5ec8a1c1124ea27e3810ec8ac8c}{\index{\-Operation\-File\-Parser@{\-Operation\-File\-Parser}!parse\-File@{parse\-File}}
+\index{parse\-File@{parse\-File}!OperationFileParser@{\-Operation\-File\-Parser}}
+\subsubsection[{parse\-File}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Operation\-File\-Parser.\-parse\-File} (
 \begin{DoxyParamCaption}
-\item[{{\bf OperationList}}]{oplist, }
-\item[{{\bf RegisterFiles}}]{reg\_\-files}
+\item[{{\bf \-Operation\-List}}]{oplist}
 \end{DoxyParamCaption}
-)  throws Exception}}
-\label{classOperationFileParser_af360317f51081606c8fb05b658be8d00}
-Parse the input file; generate one \hyperlink{classOperationList}{OperationList} and one \hyperlink{classRegisterFiles}{RegisterFiles}. \hypertarget{classOperationFileParser_af6e91ca0ed2166c6b75ad12574dc5341}{
-\index{OperationFileParser@{OperationFileParser}!toString@{toString}}
-\index{toString@{toString}!OperationFileParser@{OperationFileParser}}
-\subsubsection[{toString}]{\setlength{\rightskip}{0pt plus 5cm}String OperationFileParser.toString (
+)  throws \-Exception}}\label{classOperationFileParser_a2cd6d5ec8a1c1124ea27e3810ec8ac8c}
+\-Parse the input file; generate one \hyperlink{classOperationList}{\-Operation\-List} and one \hyperlink{classRegisterFiles}{\-Register\-Files}. \hypertarget{classOperationFileParser_af6e91ca0ed2166c6b75ad12574dc5341}{\index{\-Operation\-File\-Parser@{\-Operation\-File\-Parser}!to\-String@{to\-String}}
+\index{to\-String@{to\-String}!OperationFileParser@{\-Operation\-File\-Parser}}
+\subsubsection[{to\-String}]{\setlength{\rightskip}{0pt plus 5cm}\-String {\bf \-Operation\-File\-Parser.\-to\-String} (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}
-\label{classOperationFileParser_af6e91ca0ed2166c6b75ad12574dc5341}
-Generates the string representation of the \hyperlink{classOperationFileParser}{OperationFileParser} Object. 
+)}}\label{classOperationFileParser_af6e91ca0ed2166c6b75ad12574dc5341}
+\-Generates the string representation of the \hyperlink{classOperationFileParser}{\-Operation\-File\-Parser} \-Object. 
 
-\subsection{Member Data Documentation}
-\hypertarget{classOperationFileParser_a02c7ed52d4be7f9a23054eebcff0a96e}{
-\index{OperationFileParser@{OperationFileParser}!filename@{filename}}
-\index{filename@{filename}!OperationFileParser@{OperationFileParser}}
-\subsubsection[{filename}]{\setlength{\rightskip}{0pt plus 5cm}String {\bf OperationFileParser.filename}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
-\label{classOperationFileParser_a02c7ed52d4be7f9a23054eebcff0a96e}
+\subsection{\-Member \-Data \-Documentation}
+\hypertarget{classOperationFileParser_a176adcf1b7c4ff076e46053f40ccdfce}{\index{\-Operation\-File\-Parser@{\-Operation\-File\-Parser}!data\-\_\-file@{data\-\_\-file}}
+\index{data\-\_\-file@{data\-\_\-file}!OperationFileParser@{\-Operation\-File\-Parser}}
+\subsubsection[{data\-\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}\-File {\bf \-Operation\-File\-Parser.\-data\-\_\-file}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classOperationFileParser_a176adcf1b7c4ff076e46053f40ccdfce}
 
 
-The input filename. 
+\-The input file. 
 
 
 
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-\hyperlink{OperationFileParser_8java}{OperationFileParser.java}\end{DoxyCompactItemize}
+\hyperlink{OperationFileParser_8java}{\-Operation\-File\-Parser.\-java}\end{DoxyCompactItemize}

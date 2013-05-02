@@ -1,0 +1,188 @@
+\hypertarget{classMemStation}{\section{\-Mem\-Station \-Class \-Reference}
+\label{classMemStation}\index{\-Mem\-Station@{\-Mem\-Station}}
+}
+\-Inheritance diagram for \-Mem\-Station\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMemStation}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMemStation_a94ab3bf32e281cd07628b931b0a962f2}{\-Mem\-Station} (\-String \hyperlink{classReservationStation_a2c0bd5b95f126395b0ab081394f090f6}{sname})
+\item 
+void \hyperlink{classMemStation_ab02b57a1bea7277dab474c8ffd7ac5ac}{clear} ()
+\item 
+boolean \hyperlink{classMemStation_ac118dad2969d9bab0c2813b0e8681aa7}{is\-Ready} ()
+\item 
+\-String \hyperlink{classMemStation_a7488a8869905139d9a9ac0e0b7789327}{get\-Address} ()
+\item 
+void \hyperlink{classMemStation_a020c83f5370751b713b77bc5f419c06f}{set\-Address} (\-String \hyperlink{classMemStation_aeed8a623b07e146133976083b88ae513}{address})
+\item 
+boolean \hyperlink{classMemStation_a210ea0822fa342eae23ae190e38a0f96}{is\-Store} ()
+\item 
+void \hyperlink{classMemStation_af5cbfa20af449839121307147b3af436}{schedule\-Instruction} (\hyperlink{classOperation}{\-Operation} op, \hyperlink{classRegisterFiles}{\-Register\-Files} reg\-\_\-in, int cycles)
+\item 
+void \hyperlink{classMemStation_a4b9152fcfe59b601e7cf80e0a6ccc105}{update\-Addr\-Components} (\-String alias, \-String value)
+\item 
+boolean \hyperlink{classMemStation_afa9b7145ca1157b98d1f7d226b384b1d}{has\-Priority} (\-Hash\-Map$<$ \-String, \-Integer $>$ memory\-\_\-buffer)
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static boolean \hyperlink{classMemStation_a75e3b4382aaa6cc851f89d7f9360dae3}{is\-Store} (\-String opcode)
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classMemStation_a33eea591c23271c00768d3ec9b2eb92d}{update\-Address} ()
+\item 
+void \hyperlink{classMemStation_afe087bc173ab7dca0674621e42f36aa7}{set\-Store} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\-String \hyperlink{classMemStation_aeed8a623b07e146133976083b88ae513}{address}
+\begin{DoxyCompactList}\small\item\em \-Address to be stored or loaded from memory. \end{DoxyCompactList}\item 
+\-String\mbox{[}$\,$\mbox{]} \hyperlink{classMemStation_a26f6ed03957088b12aec6200cf9ccd1e}{addr\-\_\-comp}
+\begin{DoxyCompactList}\small\item\em \-Components used in computing the final address, and the register for stores \mbox{[}3\mbox{]}. \end{DoxyCompactList}\item 
+boolean \hyperlink{classMemStation_acc8a77b7441e35271230350677d71b8f}{is\-\_\-store}
+\begin{DoxyCompactList}\small\item\em \-True indicates that the current operation is a store. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-This class provides all \hyperlink{classMemStation}{\-Mem\-Station} functionality. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classMemStation_a94ab3bf32e281cd07628b931b0a962f2}{\index{\-Mem\-Station@{\-Mem\-Station}!\-Mem\-Station@{\-Mem\-Station}}
+\index{\-Mem\-Station@{\-Mem\-Station}!MemStation@{\-Mem\-Station}}
+\subsubsection[{\-Mem\-Station}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Mem\-Station.\-Mem\-Station} (
+\begin{DoxyParamCaption}
+\item[{\-String}]{sname}
+\end{DoxyParamCaption}
+)}}\label{classMemStation_a94ab3bf32e281cd07628b931b0a962f2}
+\-Calls superclass constructor and initializes address 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classMemStation_ab02b57a1bea7277dab474c8ffd7ac5ac}{\index{\-Mem\-Station@{\-Mem\-Station}!clear@{clear}}
+\index{clear@{clear}!MemStation@{\-Mem\-Station}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mem\-Station.\-clear} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{classMemStation_ab02b57a1bea7277dab474c8ffd7ac5ac}
+\-Function to clear the \-Reservation \-Station 
+
+\-Implements \hyperlink{classReservationStation_a5788893e16b640dc7edbab832b1cb80d}{\-Reservation\-Station}.
+
+\hypertarget{classMemStation_a7488a8869905139d9a9ac0e0b7789327}{\index{\-Mem\-Station@{\-Mem\-Station}!get\-Address@{get\-Address}}
+\index{get\-Address@{get\-Address}!MemStation@{\-Mem\-Station}}
+\subsubsection[{get\-Address}]{\setlength{\rightskip}{0pt plus 5cm}\-String {\bf \-Mem\-Station.\-get\-Address} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classMemStation_a7488a8869905139d9a9ac0e0b7789327}
+\-Function returns the value of address \hypertarget{classMemStation_afa9b7145ca1157b98d1f7d226b384b1d}{\index{\-Mem\-Station@{\-Mem\-Station}!has\-Priority@{has\-Priority}}
+\index{has\-Priority@{has\-Priority}!MemStation@{\-Mem\-Station}}
+\subsubsection[{has\-Priority}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf \-Mem\-Station.\-has\-Priority} (
+\begin{DoxyParamCaption}
+\item[{\-Hash\-Map$<$ \-String, \-Integer $>$}]{memory\-\_\-buffer}
+\end{DoxyParamCaption}
+)}}\label{classMemStation_afa9b7145ca1157b98d1f7d226b384b1d}
+\-Checks if the station has memory access priority \hypertarget{classMemStation_ac118dad2969d9bab0c2813b0e8681aa7}{\index{\-Mem\-Station@{\-Mem\-Station}!is\-Ready@{is\-Ready}}
+\index{is\-Ready@{is\-Ready}!MemStation@{\-Mem\-Station}}
+\subsubsection[{is\-Ready}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf \-Mem\-Station.\-is\-Ready} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{classMemStation_ac118dad2969d9bab0c2813b0e8681aa7}
+\-Function to determine whether \hyperlink{classMemStation}{\-Mem\-Station} is \-Ready for use 
+
+\-Implements \hyperlink{classReservationStation_a4fe26aca967123d4e9ec5aabf55d4d17}{\-Reservation\-Station}.
+
+\hypertarget{classMemStation_a210ea0822fa342eae23ae190e38a0f96}{\index{\-Mem\-Station@{\-Mem\-Station}!is\-Store@{is\-Store}}
+\index{is\-Store@{is\-Store}!MemStation@{\-Mem\-Station}}
+\subsubsection[{is\-Store}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf \-Mem\-Station.\-is\-Store} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classMemStation_a210ea0822fa342eae23ae190e38a0f96}
+\-Return whether the currently scheduled operation is a store \hypertarget{classMemStation_a75e3b4382aaa6cc851f89d7f9360dae3}{\index{\-Mem\-Station@{\-Mem\-Station}!is\-Store@{is\-Store}}
+\index{is\-Store@{is\-Store}!MemStation@{\-Mem\-Station}}
+\subsubsection[{is\-Store}]{\setlength{\rightskip}{0pt plus 5cm}static boolean {\bf \-Mem\-Station.\-is\-Store} (
+\begin{DoxyParamCaption}
+\item[{\-String}]{opcode}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}\label{classMemStation_a75e3b4382aaa6cc851f89d7f9360dae3}
+\-Static \-Function \-Classify the message as \-Store or \-Otther \hypertarget{classMemStation_af5cbfa20af449839121307147b3af436}{\index{\-Mem\-Station@{\-Mem\-Station}!schedule\-Instruction@{schedule\-Instruction}}
+\index{schedule\-Instruction@{schedule\-Instruction}!MemStation@{\-Mem\-Station}}
+\subsubsection[{schedule\-Instruction}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mem\-Station.\-schedule\-Instruction} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Operation}}]{op, }
+\item[{{\bf \-Register\-Files}}]{reg\-\_\-in, }
+\item[{int}]{cycles}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{classMemStation_af5cbfa20af449839121307147b3af436}
+\-Function to schedule the instruction 
+
+\-Implements \hyperlink{classReservationStation_a5108e433a0a7e7cdd072fa7bcecdd399}{\-Reservation\-Station}.
+
+\hypertarget{classMemStation_a020c83f5370751b713b77bc5f419c06f}{\index{\-Mem\-Station@{\-Mem\-Station}!set\-Address@{set\-Address}}
+\index{set\-Address@{set\-Address}!MemStation@{\-Mem\-Station}}
+\subsubsection[{set\-Address}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mem\-Station.\-set\-Address} (
+\begin{DoxyParamCaption}
+\item[{\-String}]{address}
+\end{DoxyParamCaption}
+)}}\label{classMemStation_a020c83f5370751b713b77bc5f419c06f}
+\-Function sets the value of address \hypertarget{classMemStation_afe087bc173ab7dca0674621e42f36aa7}{\index{\-Mem\-Station@{\-Mem\-Station}!set\-Store@{set\-Store}}
+\index{set\-Store@{set\-Store}!MemStation@{\-Mem\-Station}}
+\subsubsection[{set\-Store}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mem\-Station.\-set\-Store} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classMemStation_afe087bc173ab7dca0674621e42f36aa7}
+\-Utility funtion to set the message as load or store \hypertarget{classMemStation_a4b9152fcfe59b601e7cf80e0a6ccc105}{\index{\-Mem\-Station@{\-Mem\-Station}!update\-Addr\-Components@{update\-Addr\-Components}}
+\index{update\-Addr\-Components@{update\-Addr\-Components}!MemStation@{\-Mem\-Station}}
+\subsubsection[{update\-Addr\-Components}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mem\-Station.\-update\-Addr\-Components} (
+\begin{DoxyParamCaption}
+\item[{\-String}]{alias, }
+\item[{\-String}]{value}
+\end{DoxyParamCaption}
+)}}\label{classMemStation_a4b9152fcfe59b601e7cf80e0a6ccc105}
+\-Update the address components \hypertarget{classMemStation_a33eea591c23271c00768d3ec9b2eb92d}{\index{\-Mem\-Station@{\-Mem\-Station}!update\-Address@{update\-Address}}
+\index{update\-Address@{update\-Address}!MemStation@{\-Mem\-Station}}
+\subsubsection[{update\-Address}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Mem\-Station.\-update\-Address} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classMemStation_a33eea591c23271c00768d3ec9b2eb92d}
+\-Utility function to update the address 
+
+\subsection{\-Member \-Data \-Documentation}
+\hypertarget{classMemStation_a26f6ed03957088b12aec6200cf9ccd1e}{\index{\-Mem\-Station@{\-Mem\-Station}!addr\-\_\-comp@{addr\-\_\-comp}}
+\index{addr\-\_\-comp@{addr\-\_\-comp}!MemStation@{\-Mem\-Station}}
+\subsubsection[{addr\-\_\-comp}]{\setlength{\rightskip}{0pt plus 5cm}\-String \mbox{[}$\,$\mbox{]} {\bf \-Mem\-Station.\-addr\-\_\-comp}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classMemStation_a26f6ed03957088b12aec6200cf9ccd1e}
+
+
+\-Components used in computing the final address, and the register for stores \mbox{[}3\mbox{]}. 
+
+\hypertarget{classMemStation_aeed8a623b07e146133976083b88ae513}{\index{\-Mem\-Station@{\-Mem\-Station}!address@{address}}
+\index{address@{address}!MemStation@{\-Mem\-Station}}
+\subsubsection[{address}]{\setlength{\rightskip}{0pt plus 5cm}\-String {\bf \-Mem\-Station.\-address}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classMemStation_aeed8a623b07e146133976083b88ae513}
+
+
+\-Address to be stored or loaded from memory. 
+
+\hypertarget{classMemStation_acc8a77b7441e35271230350677d71b8f}{\index{\-Mem\-Station@{\-Mem\-Station}!is\-\_\-store@{is\-\_\-store}}
+\index{is\-\_\-store@{is\-\_\-store}!MemStation@{\-Mem\-Station}}
+\subsubsection[{is\-\_\-store}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf \-Mem\-Station.\-is\-\_\-store}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classMemStation_acc8a77b7441e35271230350677d71b8f}
+
+
+\-True indicates that the current operation is a store. 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{MemStation_8java}{\-Mem\-Station.\-java}\end{DoxyCompactItemize}
