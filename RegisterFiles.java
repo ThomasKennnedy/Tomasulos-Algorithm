@@ -21,7 +21,7 @@ public class RegisterFiles{
           registers_fp  = new LinkedHashMap<String, String>();
           
           //Initialize R0
-          //registers_int.put( "R0", "R0" );
+          registers_int.put( "R0", "0" );
           
           //Initialize the Integer Registers R1 to Rn
           for( int i = 0; i < NUM_INT_REGISTERS; i++ ){
