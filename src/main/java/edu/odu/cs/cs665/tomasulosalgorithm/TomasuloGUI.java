@@ -1,16 +1,13 @@
+package edu.odu.cs.cs665.tomasulosalgorithm;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.*;
-import java.awt.Dimension;
 import javax.swing.border.TitledBorder;
-import java.util.Enumeration;
-import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import java.io.*;
-import java.net.*;
 
 ///
 /// This class provides all GUI functionality.
@@ -55,7 +52,7 @@ public class TomasuloGUI extends JFrame {
           super("Tomsulo's Simulation");
           setLocation(50,75);
 	     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	     setMinimumSize( new Dimension( 700, 500 ) );
+	     setMinimumSize(new Dimension( 700, 500 ));
 
           //setPreferredSize( new Dimension( 700, 600 ) );
 	     Container cp = getContentPane();
@@ -71,21 +68,21 @@ public class TomasuloGUI extends JFrame {
           step_button      = new JButton("Step");
           
           //Add the control elements
-          control_panel.setLayout( new FlowLayout() );          
+          control_panel.setLayout(new FlowLayout());          
           
-          control_panel.add( file_label );
-          control_panel.add( file_field );      
-          control_panel.add( load_button );   
-          control_panel.add( step_button );   
+          control_panel.add(file_label);
+          control_panel.add(file_field);      
+          control_panel.add(load_button);   
+          control_panel.add(step_button);   
 
           //Disable Selected Control Fields
-          file_field.setEnabled( false );
-          step_button.setEnabled( false );
+          file_field.setEnabled(false);
+          step_button.setEnabled(false);
           
           //Create the status elements
-          status_panel.setLayout( new FlowLayout() ); 
+          status_panel.setLayout(new FlowLayout()); 
           clocks_field =  new JTextField("0", 8);
-          clocks_field.setEnabled( false );
+          clocks_field.setEnabled(false);
           //instr_label =  new JLabel("Instructions: ");  
           
           //Add the status elements  
@@ -94,33 +91,33 @@ public class TomasuloGUI extends JFrame {
                     
           //Create the Instructions Table Model
           op_model = new DefaultTableModel();
-          op_model.setColumnIdentifiers( new Object[]{"Instruction"," ", "j", "k", "Issue", "Complete", "Write"} );                  
+          op_model.setColumnIdentifiers(new Object[]{"Instruction"," ", "j", "k", "Issue", "Complete", "Write"});                  
           //add instruction rows
-          for( int i = 1; i <= 7; i++){
-               op_model.addRow( new Object[]{ " ", " ", " ", " ", " ", " ", " "} );
+          for (int i = 1; i <= 7; i++){
+               op_model.addRow(new Object[]{ " ", " ", " ", " ", " ", " ", " "});
           }
 
           //Create The Reservation Station Table Model
           rs_model = new DefaultTableModel();
-          rs_model.setColumnIdentifiers( new Object[]{"Time", "Name","Busy", "Op", "Vj", "Vk", "Qj", "Qk"} );
+          rs_model.setColumnIdentifiers( new Object[]{"Time", "Name","Busy", "Op", "Vj", "Vk", "Qj", "Qk"});
           //Add Reservation Station Table Rows
-          rs_model.addRow( new Object[]{""+0, "Int1", " ", " ", " ", " ", " ", " "});
-          rs_model.addRow( new Object[]{""+0, "Add1", " ", " ", " ", " ", " ", " "});
-          rs_model.addRow( new Object[]{""+0, "Add2", " ", " ", " ", " ", " ", " "});
-          rs_model.addRow( new Object[]{""+0, "Mult1", " ", " ", " ", " ", " ", " "});
-          rs_model.addRow( new Object[]{""+0, "Mult2", " ", " ", " ", " ", " ", " "});
-          rs_model.addRow( new Object[]{""+0, "Div1", " ", " ", " ", " ", " ", " "});
-          rs_model.addRow( new Object[]{""+0, "Div2", " ", " ", " ", " ", " ", " "});
+          rs_model.addRow(new Object[]{""+0, "Int1", " ", " ", " ", " ", " ", " "});
+          rs_model.addRow(new Object[]{""+0, "Add1", " ", " ", " ", " ", " ", " "});
+          rs_model.addRow(new Object[]{""+0, "Add2", " ", " ", " ", " ", " ", " "});
+          rs_model.addRow(new Object[]{""+0, "Mult1", " ", " ", " ", " ", " ", " "});
+          rs_model.addRow(new Object[]{""+0, "Mult2", " ", " ", " ", " ", " ", " "});
+          rs_model.addRow(new Object[]{""+0, "Div1", " ", " ", " ", " ", " ", " "});
+          rs_model.addRow(new Object[]{""+0, "Div2", " ", " ", " ", " ", " ", " "});
           
 
           //Create The Reservation Station Table Model
           mrs_model = new DefaultTableModel();
           mrs_model.setColumnIdentifiers( new Object[]{"Name","Busy", "Address" });
           //Add Reservation Station Table Rows
-          mrs_model.addRow( new Object[]{"Load1",  " ", " "});
-          mrs_model.addRow( new Object[]{"Load2",  " ", " "});
-          mrs_model.addRow( new Object[]{"Store1", " ", " "});
-          mrs_model.addRow( new Object[]{"Store2", " ", " "});
+          mrs_model.addRow(new Object[]{"Load1",  " ", " "});
+          mrs_model.addRow(new Object[]{"Load2",  " ", " "});
+          mrs_model.addRow(new Object[]{"Store1", " ", " "});
+          mrs_model.addRow(new Object[]{"Store2", " ", " "});
           
           //Create the Register Table Model
           reg_model =  new DefaultTableModel();
@@ -130,7 +127,7 @@ public class TomasuloGUI extends JFrame {
           reg_model.addColumn("Value");
           
           //Ad Initial Register Table Rows
-          for( int i = 0; i < 14; i++ ){          
+          for (int i = 0; i < 14; i++ ){          
                reg_model.addRow(new Object[]{ " ", " " , " ", " " });
           }        
                     
@@ -159,13 +156,13 @@ public class TomasuloGUI extends JFrame {
           op_table.getColumnModel().getColumn(0).setMaxWidth(100);
           op_table.getColumnModel().getColumn(0).setPreferredWidth(100);
           //Columns [1,3]
-          for( int i = 1; i <= 3; i++){  
+          for (int i = 1; i <= 3; i++){  
                op_table.getColumnModel().getColumn(i).setMinWidth(60);
                op_table.getColumnModel().getColumn(i).setMaxWidth(60);
                op_table.getColumnModel().getColumn(i).setPreferredWidth(60);
           }
           //Columns [4,6]
-          for( int i = 4; i <= 6; i++){  
+          for (int i = 4; i <= 6; i++){  
                op_table.getColumnModel().getColumn(i).setMinWidth(80);
                op_table.getColumnModel().getColumn(i).setMaxWidth(80);
                op_table.getColumnModel().getColumn(i).setPreferredWidth(80);
@@ -372,11 +369,12 @@ public class TomasuloGUI extends JFrame {
      ///
      /// Instruction Table Update Helper
      ///
-     private void updateInstructionTable(){
+     private void updateInstructionTable()
+     {
           OperationList update_list = sim_instance.getOperationList();
      
           //Populate Operations table with the instructions
-          for( int i = 0; i < update_list.getNumberOfOperations(); i++){
+          for (int i = 0; i < update_list.getNumberOfOperations(); i++){
                Operation it_op = update_list.getOperation( i+1 );
                //obtain the write time
                int write_time = it_op.getWriteTime();
@@ -402,7 +400,8 @@ public class TomasuloGUI extends JFrame {
      ///
      /// Register Table Update Helper
      ///
-     private void updateRegisterTable(){
+     private void updateRegisterTable()
+     {
           int temp_it_index = 0; // tempory index tracker
      
           //Get the Integer Registers
@@ -411,24 +410,24 @@ public class TomasuloGUI extends JFrame {
           Map<String, String> temp_fp_reg = sim_instance.getRegisterFiles().getFPRegisters();
           
           //add rows if needed
-          while(temp_int_reg.size() > reg_model.getRowCount()
-             || temp_fp_reg.size() > reg_model.getRowCount()) {
+          while (temp_int_reg.size() > reg_model.getRowCount()
+              || temp_fp_reg.size() > reg_model.getRowCount()) {
                reg_model.addRow(new Object[]{ " ", " ", " ", " "});
           }
           
           //Update Integer Table Values
-          for( Map.Entry<String, String> int_entry : temp_int_reg.entrySet() ){
-               reg_model.setValueAt( int_entry.getKey(), temp_it_index, 2 );
-               reg_model.setValueAt( int_entry.getValue(), temp_it_index, 3 );
+          for (Map.Entry<String, String> int_entry : temp_int_reg.entrySet()) {
+               reg_model.setValueAt(int_entry.getKey(), temp_it_index, 2);
+               reg_model.setValueAt(int_entry.getValue(), temp_it_index, 3);
                
                temp_it_index++;
           }
           
           temp_it_index = 0;
           //Update Integer Table Values
-          for( Map.Entry<String, String> fp_entry : temp_fp_reg.entrySet() ){
-               reg_model.setValueAt( fp_entry.getKey(), temp_it_index, 0 );
-               reg_model.setValueAt( fp_entry.getValue(), temp_it_index, 1 );
+          for (Map.Entry<String, String> fp_entry : temp_fp_reg.entrySet()) {
+               reg_model.setValueAt(fp_entry.getKey(), temp_it_index, 0);
+               reg_model.setValueAt(fp_entry.getValue(), temp_it_index, 1);
                
                temp_it_index++;
           }
@@ -437,43 +436,45 @@ public class TomasuloGUI extends JFrame {
      ///
      /// MemStations Table Update Helper
      ///
-     private void updateMemTable(){   
+     private void updateMemTable()
+     {   
           //Get a copy of the memory stations
           MemStation[] temp_ms = sim_instance.getMemStations();
           
           //Update the table with current values for the stations
-          for( int i = 0; i < temp_ms.length; i++ ){
+          for (int i = 0; i < temp_ms.length; i++ ){
                //generate a meaningfull representation of busy
                String busy_desc = (temp_ms[i].isBusy() ? "Yes" : "No" );
           
-               mrs_model.setValueAt( temp_ms[i].getName(), i, 0 );
-               mrs_model.setValueAt( busy_desc, i, 1 );
-               mrs_model.setValueAt( temp_ms[i].getAddress(), i, 2 );
+               mrs_model.setValueAt(temp_ms[i].getName(), i, 0);
+               mrs_model.setValueAt(busy_desc, i, 1);
+               mrs_model.setValueAt(temp_ms[i].getAddress(), i, 2);
           }
      }
 
      ///
      /// ALUStations Table Update Helper
      ///
-     private void updateALUTable(){   
+     private void updateALUTable()
+     {   
           //Get a copy of the memory stations
           ALUStation[] temp_alu = sim_instance.getALUStations();
           
           //Update the table with current values for the stations
-          for( int i =0; i < temp_alu.length; i++ ){
+          for (int i =0; i < temp_alu.length; i++ ){
                //generate a meaningfull representation of busy
                String busy_desc = (temp_alu[i].isBusy() ? "Yes" : "No" );
           
-               rs_model.setValueAt( ((temp_alu[i].isReady() && temp_alu[i].isBusy()) ? temp_alu[i].getDuration() : "0") ,
+               rs_model.setValueAt(((temp_alu[i].isReady() && temp_alu[i].isBusy()) ? temp_alu[i].getDuration() : "0") ,
                                      i, 0 );
                
-               rs_model.setValueAt( temp_alu[i].getName(), i, 1 );
-               rs_model.setValueAt( busy_desc, i, 2 );
-               rs_model.setValueAt( (temp_alu[i].isBusy() ? temp_alu[i].getOperation() : " "), i, 3 );
-               rs_model.setValueAt( temp_alu[i].getVj(), i, 4 );
-               rs_model.setValueAt( temp_alu[i].getVk(), i, 5 );
-               rs_model.setValueAt( temp_alu[i].getQj(), i, 6 );
-               rs_model.setValueAt( temp_alu[i].getQk(), i, 7 );               
+               rs_model.setValueAt(temp_alu[i].getName(), i, 1);
+               rs_model.setValueAt(busy_desc, i, 2);
+               rs_model.setValueAt((temp_alu[i].isBusy() ? temp_alu[i].getOperation() : " "), i, 3);
+               rs_model.setValueAt(temp_alu[i].getVj(), i, 4);
+               rs_model.setValueAt(temp_alu[i].getVk(), i, 5);
+               rs_model.setValueAt(temp_alu[i].getQj(), i, 6);
+               rs_model.setValueAt(temp_alu[i].getQk(), i, 7);               
           }
      }
      

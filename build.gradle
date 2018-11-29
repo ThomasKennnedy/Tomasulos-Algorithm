@@ -46,14 +46,13 @@ jar {
 
     manifest {
         attributes(
-            "Main-Class": "TomasuloGUI"
+            "Main-Class": "edu.odu.cs.cs665.tomasulosalgorithm.TomasuloGUI"
         )
     }
 }
 
 run {
-    main = "edu.odu.cs.cs330.examples.RunShapes"
-    args = ["src/main/resources/inputShapes.txt", "2"]
+    main = "edu.odu.cs.cs665.tomasulosalgorithm.TomasuloGUI"
 }
 
 test {
