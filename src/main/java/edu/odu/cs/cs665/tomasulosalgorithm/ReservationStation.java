@@ -29,17 +29,17 @@ public abstract class ReservationStation {
      /// Abstract function to clear the reservation station
      ///
      abstract void clear();
-     
+
      ///
      /// Abstract Function to determine whether the Station is Ready for use
      ///
      abstract boolean isReady();
-    
+
      ///
      /// Abstract Function to schedule the instruction
      ///
      abstract void scheduleInstruction(Operation op, RegisterFiles reg_in, int cycles);
-     
+
      ///
      /// Return the result
      ///
@@ -47,62 +47,62 @@ public abstract class ReservationStation {
           if( operation.getWriteTime() == -1 ){
                operation.setWriteTime( Clock.getInstance().get() );
           }
-          
+
           resultWritten = true;
-          
+
           return result;
      }
-     
-     
+
+
      ///
      /// Function return the value of resultready
      ///
      public boolean isResultReady(){
           return resultReady;
      }
-    
+
      ///
      /// Function returns the value of resultwritten
      ///
      public boolean isResultWritten(){
           return resultWritten;
      }
-     
+
      ///
      /// Function return the value of busy
      ///
      public boolean isBusy(){
           return busy;
      }
-     
+
      ///
      /// Function returns the value of duration
      ///
      public long getDuration(){
           return duration;
      }
-     
+
      ///
      /// Function sets the value of duration
      ///
      public void setDuration(long d){
           duration = d;
      }
-    
+
      ///
      /// Function returns the value of name of reservation station
      ///
      public String getName(){
           return sname;
      }
-     
+
      ///
      /// Function sets the name of the reservation station
      ///
      public void setName(String name){
           sname = name;
-     }     
-     
+     }
+
      ///
      /// Decrement duration
      ///
@@ -111,24 +111,24 @@ public abstract class ReservationStation {
           if( operation.getExecStart() == -1 ){
                operation.setExecStart( Clock.getInstance().get() );
           }
-          
+
           duration--;
           resultReady = ( duration == 0 );
-          
+
           if( resultReady ){
                operation.setExecEnd( Clock.getInstance().get() );
           }
      }
-     
+
      ///
      /// Utility function toc check if the Register Value is an alias
      ///
      protected boolean isPlaceHolder( String to_check ){
-          return ( to_check.equals("Add1") || to_check.equals("Add2") || 
+          return ( to_check.equals("Add1") || to_check.equals("Add2") ||
                    to_check.equals("Mul1") || to_check.equals("Mul1") ||
                    to_check.equals("Div1") || to_check.equals("Div2") ||
                    to_check.equals("Load1")|| to_check.equals("Load2")||
                    to_check.equals("Int1") );
-                 
+
      }
 }

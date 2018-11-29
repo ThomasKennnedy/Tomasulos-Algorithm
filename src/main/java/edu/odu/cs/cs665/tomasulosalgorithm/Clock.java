@@ -5,18 +5,20 @@ package edu.odu.cs.cs665.tomasulosalgorithm;
  */
 public class Clock {
     /**
-     * The clock instance.
+     * The global clock instance.
      */
     private static Clock clockPtr = null;
 
     /**
-     * Time in cycles.
+     * Time in CPU cycles.
      */
     private int time;
 
-    ///
-    ///returns singleton instance
-    ///
+    /**
+     * Allow access to the Clock instance.
+     *
+     * @return reference to the global clock
+     */
     public static Clock getInstance()
     {
         if (clockPtr == null) {
@@ -25,25 +27,27 @@ public class Clock {
         return clockPtr;
     }
 
-    ///
-    ///class is a singleton so constructor is private.
-    ///
+    /**
+     * Construct the CPU clock. Used internally.
+     */
     private Clock()
     {
         time = 0;
     }
 
-    ///
-    ///returns current time in cycles
-    ///
+    /**
+     * Get the CPU current cycle number.
+     *
+     * @return current time
+     */
     int get()
     {
         return time;
     }
 
-    ///
-    ///increment clock
-    ///
+    /**
+     * Increment the clock by one time step.
+     */
     void increment()
     {
         time++;
