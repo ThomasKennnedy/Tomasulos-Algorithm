@@ -1,11 +1,10 @@
 import java.util.HashMap;
-import java.util.ArrayList;
+
 
 ///
 /// This class provides all MemStation functionality.
 ///
-
-public class MemStation extends ReservationStation{
+public class MemStation extends ReservationStation {
     
      private String address;		///< Address to be stored or loaded from memory
      private String[] addr_comp;   ///< Components used in computing the final address, and the register for stores [3]
@@ -14,7 +13,8 @@ public class MemStation extends ReservationStation{
      ///
      /// Calls superclass constructor and initializes address
      ///
-     public MemStation(String sname){
+     public MemStation(String sname)
+     {
           super(sname);
           address = null;
           addr_comp = new String[3];
@@ -27,7 +27,8 @@ public class MemStation extends ReservationStation{
      ///
      /// Function to clear the Reservation Station
      ///
-     public void clear(){
+     public void clear()
+     {
           busy = false;
           operation = null;
           address = null;
@@ -43,37 +44,43 @@ public class MemStation extends ReservationStation{
      ///
      /// Function to determine whether MemStation is Ready for use
      ///
-     public boolean isReady(){
-        return ( !resultReady  && !isPlaceHolder(addr_comp[0]) &&
-                !isPlaceHolder(addr_comp[1]) && 
-                ( !is_store || (is_store && !isPlaceHolder(addr_comp[2])) ) ); // force store to wait for register value
+     public boolean isReady()
+     {
+        return !resultReady
+            && !isPlaceHolder(addr_comp[0])
+            && !isPlaceHolder(addr_comp[1])
+            && (!is_store || (is_store && !isPlaceHolder(addr_comp[2]))); // force store to wait for register value
      }
 
      ///
      /// Function returns the value of address
      ///
-     public String getAddress(){
+     public String getAddress()
+     {
           return address;
      }
      
      ///
      /// Function sets the value of address
      ///
-     public void setAddress(String address){
+     public void setAddress(String address)
+     {
           address = address;
      }
      
      ///
      /// Return whether the currently scheduled operation is a store
      ///
-     public boolean isStore(){
+     public boolean isStore()
+     {
           return is_store;
      }
      
      ///
      /// Function to schedule the instruction
      ///
-     public void scheduleInstruction(Operation op, RegisterFiles reg_in, int cycles){
+     public void scheduleInstruction(Operation op, RegisterFiles reg_in, int cycles)
+     {
           this.operation = op;
           this.busy= true;
           this.duration = cycles;
@@ -94,8 +101,8 @@ public class MemStation extends ReservationStation{
      ///
      ///Update the address components
      ///
-     public void updateAddrComponents(String alias, String value){
-     
+     public void updateAddrComponents(String alias, String value)
+     {
           if( addr_comp[0].equals(alias) ){
                addr_comp[0] = value;
           }
@@ -122,14 +129,14 @@ public class MemStation extends ReservationStation{
           result = "M(" + addr_comp[0]  + "," + addr_comp[1]  + ")";
      
           //attempt to parse the values as integers
-          try{
+          try {
                temp_int1 = Integer.parseInt( addr_comp[0] );
                
                temp_int2 = Integer.parseInt( addr_comp[1] );
               
                result = "M("+( temp_int1 + temp_int2 )+")";
           }
-          catch( Exception e ){
+          catch ( Exception e ) {
           
           }
           address = result;
@@ -166,7 +173,8 @@ public class MemStation extends ReservationStation{
      ///
      ///Static Function Classify the message as Store or Otther
      ///
-     public static boolean isStore( String opcode ){
-           return ( opcode.equals("S.D") || opcode.equals("SD") );
+     public static boolean isStore( String opcode )
+     {
+           return opcode.equals("S.D") || opcode.equals("SD");
      }
 }

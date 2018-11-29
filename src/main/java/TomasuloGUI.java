@@ -411,8 +411,9 @@ public class TomasuloGUI extends JFrame {
           Map<String, String> temp_fp_reg = sim_instance.getRegisterFiles().getFPRegisters();
           
           //add rows if needed
-          while( (temp_int_reg.size() > reg_model.getRowCount()) || (temp_fp_reg.size() > reg_model.getRowCount()) ){
-               reg_model.addRow( new Object[]{ " ", " ", " ", " "} );
+          while(temp_int_reg.size() > reg_model.getRowCount()
+             || temp_fp_reg.size() > reg_model.getRowCount()) {
+               reg_model.addRow(new Object[]{ " ", " ", " ", " "});
           }
           
           //Update Integer Table Values
@@ -441,7 +442,7 @@ public class TomasuloGUI extends JFrame {
           MemStation[] temp_ms = sim_instance.getMemStations();
           
           //Update the table with current values for the stations
-          for( int i =0; i < temp_ms.length; i++ ){
+          for( int i = 0; i < temp_ms.length; i++ ){
                //generate a meaningfull representation of busy
                String busy_desc = (temp_ms[i].isBusy() ? "Yes" : "No" );
           
@@ -463,12 +464,12 @@ public class TomasuloGUI extends JFrame {
                //generate a meaningfull representation of busy
                String busy_desc = (temp_alu[i].isBusy() ? "Yes" : "No" );
           
-               rs_model.setValueAt( (( temp_alu[i].isReady() && temp_alu[i].isBusy() ) ? temp_alu[i].getDuration() : "0") ,
+               rs_model.setValueAt( ((temp_alu[i].isReady() && temp_alu[i].isBusy()) ? temp_alu[i].getDuration() : "0") ,
                                      i, 0 );
                
                rs_model.setValueAt( temp_alu[i].getName(), i, 1 );
                rs_model.setValueAt( busy_desc, i, 2 );
-               rs_model.setValueAt( ( (temp_alu[i].isBusy()) ? temp_alu[i].getOperation() : " "), i, 3 );
+               rs_model.setValueAt( (temp_alu[i].isBusy() ? temp_alu[i].getOperation() : " "), i, 3 );
                rs_model.setValueAt( temp_alu[i].getVj(), i, 4 );
                rs_model.setValueAt( temp_alu[i].getVk(), i, 5 );
                rs_model.setValueAt( temp_alu[i].getQj(), i, 6 );
@@ -483,8 +484,4 @@ public class TomasuloGUI extends JFrame {
      {
           new TomasuloGUI().setVisible(true);
      }
-
-
-
-
 }
