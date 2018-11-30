@@ -48,13 +48,14 @@ public class TomasuloGUI extends JFrame {
      ///
      /// The GUI Constructor
      ///
-     public TomasuloGUI(){
+     public TomasuloGUI()
+     {
           super("Tomsulo's Simulation");
           setLocation(50,75);
 	     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	     setMinimumSize(new Dimension( 700, 500 ));
+	     setMinimumSize(new Dimension(700, 500));
 
-          //setPreferredSize( new Dimension( 700, 600 ) );
+          //setPreferredSize(new Dimension(700, 600));
 	     Container cp = getContentPane();
 	
           //create the container panels
@@ -93,26 +94,26 @@ public class TomasuloGUI extends JFrame {
           op_model = new DefaultTableModel();
           op_model.setColumnIdentifiers(new Object[]{"Instruction"," ", "j", "k", "Issue", "Complete", "Write"});
           //add instruction rows
-          for (int i = 1; i <= 7; i++){
-               op_model.addRow(new Object[]{ " ", " ", " ", " ", " ", " ", " "});
+          for (int i = 1; i <= 7; i++) {
+               op_model.addRow(new Object[]{" ", " ", " ", " ", " ", " ", " "});
           }
 
           //Create The Reservation Station Table Model
           rs_model = new DefaultTableModel();
-          rs_model.setColumnIdentifiers( new Object[]{"Time", "Name","Busy", "Op", "Vj", "Vk", "Qj", "Qk"});
+          rs_model.setColumnIdentifiers(new Object[]{"Time", "Name","Busy", "Op", "Vj", "Vk", "Qj", "Qk"});
           //Add Reservation Station Table Rows
-          rs_model.addRow(new Object[]{""+0, "Int1", " ", " ", " ", " ", " ", " "});
-          rs_model.addRow(new Object[]{""+0, "Add1", " ", " ", " ", " ", " ", " "});
-          rs_model.addRow(new Object[]{""+0, "Add2", " ", " ", " ", " ", " ", " "});
-          rs_model.addRow(new Object[]{""+0, "Mult1", " ", " ", " ", " ", " ", " "});
-          rs_model.addRow(new Object[]{""+0, "Mult2", " ", " ", " ", " ", " ", " "});
-          rs_model.addRow(new Object[]{""+0, "Div1", " ", " ", " ", " ", " ", " "});
-          rs_model.addRow(new Object[]{""+0, "Div2", " ", " ", " ", " ", " ", " "});
+          rs_model.addRow(new Object[]{"" + 0, "Int1", " ", " ", " ", " ", " ", " "});
+          rs_model.addRow(new Object[]{"" + 0, "Add1", " ", " ", " ", " ", " ", " "});
+          rs_model.addRow(new Object[]{"" + 0, "Add2", " ", " ", " ", " ", " ", " "});
+          rs_model.addRow(new Object[]{"" + 0, "Mult1", " ", " ", " ", " ", " ", " "});
+          rs_model.addRow(new Object[]{"" + 0, "Mult2", " ", " ", " ", " ", " ", " "});
+          rs_model.addRow(new Object[]{"" + 0, "Div1", " ", " ", " ", " ", " ", " "});
+          rs_model.addRow(new Object[]{"" + 0, "Div2", " ", " ", " ", " ", " ", " "});
 
 
           //Create The Reservation Station Table Model
           mrs_model = new DefaultTableModel();
-          mrs_model.setColumnIdentifiers( new Object[]{"Name","Busy", "Address" });
+          mrs_model.setColumnIdentifiers(new Object[]{"Name","Busy", "Address" });
           //Add Reservation Station Table Rows
           mrs_model.addRow(new Object[]{"Load1",  " ", " "});
           mrs_model.addRow(new Object[]{"Load2",  " ", " "});
@@ -127,8 +128,8 @@ public class TomasuloGUI extends JFrame {
           reg_model.addColumn("Value");
 
           //Ad Initial Register Table Rows
-          for (int i = 0; i < 14; i++ ){
-               reg_model.addRow(new Object[]{ " ", " " , " ", " " });
+          for (int i = 0; i < 14; i++) {
+               reg_model.addRow(new Object[]{" ", " " , " ", " "});
           }
 
           //Create the tables
@@ -139,10 +140,10 @@ public class TomasuloGUI extends JFrame {
 
 
           //Disallow editing of table fields
-          op_table.setEnabled( false );
-          rs_table.setEnabled( false );
-          mrs_table.setEnabled( false );
-          reg_table.setEnabled( false );
+          op_table.setEnabled(false);
+          rs_table.setEnabled(false);
+          mrs_table.setEnabled(false);
+          reg_table.setEnabled(false);
 
           //Disable the reorganization of columns
           op_table.getTableHeader().setReorderingAllowed(false);
@@ -156,25 +157,23 @@ public class TomasuloGUI extends JFrame {
           op_table.getColumnModel().getColumn(0).setMaxWidth(100);
           op_table.getColumnModel().getColumn(0).setPreferredWidth(100);
           //Columns [1,3]
-          for (int i = 1; i <= 3; i++){
+          for (int i = 1; i <= 3; i++) {
                op_table.getColumnModel().getColumn(i).setMinWidth(60);
                op_table.getColumnModel().getColumn(i).setMaxWidth(60);
                op_table.getColumnModel().getColumn(i).setPreferredWidth(60);
           }
           //Columns [4,6]
-          for (int i = 4; i <= 6; i++){
+          for (int i = 4; i <= 6; i++) {
                op_table.getColumnModel().getColumn(i).setMinWidth(80);
                op_table.getColumnModel().getColumn(i).setMaxWidth(80);
                op_table.getColumnModel().getColumn(i).setPreferredWidth(80);
           }
 
           //Set Reservation Station Table Column Widths
-          //Set the first columnt -- leave default for the remaining columns
+          //Set the first column -- leave default for the remaining columns
           rs_table.getColumnModel().getColumn(0).setMinWidth(80);
           rs_table.getColumnModel().getColumn(0).setMaxWidth(80);
           rs_table.getColumnModel().getColumn(0).setPreferredWidth(80);
-
-
 
           //Set Register Table Column widths
           //FP Name Column
@@ -196,14 +195,14 @@ public class TomasuloGUI extends JFrame {
 
 
           //Set Table Viewport size for Table JScrollPanes
-          op_table.setPreferredScrollableViewportSize( op_table.getPreferredSize() );
-          rs_table.setPreferredScrollableViewportSize( rs_table.getPreferredSize() );
-          mrs_table.setPreferredScrollableViewportSize( mrs_table.getPreferredSize() );
-          reg_table.setPreferredScrollableViewportSize( reg_table.getPreferredSize() );
+          op_table.setPreferredScrollableViewportSize(op_table.getPreferredSize());
+          rs_table.setPreferredScrollableViewportSize(rs_table.getPreferredSize());
+          mrs_table.setPreferredScrollableViewportSize(mrs_table.getPreferredSize());
+          reg_table.setPreferredScrollableViewportSize(reg_table.getPreferredSize());
 
           //Create Table JScrollPanes
-          JScrollPane op_panel= new JScrollPane(op_table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+          JScrollPane op_panel = new JScrollPane(op_table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                                                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
           JScrollPane rs_panel = new JScrollPane(rs_table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                                                  JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -215,28 +214,28 @@ public class TomasuloGUI extends JFrame {
                                                   JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
           //Create Panel Title Borders
-          TitledBorder control_border = BorderFactory.createTitledBorder( "Controls" );
-          control_panel.setBorder( control_border );
+          TitledBorder control_border = BorderFactory.createTitledBorder("Controls");
+          control_panel.setBorder(control_border);
 
-          TitledBorder status_border = BorderFactory.createTitledBorder( "Clock" );
-          status_panel.setBorder( status_border );
+          TitledBorder status_border = BorderFactory.createTitledBorder("Clock");
+          status_panel.setBorder(status_border);
 
-          TitledBorder op_border = BorderFactory.createTitledBorder( "Instructions" );
-          op_panel.setBorder( op_border );
+          TitledBorder op_border = BorderFactory.createTitledBorder("Instructions");
+          op_panel.setBorder(op_border);
 
-          TitledBorder rs_border = BorderFactory.createTitledBorder( "ALU Stations" );
-          rs_panel.setBorder( rs_border );
+          TitledBorder rs_border = BorderFactory.createTitledBorder("ALU Stations");
+          rs_panel.setBorder(rs_border);
 
-          TitledBorder mrs_border = BorderFactory.createTitledBorder( "Memory Stations" );
-          mrs_panel.setBorder( mrs_border );
+          TitledBorder mrs_border = BorderFactory.createTitledBorder("Memory Stations");
+          mrs_panel.setBorder(mrs_border);
 
-          TitledBorder reg_border = BorderFactory.createTitledBorder( "Registers" );
-          reg_panel.setBorder( reg_border );
+          TitledBorder reg_border = BorderFactory.createTitledBorder("Registers");
+          reg_panel.setBorder(reg_border);
 
 
 
           //set the layout manager and create the constraints helper
-          cp.setLayout( new GridBagLayout() );
+          cp.setLayout(new GridBagLayout());
           GridBagConstraints c = new GridBagConstraints();
 
           //add the controls panel
@@ -246,7 +245,7 @@ public class TomasuloGUI extends JFrame {
           c.gridy     = 0;
           c.gridwidth = 2;
           c.gridheight= 1;
-	     cp.add( control_panel, c);
+	     cp.add(control_panel, c);
 	
           //add the status panel
           c.fill = GridBagConstraints.HORIZONTAL;
@@ -255,7 +254,7 @@ public class TomasuloGUI extends JFrame {
           c.gridy     = 0;
           c.gridwidth = 1;
           c.gridheight= 1;
-	     cp.add( status_panel, c);
+	     cp.add(status_panel, c);
 
           //add the operations scroll panel
           c.fill = GridBagConstraints.HORIZONTAL;
@@ -263,7 +262,7 @@ public class TomasuloGUI extends JFrame {
           c.gridy     = 1;
           c.gridwidth = 2;
           c.gridheight= 1;
-	     cp.add( op_panel, c);
+	     cp.add(op_panel, c);
 
           //add the Reservation Station panel
           c.fill = GridBagConstraints.HORIZONTAL;
@@ -271,7 +270,7 @@ public class TomasuloGUI extends JFrame {
           c.gridy     = 3;
           c.gridwidth = 3;
           c.gridheight= 1;
-          cp.add( rs_panel, c);
+          cp.add(rs_panel, c);
 
           //add the Memory Reservation Station panel
           c.fill = GridBagConstraints.HORIZONTAL;
@@ -279,7 +278,7 @@ public class TomasuloGUI extends JFrame {
           c.gridy     = 2;
           c.gridwidth = 2;
           c.gridheight= 1;
-          cp.add( mrs_panel, c);
+          cp.add(mrs_panel, c);
 
 
           //add the Registers panel
@@ -288,31 +287,31 @@ public class TomasuloGUI extends JFrame {
           c.gridy     = 1;
           c.gridwidth = 1;
           c.gridheight= 2;
-          cp.add( reg_panel, c);
+          cp.add(reg_panel, c);
 
-          //Set Action Listeners( Event Handlers )
+          //Set Action Listeners(Event Handlers)
           //File Load Listener
           load_button.addActionListener(
-               new ActionListener(){
-                    public void actionPerformed(ActionEvent e){
+               new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
                          //Open the file selection Dialog
-                         int file_result = file_dialog.showOpenDialog( TomasuloGUI.this );
+                         int file_result = file_dialog.showOpenDialog(TomasuloGUI.this);
 
-                         if( file_result == JFileChooser.APPROVE_OPTION ){
+                         if(file_result == JFileChooser.APPROVE_OPTION) {
                               instructions_file = file_dialog.getSelectedFile();
-                              file_field.setText( instructions_file.getName() );
+                              file_field.setText(instructions_file.getName());
 
 
 
                               //construct the simulation
                               sim_instance = new Simulation();
                               try{
-                                   sim_instance.initialize( instructions_file );
-                                   load_button.setEnabled( false );
-                                   step_button.setEnabled( true );
+                                   sim_instance.initialize(instructions_file);
+                                   load_button.setEnabled(false);
+                                   step_button.setEnabled(true);
                               }
-                              catch(Exception ex){
-                                   javax.swing.JOptionPane.showMessageDialog( new JFrame(), ex.toString() );
+                              catch(Exception ex) {
+                                   javax.swing.JOptionPane.showMessageDialog(new JFrame(), ex.toString());
                               }
                          }
 
@@ -321,31 +320,27 @@ public class TomasuloGUI extends JFrame {
                          //remains constant
                          OperationList update_list = sim_instance.getOperationList();
 
-                         while( op_model.getRowCount() < update_list.getNumberOfOperations() ) {
-                              op_model.addRow( new Object[]{ " ", " ", " ", " ", " ", " ", " "} );
+                         while (op_model.getRowCount() < update_list.getNumberOfOperations()) {
+                              op_model.addRow(new Object[]{" ", " ", " ", " ", " ", " ", " "});
                          }
-
-
 
                          //Populate the tables
                          updateInstructionTable();
                          updateRegisterTable();
                          updateMemTable();
                          updateALUTable();
-
-
                     }
                }
-          );
+         );
           //Step Listener
           step_button.addActionListener(
-               new ActionListener(){
-                    public void actionPerformed(ActionEvent e){
+               new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
                          sim_instance.performStep();
 
                          //update UI
                          //update clock
-                         clocks_field.setText( ""+sim_instance.getCurrentCycle() );
+                         clocks_field.setText("" + sim_instance.getCurrentCycle());
                          //update tables
                          updateInstructionTable();
                          updateRegisterTable();
@@ -353,15 +348,15 @@ public class TomasuloGUI extends JFrame {
                          updateALUTable();
 
                          //Check if the simulation has finished
-                         if( sim_instance.isComplete() ){
-                              javax.swing.JOptionPane.showMessageDialog( new JFrame(), "Simulation Complete" );
-                              step_button.setEnabled( false );
+                         if (sim_instance.isComplete()) {
+                              javax.swing.JOptionPane.showMessageDialog(new JFrame(), "Simulation Complete");
+                              step_button.setEnabled(false);
                          }
 
 
                     }
                }
-          );
+         );
 
           pack();
      }
@@ -374,26 +369,26 @@ public class TomasuloGUI extends JFrame {
           OperationList update_list = sim_instance.getOperationList();
 
           //Populate Operations table with the instructions
-          for (int i = 0; i < update_list.getNumberOfOperations(); i++){
-               Operation it_op = update_list.getOperation( i+1 );
+          for (int i = 0; i < update_list.getNumberOfOperations(); i++) {
+               Operation it_op = update_list.getOperation(i+1);
                //obtain the write time
                int write_time = it_op.getWriteTime();
 
                //Opcode
-               op_model.setValueAt( it_op.getOpcode(), i, 0);
+               op_model.setValueAt(it_op.getOpcode(), i, 0);
                //Operands
-               op_model.setValueAt( it_op.getOperand(1), i, 1);
-               op_model.setValueAt( it_op.getOperand(2), i, 2);
+               op_model.setValueAt(it_op.getOperand(1), i, 1);
+               op_model.setValueAt(it_op.getOperand(2), i, 2);
 
-               if( it_op.getNumberOfOperands() > 2 ){
-                    op_model.setValueAt( it_op.getOperand(3), i, 3);
+               if (it_op.getNumberOfOperands() > 2) {
+                    op_model.setValueAt(it_op.getOperand(3), i, 3);
                }
 
-               op_model.setValueAt( it_op.getExecution(), i, 5);
-               op_model.setValueAt( (write_time == -1 ? " " : write_time ), i, 6);
+               op_model.setValueAt(it_op.getExecution(), i, 5);
+               op_model.setValueAt((write_time == -1 ? " " : write_time), i, 6);
 
                //Issue Number - display once the instruction has been scheduled
-               op_model.setValueAt( (it_op.isScheduled() ? it_op.getIssueNum() : " " ), i, 4);
+               op_model.setValueAt((it_op.isScheduled() ? it_op.getIssueNum() : " "), i, 4);
           }
      }
 
@@ -412,7 +407,7 @@ public class TomasuloGUI extends JFrame {
           //add rows if needed
           while (temp_int_reg.size() > reg_model.getRowCount()
               || temp_fp_reg.size() > reg_model.getRowCount()) {
-               reg_model.addRow(new Object[]{ " ", " ", " ", " "});
+               reg_model.addRow(new Object[]{" ", " ", " ", " "});
           }
 
           //Update Integer Table Values
@@ -442,9 +437,9 @@ public class TomasuloGUI extends JFrame {
           MemStation[] temp_ms = sim_instance.getMemStations();
 
           //Update the table with current values for the stations
-          for (int i = 0; i < temp_ms.length; i++ ){
+          for (int i = 0; i < temp_ms.length; i++) {
                //generate a meaningfull representation of busy
-               String busy_desc = (temp_ms[i].isBusy() ? "Yes" : "No" );
+               String busy_desc = (temp_ms[i].isBusy() ? "Yes" : "No");
 
                mrs_model.setValueAt(temp_ms[i].getName(), i, 0);
                mrs_model.setValueAt(busy_desc, i, 1);
@@ -461,12 +456,12 @@ public class TomasuloGUI extends JFrame {
           ALUStation[] temp_alu = sim_instance.getALUStations();
 
           //Update the table with current values for the stations
-          for (int i =0; i < temp_alu.length; i++ ){
+          for (int i = 0; i < temp_alu.length; i++) {
                //generate a meaningfull representation of busy
-               String busy_desc = (temp_alu[i].isBusy() ? "Yes" : "No" );
+               String busy_desc = (temp_alu[i].isBusy() ? "Yes" : "No");
 
-               rs_model.setValueAt(((temp_alu[i].isReady() && temp_alu[i].isBusy()) ? temp_alu[i].getDuration() : "0") ,
-                                     i, 0 );
+               rs_model.setValueAt(((temp_alu[i].isReady() && temp_alu[i].isBusy()) ? temp_alu[i].getDuration() : "0"),
+                                     i, 0);
 
                rs_model.setValueAt(temp_alu[i].getName(), i, 1);
                rs_model.setValueAt(busy_desc, i, 2);

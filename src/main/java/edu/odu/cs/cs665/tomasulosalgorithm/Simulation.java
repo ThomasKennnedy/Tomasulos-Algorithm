@@ -14,8 +14,8 @@ public class Simulation {
      private ALUStation[] alu_rs;                                ///< ALU and Integer Reservation Stations
      private MemStation[] mem_rs;                                ///< Memory Reservation Stations
 
-     private HashMap<String, Integer[] > instruction_to_station; ///< Mapping of instructions to Reservation Stations
-     private HashMap<String, Integer > instruction_to_time;      ///< Mapping of instructions to Execution Time
+     private HashMap<String, Integer[]> instruction_to_station; ///< Mapping of instructions to Reservation Stations
+     private HashMap<String, Integer> instruction_to_time;      ///< Mapping of instructions to Execution Time
      private HashMap<String, String> alias_to_register;          ///< Mapping of placeholder to Register
 
      private HashMap<String, Integer> memory_buffer;              ///< Mapping of operation issue numbers to ,emory locations

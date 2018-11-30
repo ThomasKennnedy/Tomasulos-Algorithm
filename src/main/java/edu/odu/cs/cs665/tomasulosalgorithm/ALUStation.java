@@ -11,7 +11,7 @@ public class ALUStation extends ReservationStation {
     private String qk;          ///<name of reservation station producing Vk
     private String A;           ///<used to hold immediate field or off address
 
-      ///
+    ///
     /// Calls superclass constructor and initializes vj,vk,qj and qk
     ///
     public ALUStation(String sname)
@@ -34,7 +34,7 @@ public class ALUStation extends ReservationStation {
         this.vj = null;
         this.vk = null;
         this.A = null;
-        this.qj = null; 
+        this.qj = null;
         this.qk = null;
         super.resultReady = false;
         super.resultWritten = false;
@@ -212,7 +212,7 @@ public class ALUStation extends ReservationStation {
             temp_int2 = Integer.parseInt(vk);
             is_int2 = true;
 
-            result = "" + (temp_int1 + temp_int2);
+            result = "" + temp_int1 + temp_int2;
         }
         catch (Exception e) {
 

@@ -48,7 +48,7 @@ public class Operation {
           int temp_index;          // temporary index
           temp_index = temp.indexOf('(');
 
-          operand_3 = temp.substring(temp_index+1, temp.indexOf(')'));
+          operand_3 = temp.substring(temp_index + 1, temp.indexOf(')'));
           operand_2 = temp.substring(0, temp_index);
 
           this.opcode      = opcode;
@@ -120,14 +120,14 @@ public class Operation {
      ///
      public String getOperands()
      {
-          String to_return = "";
+          StringBuilder bld = new StringBuilder();
 
           for (int i = 0; i < (operands.length - 1); i++) {
-               to_return += operands[i] + " ";
+               bld.append(operands[i]).append(' ');
           }
-          to_return += operands[operands.length - 1];
+          bld.append(operands[operands.length - 1]);
 
-          return to_return;
+          return bld.toString();
      }
 
      ///
@@ -269,16 +269,17 @@ public class Operation {
      ///
      public String toString()
      {
-          String to_return = "" + opcode;
+          StringBuilder bld = new StringBuilder();
+          bld.append("" + opcode);
 
           for (int i = 0; i < operands.length; i++) {
-               to_return += " " + operands[i];
+               bld.append(" " + operands[i]);
           }
 
           if (has_comment) {
-               to_return += " ; " + comment;
+               bld.append(" ; " + comment);
           }
 
-          return to_return;
+          return bld.toString();
      }
 }
