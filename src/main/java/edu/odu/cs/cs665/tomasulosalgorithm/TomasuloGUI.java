@@ -474,7 +474,9 @@ public class TomasuloGUI extends JFrame {
      }
 
      /**
-      * The main function
+      * The main function. Construct a new GUI and make it visible
+      *
+      * @param args no command line arguments or accepted or used
       */
      public static void main(String[] args)
      {

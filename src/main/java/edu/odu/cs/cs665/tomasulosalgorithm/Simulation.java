@@ -9,19 +9,19 @@ import java.util.HashMap;
  * This class contains all simulation logic.
  */
 public class Simulation {
-     private OperationList operations;                           ///< List of instructions
-     private RegisterFiles registers;                            ///< Register Files
-     private ALUStation[] alu_rs;                                ///< ALU and Integer Reservation Stations
-     private MemStation[] mem_rs;                                ///< Memory Reservation Stations
+     private OperationList operations;                          ///< List of instructions
+     private RegisterFiles registers;                           ///< Register Files
+     private ALUStation[] alu_rs;                               ///< ALU and Integer Reservation Stations
+     private MemStation[] mem_rs;                               ///< Memory Reservation Stations
 
      private HashMap<String, Integer[]> instruction_to_station; ///< Mapping of instructions to Reservation Stations
      private HashMap<String, Integer> instruction_to_time;      ///< Mapping of instructions to Execution Time
-     private HashMap<String, String> alias_to_register;          ///< Mapping of placeholder to Register
+     private HashMap<String, String> alias_to_register;         ///< Mapping of placeholder to Register
 
-     private HashMap<String, Integer> memory_buffer;              ///< Mapping of operation issue numbers to ,emory locations
+     private HashMap<String, Integer> memory_buffer;            ///< Mapping of operation issue numbers to ,emory locations
 
-     private Clock clock;                                        ///< Clock Cycle Object
-     private boolean is_initialized;                             ///< Whether the Simulation Instance is initialized
+     private Clock clock;                                       ///< Clock Cycle Object
+     private boolean is_initialized;                            ///< Whether the Simulation Instance is initialized
 
      /**
       * Simulation Constructor
@@ -32,14 +32,17 @@ public class Simulation {
      }
 
      /**
-      * Initialize the simulation
+      * Initialize the simulation.
+      *
+      * @param dataFile input file containing the set of all instructions to
+      *     simulate
       */
-     public void initialize(File data_file)
+     public void initialize(File dataFile)
           throws Exception
      {
           clock = Clock.getInstance();
 
-          OperationFileParser file_parser = new OperationFileParser(data_file);
+          OperationFileParser file_parser = new OperationFileParser(dataFile);
 
           //Iniatialize containers for instructions and registers
           operations = new OperationList();

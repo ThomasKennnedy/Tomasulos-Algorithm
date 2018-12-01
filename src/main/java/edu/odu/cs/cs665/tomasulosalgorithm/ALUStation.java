@@ -12,11 +12,13 @@ public class ALUStation extends ReservationStation {
     private String A;           ///<used to hold immediate field or off address
 
     /**
-     * Calls superclass constructor and initializes vj,vk,qj and qk
+     * Calls superclass constructor and initializes vj, vk, qj and qk.
+     *
+     * @param sName name to use for this ALU Station
      */
-    public ALUStation(String sname)
+    public ALUStation(String sName)
     {
-        super(sname);
+        super(sName);
         this.vj = null;
         this.vk = null;
         this.A = null;
@@ -25,7 +27,7 @@ public class ALUStation extends ReservationStation {
     }
 
     /**
-     * Function to clear the Reservation Station
+     * Function to clear the Reservation Station.
      */
     public void clear()
     {
@@ -43,6 +45,8 @@ public class ALUStation extends ReservationStation {
     /**
      * Determine whether operands are available and therefore ready
      * for execution.
+     *
+     * @return true if this station is ready for execution
      */
     public boolean isReady()
     {
@@ -52,10 +56,14 @@ public class ALUStation extends ReservationStation {
     }
 
     /**
-     * Function to schedule the instruction
+     * Function to schedule the instruction.
+     *
+     * @param op operand to schedule
+     * @param regIn register files to reference
+     * @param cycles duration in cycles
      */
     public void scheduleInstruction(Operation op,
-                                    RegisterFiles reg_in, int cycles)
+                                    RegisterFiles regIn, int cycles)
     {
         this.operation = op;
         this.busy = true;
@@ -63,18 +71,18 @@ public class ALUStation extends ReservationStation {
 
         result = "R(" + op.getOperand(2) + "," + op.getOperand(3) + ")";
 
-        if (isPlaceHolder(reg_in.getRegister(operation.getOperand(2)))) {
-             qj = reg_in.getRegister(operation.getOperand(2));
+        if (isPlaceHolder(regIn.getRegister(operation.getOperand(2)))) {
+             qj = regIn.getRegister(operation.getOperand(2));
         }
         else {
-             vj = reg_in.getRegister(operation.getOperand(2));
+             vj = regIn.getRegister(operation.getOperand(2));
         }
 
-        if (isPlaceHolder(reg_in.getRegister(operation.getOperand(3)))) {
-             qk = reg_in.getRegister(operation.getOperand(3));
+        if (isPlaceHolder(regIn.getRegister(operation.getOperand(3)))) {
+             qk = regIn.getRegister(operation.getOperand(3));
         }
         else {
-             vk = reg_in.getRegister(operation.getOperand(3));
+             vk = regIn.getRegister(operation.getOperand(3));
         }
 
         //set the operation as scheduled
@@ -82,7 +90,9 @@ public class ALUStation extends ReservationStation {
     }
 
     /**
-     * Function returns the value vj
+     * Retrieve the value vj.
+     *
+     * @return vj as a String
      */
     public String getVj()
     {
@@ -96,7 +106,9 @@ public class ALUStation extends ReservationStation {
     }
 
     /**
-     * Function returns the value vk
+     * Retrieve the value vk.
+     *
+     * @return vk as a String
      */
     public String getVk()
     {
@@ -110,7 +122,9 @@ public class ALUStation extends ReservationStation {
     }
 
     /**
-     * Function returns the value qj
+     * Retrieve the value qj.
+     *
+     * @return qj as a String
      */
     public String getQj()
     {
@@ -124,7 +138,9 @@ public class ALUStation extends ReservationStation {
     }
 
     /**
-     * Function returns the value qk
+     * Retrieve the value qk.
+     *
+     * @return qk as a String
      */
     public String getQk()
     {
@@ -138,7 +154,9 @@ public class ALUStation extends ReservationStation {
     }
 
     /**
-     * Function returns the value A
+     * Retrieve the value A.
+     *
+     * @return A as a String
      */
     public String getA()
     {
@@ -146,23 +164,29 @@ public class ALUStation extends ReservationStation {
     }
 
     /**
-     * Function to set the value of qj
+     * Update the value of qj.
+     *
+     * @param sName new qj
      */
-    public void setQj(String sname)
+    public void setQj(String sName)
     {
-        qj = sname;
+        qj = sName;
     }
 
     /**
-     * Function to set the value of qk
+     * Update the value of qk.
+     *
+     * @param sName new qk
      */
-    public void setQk(String sname)
+    public void setQk(String sName)
     {
-        qk = sname;
+        qk = sName;
     }
 
     /**
-     * Function to set the value of vj
+     * Update the value of vj.
+     *
+     * @param i new vj
      */
     public void setVj(String i)
     {
@@ -170,7 +194,9 @@ public class ALUStation extends ReservationStation {
     }
 
     /**
-     * Function to set the value of vk
+     * Update the value of vk.
+     *
+     * @param i new vk
      */
     public void setVk(String i)
     {
@@ -178,7 +204,9 @@ public class ALUStation extends ReservationStation {
     }
 
     /**
-     * Function to set the value of A
+     * Update the value of A.
+     *
+     * @param i new A
      */
     public void setA(String i)
     {
@@ -186,12 +214,15 @@ public class ALUStation extends ReservationStation {
     }
 
     /**
-     * Finalize the result - perform integer parsing if necessary
+     * Finalize the result--perform integer parsing if necessary.
      */
     void finalizeResult()
     {
-        boolean is_int1, is_int2; //boolean flags that hold true if the operands are integers
-        int temp_int1, temp_int2; //temporary integers to hold the intermediate parsing results
+        // is_intx - Flags hold true if the operands are integers
+        boolean isInt1, isInt2;
+
+        int vjAsInt;
+        int vkAsInt;
 
         //default result if the parsing fails
         result = "R(" + vj + "," + vk + ")";
@@ -203,18 +234,18 @@ public class ALUStation extends ReservationStation {
                 vj = vj.substring(1);
             }
 
-            temp_int1 = Integer.parseInt(vj);
-            is_int1 = true;
+            vjAsInt = Integer.parseInt(vj);
+            isInt1 = true;
 
             //parse vk
             if (vk.startsWith("#")) {
                 vk = vk.substring(1);
             }
 
-            temp_int2 = Integer.parseInt(vk);
-            is_int2 = true;
+            vkAsInt = Integer.parseInt(vk);
+            isInt2 = true;
 
-            result = "" + temp_int1 + temp_int2;
+            result = "" + vjAsInt + vkAsInt;
         }
         catch (Exception e) {
 
@@ -222,7 +253,9 @@ public class ALUStation extends ReservationStation {
     }
 
     /**
-     * Return an operation type descriptor
+     * Generate an operation type descriptor.
+     *
+     * @return operation type descriptor
      */
     public String getOperation()
     {
