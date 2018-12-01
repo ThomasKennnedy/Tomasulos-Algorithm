@@ -23,17 +23,17 @@ public class Simulation {
      private Clock clock;                                        ///< Clock Cycle Object
      private boolean is_initialized;                             ///< Whether the Simulation Instance is initialized
 
-     ///
-     /// Simulation Constructor
-     ///
+     /**
+      * Simulation Constructor
+      */
      public Simulation()
      {
           is_initialized = false;
      }
 
-     ///
-     /// Initialize the simulation
-     ///
+     /**
+      * Initialize the simulation
+      */
      public void initialize(File data_file)
           throws Exception
      {
@@ -124,9 +124,9 @@ public class Simulation {
           is_initialized = true;
      }
 
-     ///
-     /// Returns true when the simulation has finished
-     ///
+     /**
+      * Returns true when the simulation has finished
+      */
      public boolean isComplete()
      {
           boolean complete = false;
@@ -238,41 +238,41 @@ public class Simulation {
           }
      }
 
-     ///
-     /// Return the current clock cycle
-     ///
+     /**
+      * Return the current clock cycle
+      */
      public int getCurrentCycle()
      {
           return clock.get();
      }
 
-     ///
-     /// Return the Instruction List
-     ///
+     /**
+      * Return the Instruction List
+      */
      public OperationList getOperationList()
      {
           return operations;
      }
 
-     ///
-     ///Return the Regieter Files
-     ///
+     /**
+      *Return the Regieter Files
+      */
      public RegisterFiles getRegisterFiles()
      {
           return registers;
      }
 
-     ///
-     /// Return the Memory Reservation Stations
-     ///
+     /**
+      * Return the Memory Reservation Stations
+      */
      public MemStation[] getMemStations()
      {
           return mem_rs;
      }
 
-     ///
-     /// Return the ALU Reservation Stations
-     ///
+     /**
+      * Return the ALU Reservation Stations
+      */
      public ALUStation[] getALUStations()
      {
           return alu_rs;
@@ -280,9 +280,9 @@ public class Simulation {
 
      //Utility Functions
 
-     ///
-     ///Parse the comment and update the Register Files Accordingly
-     ///
+     /**
+      * Parse the comment and update the Register Files Accordingly
+      */
      private void parseComment(String comment)
      {
           String[] split_1; //split on ","
@@ -297,9 +297,9 @@ public class Simulation {
           }
      }
 
-     ///
-     ///Classify an Instruction as Memory or Other
-     ///
+     /**
+      * Classify an Instruction as Memory or Other
+      */
      private boolean classify(String opcode)
      {
           return opcode.equals("L.D") || opcode.equals("LD")
@@ -307,10 +307,10 @@ public class Simulation {
 
      }
 
-     ///
-     /// Broadcast the Result to all Reservation Stations
-     /// Update the Register File
-     ///
+     /**
+      * Broadcast the Result to all Reservation Stations
+      * Update the Register File
+      */
      private void broadcast(String alias, String result) {
           String register; // the register to update
 
@@ -349,7 +349,5 @@ public class Simulation {
                }
                alias_to_register.remove(alias);
           }
-
      }
-
 }

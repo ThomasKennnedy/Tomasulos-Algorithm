@@ -9,9 +9,9 @@ import java.util.Map;
 
 import java.io.*;
 
-///
-/// This class provides all GUI functionality.
-///
+/**
+ * This class provides all GUI functionality.
+ */
 public class TomasuloGUI extends JFrame {
      JPanel control_panel; ///< Container panel for controls
      JPanel status_panel;  ///< Container panel for status
@@ -45,9 +45,9 @@ public class TomasuloGUI extends JFrame {
      final JFileChooser file_dialog = new JFileChooser(); ///< File selection dialog
      File instructions_file; ///< Instructions File object
 
-     ///
-     /// The GUI Constructor
-     ///
+     /**
+      * The GUI Constructor
+      */
      public TomasuloGUI()
      {
           super("Tomsulo's Simulation");
@@ -361,9 +361,9 @@ public class TomasuloGUI extends JFrame {
           pack();
      }
 
-     ///
-     /// Instruction Table Update Helper
-     ///
+     /**
+      * Instruction Table Update Helper
+      */
      private void updateInstructionTable()
      {
           OperationList update_list = sim_instance.getOperationList();
@@ -392,9 +392,9 @@ public class TomasuloGUI extends JFrame {
           }
      }
 
-     ///
-     /// Register Table Update Helper
-     ///
+     /**
+      * Register Table Update Helper
+      */
      private void updateRegisterTable()
      {
           int temp_it_index = 0; // tempory index tracker
@@ -428,9 +428,9 @@ public class TomasuloGUI extends JFrame {
           }
      }
 
-     ///
-     /// MemStations Table Update Helper
-     ///
+     /**
+      * MemStations Table Update Helper
+      */
      private void updateMemTable()
      {
           //Get a copy of the memory stations
@@ -473,9 +473,9 @@ public class TomasuloGUI extends JFrame {
           }
      }
 
-     ///
-     /// The main function
-     ///
+     /**
+      * The main function
+      */
      public static void main(String[] args)
      {
           new TomasuloGUI().setVisible(true);

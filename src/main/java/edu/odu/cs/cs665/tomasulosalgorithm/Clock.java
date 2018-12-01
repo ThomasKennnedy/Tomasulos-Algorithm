@@ -40,7 +40,7 @@ public class Clock {
      *
      * @return current time
      */
-    int get()
+    public int get()
     {
         return time;
     }
@@ -48,7 +48,7 @@ public class Clock {
     /**
      * Increment the clock by one time step.
      */
-    void increment()
+    public void increment()
     {
         time++;
     }

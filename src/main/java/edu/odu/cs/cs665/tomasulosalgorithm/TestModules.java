@@ -2,9 +2,9 @@ package edu.odu.cs.cs665.tomasulosalgorithm;
 
 import java.io.File;
 
-///
-/// This class contaisn all moduling testing.
-///
+/**
+ * This class contaisn all moduling testing.
+ */
 public class TestModules {
 
      public static void main(String[] args)

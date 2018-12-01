@@ -11,9 +11,9 @@ public class ALUStation extends ReservationStation {
     private String qk;          ///<name of reservation station producing Vk
     private String A;           ///<used to hold immediate field or off address
 
-    ///
-    /// Calls superclass constructor and initializes vj,vk,qj and qk
-    ///
+    /**
+     * Calls superclass constructor and initializes vj,vk,qj and qk
+     */
     public ALUStation(String sname)
     {
         super(sname);
@@ -24,9 +24,9 @@ public class ALUStation extends ReservationStation {
         this.qk = null;
     }
 
-    ///
-    /// Function to clear the Reservation Station
-    ///
+    /**
+     * Function to clear the Reservation Station
+     */
     public void clear()
     {
         this.busy = false;
@@ -49,9 +49,9 @@ public class ALUStation extends ReservationStation {
         return (busy && qj == null && qk == null && !resultReady);
     }
 
-    ///
-    /// Function to schedule the instruction
-    ///
+    /**
+     * Function to schedule the instruction
+     */
     public void scheduleInstruction(Operation op,
                                     RegisterFiles reg_in, int cycles)
     {
@@ -79,9 +79,9 @@ public class ALUStation extends ReservationStation {
           operation.setScheduled();
     }
 
-    ///
-    /// Function returns the value vj
-    ///
+    /**
+     * Function returns the value vj
+     */
     public String getVj()
     {
         if (vj == null) {
@@ -93,9 +93,9 @@ public class ALUStation extends ReservationStation {
         //return (vj == null ? "" : vj);
     }
 
-    ///
-    /// Function returns the value vk
-    ///
+    /**
+     * Function returns the value vk
+     */
     public String getVk()
     {
         if (vk == null) {
@@ -107,9 +107,9 @@ public class ALUStation extends ReservationStation {
         //return (vk == null ? "" : vk);
     }
 
-    ///
-    /// Function returns the value qj
-    ///
+    /**
+     * Function returns the value qj
+     */
     public String getQj()
     {
         if (qj == null) {
@@ -121,9 +121,9 @@ public class ALUStation extends ReservationStation {
         //return (qj == null ? "" : qj);
     }
 
-    ///
-    /// Function returns the value qk
-    ///
+    /**
+     * Function returns the value qk
+     */
     public String getQk()
     {
         if (qk == null) {
@@ -135,57 +135,57 @@ public class ALUStation extends ReservationStation {
         //return (qk == null ? "" : qk);
     }
 
-    ///
-    /// Function returns the value A
-    ///
+    /**
+     * Function returns the value A
+     */
     public String getA()
     {
         return A;
     }
 
-    ///
-    /// Function to set the value of qj
-    ///
+    /**
+     * Function to set the value of qj
+     */
     public void setQj(String sname)
     {
         qj = sname;
     }
 
-    ///
-    /// Function to set the value of qk
-    ///
+    /**
+     * Function to set the value of qk
+     */
     public void setQk(String sname)
     {
         qk = sname;
     }
 
-    ///
-    /// Function to set the value of vj
-    ///
+    /**
+     * Function to set the value of vj
+     */
     public void setVj(String i)
     {
         vj = i;
     }
 
-    ///
-    /// Function to set the value of vk
-    ///
+    /**
+     * Function to set the value of vk
+     */
     public void setVk(String i)
     {
         vk = i;
     }
 
-    ///
-    /// Function to set the value of A
-    ///
+    /**
+     * Function to set the value of A
+     */
     public void setA(String i)
     {
         A = i;
     }
 
-    ///
-    /// Finalize the result - perform integer parsing if necessary
-    ///
+    /**
+     * Finalize the result - perform integer parsing if necessary
+     */
     void finalizeResult()
     {
         boolean is_int1, is_int2; //boolean flags that hold true if the operands are integers
@@ -219,9 +219,9 @@ public class ALUStation extends ReservationStation {
         }
     }
 
-    ///
-    /// Return an operation type descriptor
-    ///
+    /**
+     * Return an operation type descriptor
+     */
     public String getOperation()
     {
         if (operation == null) {
