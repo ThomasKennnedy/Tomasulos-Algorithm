@@ -2,11 +2,10 @@ package edu.odu.cs.cs665.tomasulosalgorithm;
 
 import java.util.LinkedHashMap;
 
-///
-///This class provides all register functionality for
-///integer and floating point register files.
-///
-
+/**
+ * This class provides all register functionality for
+ * integer and floating point register files.
+ */
 public class RegisterFiles{
      public static final int NUM_INT_REGISTERS = 32;  ///< Total number of integer registers-- not including R0.
      public static final int NUM_FP_REGISTERS  = 32;  ///< Total number of floating point registers.
@@ -14,9 +13,9 @@ public class RegisterFiles{
      private LinkedHashMap<String, String> registers_int; ///< Consists of all integer registers.
      private LinkedHashMap<String, String> registers_fp;  ///< Consists of all floating point registers.
 
-     ///
-     ///Constructs the register files; initializes all floating point and integer registers to "0";
-     ///
+     /**
+      * Constructs the register files; initializes all floating point and integer registers to "0";
+      */
      public RegisterFiles()
      {
           registers_int = new LinkedHashMap<String, String>();
@@ -38,9 +37,9 @@ public class RegisterFiles{
           }
      }
 
-     ///
-     ///Generates a copy of an existing RegisterFiles object.
-     ///
+     /**
+      * Generates a copy of an existing RegisterFiles object.
+      */
      public RegisterFiles(RegisterFiles to_copy)
      {
           registers_int = new LinkedHashMap<String, String>();
@@ -51,26 +50,26 @@ public class RegisterFiles{
           this.registers_fp  = new LinkedHashMap<String, String>(to_copy.registers_fp);
      }
 
-     ///
-     /// Returns a LinkedHashMap that conatins a copy of the current integer register file.
-     ///
+     /**
+      *  Returns a LinkedHashMap that conatins a copy of the current integer register file.
+      */
      public LinkedHashMap<String, String> getIntegerRegisters()
      {
           return new LinkedHashMap<String, String>(registers_int);
      }
 
-     ///
-     /// Returns a LinkedHashMap that conatins a copy of the current floating point register file.
-     ///
+     /**
+      *  Returns a LinkedHashMap that conatins a copy of the current floating point register file.
+      */
      public LinkedHashMap<String, String> getFPRegisters()
      {
           return new LinkedHashMap<String, String>(registers_fp);
      }
 
-     ///
-     ///Returns the current value of the specified register. An "Invalid register ID" exception is thrown if
-     ///the specified register does not exist.
-     ///
+     /**
+      * Returns the current value of the specified register. An "Invalid register ID" exception is thrown if
+      * the specified register does not exist.
+      */
      public String getRegister(String r_id)
           /*throws Exception*/
      {
@@ -97,10 +96,10 @@ public class RegisterFiles{
           return to_return;
      }
 
-     ///
-     ///Sets a new value for the specified register. An "Invalid register ID" exception is thrown if
-     ///the specified register does not exist.
-     ///
+     /**
+      * Sets a new value for the specified register. An "Invalid register ID" exception is thrown if
+      * the specified register does not exist.
+      */
      public void setRegister(String r_id, String val_in)
           /*throws Exception*/
      {
@@ -122,9 +121,9 @@ public class RegisterFiles{
           //System.out.println( r_id + " " + val_in);
      }
 
-     ///
-     ///Generates the string representation of the RegisterFiles Object.
-     ///
+     /**
+      * Generates the string representation of the RegisterFiles Object.
+      */
      public String toString()
      {
           return "Integer Registers: " + NUM_INT_REGISTERS + "\n"

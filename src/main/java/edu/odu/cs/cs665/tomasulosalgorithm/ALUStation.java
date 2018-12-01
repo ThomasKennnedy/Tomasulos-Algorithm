@@ -1,8 +1,8 @@
 package edu.odu.cs.cs665.tomasulosalgorithm;
 
-///
-/// This class provides all ALUStation functionality.
-///
+/**
+ * This class provides all ALUStation functionality.
+ */
 public class ALUStation extends ReservationStation {
 
     private String vj;          ///<value of operand
@@ -46,7 +46,9 @@ public class ALUStation extends ReservationStation {
      */
     public boolean isReady()
     {
-        return (busy && qj == null && qk == null && !resultReady);
+        return busy
+            && qj == null && qk == null
+            && !resultReady;
     }
 
     /**
@@ -55,28 +57,28 @@ public class ALUStation extends ReservationStation {
     public void scheduleInstruction(Operation op,
                                     RegisterFiles reg_in, int cycles)
     {
-          this.operation = op;
-          this.busy = true;
-          this.duration = cycles;
+        this.operation = op;
+        this.busy = true;
+        this.duration = cycles;
 
-          result = "R(" + op.getOperand(2) + "," + op.getOperand(3) + ")";
+        result = "R(" + op.getOperand(2) + "," + op.getOperand(3) + ")";
 
-          if (isPlaceHolder(reg_in.getRegister(operation.getOperand(2)))) {
-               qj = reg_in.getRegister(operation.getOperand(2));
-          }
-          else {
-               vj = reg_in.getRegister(operation.getOperand(2));
-          }
+        if (isPlaceHolder(reg_in.getRegister(operation.getOperand(2)))) {
+             qj = reg_in.getRegister(operation.getOperand(2));
+        }
+        else {
+             vj = reg_in.getRegister(operation.getOperand(2));
+        }
 
-          if (isPlaceHolder(reg_in.getRegister(operation.getOperand(3)))) {
-               qk = reg_in.getRegister(operation.getOperand(3));
-          }
-          else {
-               vk = reg_in.getRegister(operation.getOperand(3));
-          }
+        if (isPlaceHolder(reg_in.getRegister(operation.getOperand(3)))) {
+             qk = reg_in.getRegister(operation.getOperand(3));
+        }
+        else {
+             vk = reg_in.getRegister(operation.getOperand(3));
+        }
 
-          //set the operation as scheduled
-          operation.setScheduled();
+        //set the operation as scheduled
+        operation.setScheduled();
     }
 
     /**

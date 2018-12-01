@@ -8,32 +8,32 @@ import java.io.File;
 
 //import java.io.*;
 
-///
-/// This class provides all file parsing funtionality. Given an input file, one OperationList and one RegisterFiles
-/// will be generated.
-
+/**
+ * This class provides all file parsing funtionality. Given an input file, one OperationList and one RegisterFiles
+ * will be generated.
+ */
 public class OperationFileParser {
      private File data_file; ///< The input file
 
-     ///
-     ///Set the input file to the default value of "a.in".
-     ///
+     /**
+      * Set the input file to the default value of "a.in".
+      */
      public OperationFileParser()
      {
           this.data_file = new File("a.in");
      }
 
-     ///
-     ///Set the input file to the specified filename.
-     ///
+     /**
+      * Set the input file to the specified filename.
+      */
      public OperationFileParser(File file_in)
      {
           this.data_file = file_in;
      }
 
-     ///
-     /// Parse the input file; generate one OperationList and one RegisterFiles.
-     ///
+     /**
+      *  Parse the input file; generate one OperationList and one RegisterFiles.
+      */
      public void parseFile(OperationList oplist)
           throws Exception
      {
@@ -79,7 +79,7 @@ public class OperationFileParser {
                          //temporary index
                          int temp_index = split_2[i].indexOf(',');
                          //check for a comma
-                         temp_index = (temp_index == -1 ? split_2[i].length(): temp_index);
+                         temp_index = (temp_index == -1 ? split_2[i].length() : temp_index);
 
                          operands[i - 1] = split_2[i].substring(0, temp_index);
                     }
@@ -117,9 +117,9 @@ public class OperationFileParser {
 
      }
 
-     ///
-     ///Generates the string representation of the OperationFileParser Object.
-     ///
+     /**
+      * Generates the string representation of the OperationFileParser Object.
+      */
      public String toString()
      {
           return "Operation File Parser";

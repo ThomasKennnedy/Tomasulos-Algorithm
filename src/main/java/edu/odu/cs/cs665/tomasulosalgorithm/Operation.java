@@ -1,8 +1,8 @@
 package edu.odu.cs.cs665.tomasulosalgorithm;
 
-///
-/// This class provides all Operation functionality.
-///
+/**
+ * This class provides all Operation functionality.
+ */
 public class Operation {
      private String opcode;           ///< Contains the opcode.
      private String comment;          ///< Stores the comment.
@@ -20,9 +20,9 @@ public class Operation {
 
      }
 
-     ///
-     /// Construct an Operation object give 1 opcode, 3 operands and a boolean.
-     ///
+     /**
+      * Construct an Operation object give 1 opcode, 3 operands and a boolean.
+      */
      public Operation(String opcode, String operand_1, String operand_2,
                       String operand_3, boolean has_comment)
      {
@@ -36,9 +36,9 @@ public class Operation {
           issue = 0;
      }
 
-     ///
-     /// Construct an Operation object give 1 opcode, 2 operands and a boolean.
-     ///
+     /**
+      * Construct an Operation object give 1 opcode, 2 operands and a boolean.
+      */
      public Operation(String opcode, String operand_1, String operand_2, boolean has_comment)
      {
           //break apart the second operand
@@ -61,9 +61,9 @@ public class Operation {
           issue = 0;
      }
 
-     ///
-     /// Construct an Operation object given an existing Operation object.
-     ///
+     /**
+      * Construct an Operation object given an existing Operation object.
+      */
      public Operation(Operation to_copy)
      {
           this.opcode   = to_copy.opcode;
@@ -75,49 +75,49 @@ public class Operation {
           this.issue = to_copy.issue;
      }
 
-     ///
-     /// Return whether a comment exists
-     ///
+     /**
+      * Return whether a comment exists
+      */
      public boolean hasComment()
      {
           return has_comment;
      }
 
-     ///
-     ///Return the opcode -- exempli gratia LOAD, SD, DADDI.
-     ///
+     /**
+      *Return the opcode -- exempli gratia LOAD, SD, DADDI.
+      */
      public String getOpcode()
      {
           return opcode;
      }
 
-     ///
-     ///Return the comment.
-     ///
+     /**
+      *Return the comment.
+      */
      public String getComment()
      {
           return comment;
      }
 
-     ///
-     ///Get the operand at the specified position. Positions start at "1".
-     ///
+     /**
+      *Get the operand at the specified position. Positions start at "1".
+      */
      public String getOperand(int number)
      {
           return operands[number - 1];
      }
 
-     ///
-     ///Return the number of operands
-     ///
+     /**
+      * Return the number of operands
+      */
      public int getNumberOfOperands()
      {
           return operands.length;
      }
 
-     ///
-     ///Return a String containing all operands.
-     ///
+     /**
+      * Return a String containing all operands.
+      */
      public String getOperands()
      {
           StringBuilder bld = new StringBuilder();
@@ -130,33 +130,33 @@ public class Operation {
           return bld.toString();
      }
 
-     ///
-     /// Get execution start
-     ///
+     /**
+      * Get execution start
+      */
      public int getExecStart()
      {
           return exec_start;
      }
 
-     ///
-     ///Get execution end
-     ///
+     /**
+      *Get execution end
+      */
      public int getExecEnd()
      {
           return exec_end;
      }
 
-     ///
-     ///Get the issue number
-     ///
+     /**
+      *Get the issue number
+      */
      public int getIssueNum()
      {
           return issue;
      }
 
-     ///
-     ///Get execution description
-     ///
+     /**
+      *Get execution description
+      */
      public String getExecution()
      {
           String to_return = "";
@@ -173,42 +173,42 @@ public class Operation {
           return to_return;
      }
 
-     ///
-     ///Get the time the result was written
-     ///
+     /**
+      *Get the time the result was written
+      */
      public int getWriteTime()
      {
           return time_write;
      }
 
-     ///
-     /// Return whether the instruction has been scheduled
-     ///
+     /**
+      * Return whether the instruction has been scheduled
+      */
      boolean isScheduled()
      {
           return scheduled;
      }
 
-     ///
-     ///Set the Operation opcode.
-     ///
+     /**
+      * Set the Operation opcode.
+      */
      public void setOpcode(String opcode)
      {
           this.opcode = opcode;
      }
 
-     ///
-     ///Set a comment
-     ///
+     /**
+      * Set a comment
+      */
      public void setComment(String comment)
      {
           this.comment = comment;
      }
 
-     ///
-     ///Set the operand at the specified position. Positions start at "1".
+     /**
+      *Set the operand at the specified position. Positions start at "1".
      ///Return an error if the position is invalid.
-     ///
+      */
      public void setOperand(int number, String operand_in)
           throws Exception
      {
@@ -224,49 +224,49 @@ public class Operation {
           operands[number - 1] = operand_in;
      }
 
-     ///
-     ///Set execution start
-     ///
+     /**
+      * Set execution start
+      */
      public void setExecStart(int n)
      {
           exec_start = n;
      }
 
-     ///
-     ///Set execution end
-     ///
+     /**
+      * Set execution end
+      */
      public void setExecEnd(int n)
      {
           exec_end = n;
      }
 
-     ///
-     ///Set the time the result was written
-     ///
+     /**
+      * Set the time the result was written
+      */
      public void setWriteTime(int n)
      {
           time_write = n;
      }
 
-     ///
-     /// Set the scheduled flag
-     ///
-     void setScheduled()
+     /**
+      * Set the scheduled flag
+      */
+     public void setScheduled()
      {
           scheduled = true;
      }
 
-     ///
-     /// Set the issue number
-     ///
+     /**
+      * Set the issue number
+      */
      public void setIssueNum(int i)
      {
           issue = i;
      }
 
-     ///
-     ///Return the string represeation of the Operation object.
-     ///
+     /**
+      * Return the string represeation of the Operation object.
+      */
      public String toString()
      {
           StringBuilder bld = new StringBuilder();

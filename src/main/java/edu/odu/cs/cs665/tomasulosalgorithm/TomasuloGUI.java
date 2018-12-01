@@ -447,9 +447,9 @@ public class TomasuloGUI extends JFrame {
           }
      }
 
-     ///
-     /// ALUStations Table Update Helper
-     ///
+     /**
+      * ALUStations Table Update Helper
+      */
      private void updateALUTable()
      {
           //Get a copy of the memory stations

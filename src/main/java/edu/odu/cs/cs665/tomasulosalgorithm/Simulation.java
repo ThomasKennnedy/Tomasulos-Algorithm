@@ -5,9 +5,9 @@ import java.io.File;
 
 import java.util.HashMap;
 
-///
-/// This class contains all simulation logic.
-///
+/**
+ * This class contains all simulation logic.
+ */
 public class Simulation {
      private OperationList operations;                           ///< List of instructions
      private RegisterFiles registers;                            ///< Register Files
