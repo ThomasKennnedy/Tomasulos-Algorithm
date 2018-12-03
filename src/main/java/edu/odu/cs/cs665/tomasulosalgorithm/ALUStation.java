@@ -27,7 +27,7 @@ public class ALUStation extends ReservationStation {
     }
 
     /**
-     * Function to clear the Reservation Station.
+     * Clear the Reservation Station.
      */
     public void clear()
     {
