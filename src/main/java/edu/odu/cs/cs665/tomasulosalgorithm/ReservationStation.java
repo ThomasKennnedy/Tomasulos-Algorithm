@@ -48,7 +48,7 @@ public abstract class ReservationStation {
     String getResult()
     {
         if (operation.getWriteTime() == -1) {
-             operation.setWriteTime(Clock.getInstance().get());
+            operation.setWriteTime(Clock.getInstance().get());
         }
 
         resultWritten = true;
@@ -62,7 +62,7 @@ public abstract class ReservationStation {
      */
     public boolean isResultReady()
     {
-         return resultReady;
+        return resultReady;
     }
 
     /**
@@ -110,7 +110,7 @@ public abstract class ReservationStation {
      */
     public void setName(String name)
     {
-         sname = name;
+        sname = name;
     }
 
     /**
@@ -120,14 +120,14 @@ public abstract class ReservationStation {
     {
         //set the execution start of the Operation
         if (operation.getExecStart() == -1) {
-             operation.setExecStart(Clock.getInstance().get());
+            operation.setExecStart(Clock.getInstance().get());
         }
 
         duration--;
         resultReady = (duration == 0);
 
         if (resultReady) {
-             operation.setExecEnd(Clock.getInstance().get());
+            operation.setExecEnd(Clock.getInstance().get());
         }
     }
 

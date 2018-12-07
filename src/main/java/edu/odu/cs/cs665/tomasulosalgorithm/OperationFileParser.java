@@ -20,7 +20,7 @@ public class OperationFileParser {
      */
     public OperationFileParser()
     {
-         this.data_file = new File("a.in");
+        this.data_file = new File("a.in");
     }
 
     /**
@@ -28,7 +28,7 @@ public class OperationFileParser {
      */
     public OperationFileParser(File file_in)
     {
-         this.data_file = file_in;
+        this.data_file = file_in;
     }
 
     /**
@@ -48,11 +48,11 @@ public class OperationFileParser {
         boolean comment_exists;
 
         while ((line = file_buff.readLine()) != null) {
-           //trim line
-           line = line.trim();
+            //trim line
+            line = line.trim();
 
-           //only process non-empty lines
-           if (line != null && !line.equals("")) {
+            //only process non-empty lines
+            if (line != null && !line.equals("")) {
                 //increment the issue_number
                 issue++;
 
@@ -82,7 +82,7 @@ public class OperationFileParser {
                     temp_index = (temp_index == -1 ? split_2[i].length() : temp_index);
 
                     operands[i - 1] = split_2[i].substring(0, temp_index);
-               }
+                }
 
                 if (operands.length == 3) {
                     oplist.addOperation(new Operation(operation,
@@ -119,6 +119,6 @@ public class OperationFileParser {
      */
     public String toString()
     {
-         return "Operation File Parser";
+        return "Operation File Parser";
     }
 }
