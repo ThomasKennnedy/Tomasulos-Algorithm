@@ -1,5 +1,6 @@
 package edu.odu.cs.cs665.tomasulosalgorithm;
 
+import java.io.Reader;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,22 +14,22 @@ import java.io.File;
  * will be generated.
  */
 public class OperationFileParser {
-    private File data_file; ///< The input file
+    private BufferedReader data_file; ///< The input file
 
     /**
      * Set the input file to the default value of "a.in".
      */
-    public OperationFileParser()
+    private OperationFileParser()
     {
-        this.data_file = new File("a.in");
+        this.data_file = null; //new File("a.in");
     }
 
     /**
      * Set the input file to the specified filename.
      */
-    public OperationFileParser(File file_in)
+    public OperationFileParser(Reader file_in)
     {
-        this.data_file = file_in;
+        this.data_file = new BufferedReader(file_in);
     }
 
     /**
@@ -37,8 +38,8 @@ public class OperationFileParser {
     public void parseFile(OperationList oplist)
          throws Exception
     {
-        FileReader in_file = new FileReader(data_file);
-        BufferedReader file_buff = new BufferedReader(in_file);
+        //FileReader in_file = new FileReader(data_file);
+        BufferedReader file_buff = new BufferedReader(data_file);
 
         String[] split_1, split_2, operands;
         String op_portion, comment_portion = "";

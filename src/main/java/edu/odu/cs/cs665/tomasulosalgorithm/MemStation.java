@@ -159,6 +159,7 @@ public class MemStation extends ReservationStation {
      * Utility function to update the address.
      */
     private void updateAddress()
+        throws NumberFormatException
     {
         // temporary integers to hold the intermediate parsing results
         int tempInt1, tempInt2;
@@ -167,16 +168,14 @@ public class MemStation extends ReservationStation {
         result = "M(" + addrComp[0]  + "," + addrComp[1]  + ")";
 
         //attempt to parse the values as integers
-        try {
-            tempInt1 = Integer.parseInt(addrComp[0]);
 
-            tempInt2 = Integer.parseInt(addrComp[1]);
+        tempInt1 = Integer.parseInt(addrComp[0]);
 
-            result = "M(" + tempInt1 + tempInt2 + ")";
-        }
-        catch (Exception e) {
+        tempInt2 = Integer.parseInt(addrComp[1]);
 
-        }
+        result = "M(" + tempInt1 + tempInt2 + ")";
+        
+
         address = result;
     }
 

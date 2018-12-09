@@ -53,7 +53,7 @@ public class Operation {
 
         this.opcode      = opcode;
         this.operands    = new String[]{operand_1, operand_2, operand_3};
-        this.comment     = comment;
+        this.comment     = "";
         this.has_comment = has_comment;
 
         exec_start = exec_end = time_write = -1;

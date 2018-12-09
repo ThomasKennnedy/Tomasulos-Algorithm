@@ -1,6 +1,8 @@
 package edu.odu.cs.cs665.tomasulosalgorithm;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
 
 /**
  * This class contaisn all moduling testing.
@@ -8,9 +10,10 @@ import java.io.File;
 public class TestModules {
 
      public static void main(String[] args)
+          throws FileNotFoundException
      {
           OperationList testList = new OperationList();
-          OperationFileParser testParser = new OperationFileParser(new File("test-input/a1.in"));
+          OperationFileParser testParser = new OperationFileParser(new FileReader(new File("test-input/a1.in")));
           RegisterFiles testRegs = new RegisterFiles();
 
           //Parse a test input file

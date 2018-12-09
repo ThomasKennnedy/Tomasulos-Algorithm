@@ -2,6 +2,7 @@ package edu.odu.cs.cs665.tomasulosalgorithm;
 
 import java.io.IOException;
 import java.io.File;
+import java.io.FileReader;
 
 import java.util.HashMap;
 
@@ -42,7 +43,8 @@ public class Simulation {
     {
         clock = Clock.getInstance();
 
-        OperationFileParser file_parser = new OperationFileParser(dataFile);
+        FileReader dataFileReader = new FileReader(dataFile);
+        OperationFileParser file_parser = new OperationFileParser(dataFileReader);
 
         //Iniatialize containers for instructions and registers
         operations = new OperationList();
