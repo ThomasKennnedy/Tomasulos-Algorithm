@@ -4,4 +4,5 @@ build
 **.class
 **.jar
 
-
+# Vim
+**.swp
