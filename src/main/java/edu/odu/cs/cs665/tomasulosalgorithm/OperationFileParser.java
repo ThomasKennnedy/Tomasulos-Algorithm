@@ -2,19 +2,18 @@ package edu.odu.cs.cs665.tomasulosalgorithm;
 
 import java.io.Reader;
 import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
-import java.io.File;
-
-//import java.io.*;
 
 /**
- * This class provides all file parsing funtionality. Given an input file, one OperationList and one RegisterFiles
- * will be generated.
+ * This class provides all file parsing funtionality. Given an input file, one
+ * OperationList and one RegisterFiles will be generated.
  */
 public class OperationFileParser {
-    private BufferedReader dataFile; ///< The input file
+
+    /**
+     * Input file containg operations.
+     */
+    private BufferedReader dataFile;
 
     /**
      * Set the input file to the default value of "a.in".
@@ -26,6 +25,8 @@ public class OperationFileParser {
 
     /**
      * Set the input file to the specified filename.
+     *
+     * @param fileIn reader referencing the input source.
      */
     public OperationFileParser(Reader fileIn)
     {
@@ -33,7 +34,10 @@ public class OperationFileParser {
     }
 
     /**
-     *  Parse the input file; generate one OperationList and one RegisterFiles.
+     * Parse the input file; generate one OperationList and one RegisterFiles.
+     *
+     * @throws Exception if the an operation is malformed (e.g., contains an
+     *  invalid number of operands).
      */
     public void parseFile(OperationList oplist)
          throws Exception
@@ -77,12 +81,15 @@ public class OperationFileParser {
                 operands = new String[split2.length - 1];
 
                 for (int i = 1; i < split2.length; i++) {
-                    //temporary index
-                    int tempIndex = split2[i].indexOf(',');
-                    //check for a comma
-                    tempIndex = (tempIndex == -1 ? split2[i].length() : tempIndex);
+                    // Locate the comma index or end of string (if no comma
+                    // exists)
+                    int commaIndex = split2[i].indexOf(',');
 
-                    operands[i - 1] = split2[i].substring(0, tempIndex);
+                    if (commaIndex == -1) {
+                        commaIndex = split2[i].length();
+                    }
+
+                    operands[i - 1] = split2[i].substring(0, commaIndex);
                 }
 
                 if (operands.length == 3) {

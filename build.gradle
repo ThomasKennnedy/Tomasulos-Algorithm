@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         jcenter()
-    
+
         // Add SpotBugs required repo
         maven {
             url "https://plugins.gradle.org/m2/"
@@ -58,11 +58,20 @@ run {
 test {
     reports {
         html.enabled = true
-    }               
+    }
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+
+    jacoco {
+        append = false
+    }
 }
 
 javadoc {
-    failOnError false    
+    failOnError false
 }
 
 /**

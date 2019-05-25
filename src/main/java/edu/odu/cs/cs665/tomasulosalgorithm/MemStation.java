@@ -126,7 +126,6 @@ public class MemStation extends ReservationStation {
 
         updateAddress();
 
-        //set the operation as scheduled
         operation.setScheduled();
 
         //Classify the Instruction as load or store
@@ -197,7 +196,9 @@ public class MemStation extends ReservationStation {
     public boolean hasPriority(HashMap<String, Integer> memoryBuffer)
     {
         if (memoryBuffer.containsKey(result)) {
-            if (memoryBuffer.get(result).intValue() >= operation.getIssueNum()) {
+            int resultAsInt = memoryBuffer.get(result).intValue();
+
+            if (resultAsInt >= operation.getIssueNum()) {
                  return true;
             }
         }

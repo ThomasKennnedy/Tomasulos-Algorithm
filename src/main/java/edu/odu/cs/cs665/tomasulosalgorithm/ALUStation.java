@@ -11,7 +11,7 @@ public class ALUStation extends ReservationStation {
     private String vj;
 
     /**
-     * Value of operand (Second).
+     * Value of operand (second).
      */
     private String vk;
 
@@ -107,7 +107,6 @@ public class ALUStation extends ReservationStation {
              vk = regIn.getRegister(operation.getOperand(3));
         }
 
-        //set the operation as scheduled
         operation.setScheduled();
     }
 
@@ -123,8 +122,6 @@ public class ALUStation extends ReservationStation {
         }
 
         return vj;
-
-        //return (vj == null ? "" : vj);
     }
 
     /**
@@ -139,8 +136,6 @@ public class ALUStation extends ReservationStation {
         }
 
         return vk;
-
-        //return (vk == null ? "" : vk);
     }
 
     /**
@@ -155,8 +150,6 @@ public class ALUStation extends ReservationStation {
         }
 
         return qj;
-
-        //return (qj == null ? "" : qj);
     }
 
     /**
@@ -171,8 +164,6 @@ public class ALUStation extends ReservationStation {
         }
 
         return qk;
-
-        //return (qk == null ? "" : qk);
     }
 
     /**
@@ -287,8 +278,6 @@ public class ALUStation extends ReservationStation {
         }
 
         return operation.getOpcode();
-
-        //return (operation != null ? operation.getOpcode() : " ");
     }
 
 }
