@@ -32,12 +32,14 @@ public class MemStation extends ReservationStation {
     public MemStation(String sName)
     {
         super(sName);
-        address = null;
+        //address = null;
         addrComp = new String[3];
-        addrComp[0] = "";
-        addrComp[1] = "";
-        addrComp[2] = "";
-        isStore = false;
+        //addrComp[0] = "";
+        //addrComp[1] = "";
+        //addrComp[2] = "";
+        //isStore = false;
+
+        clear();
     }
 
     /**
@@ -157,22 +159,24 @@ public class MemStation extends ReservationStation {
 
     /**
      * Utility function to update the address.
-     *
-     * @throws NumberFormatException if addrComp elements are not integers.
      */
     private void updateAddress()
-        throws NumberFormatException
     {
-        //default result if the parsing fails
-        result = "M(" + addrComp[0]  + "," + addrComp[1]  + ")";
 
-        //attempt to parse the values as integers
-        int tempInt1 = Integer.parseInt(addrComp[0]);
-        int tempInt2 = Integer.parseInt(addrComp[1]);
+        try {
+            //attempt to parse the values as integers
+            int tempInt1 = Integer.parseInt(addrComp[0]);
+            int tempInt2 = Integer.parseInt(addrComp[1]);
 
-        result = "M(" + tempInt1 + tempInt2 + ")";
+            result = "M(" + tempInt1 + tempInt2 + ")";
 
-        address = result;
+            address = result;
+        }
+        catch (NumberFormatException exc) {
+            //default result if the parsing fails
+            result = "M(" + addrComp[0]  + "," + addrComp[1]  + ")";
+        }
+
     }
 
     /**

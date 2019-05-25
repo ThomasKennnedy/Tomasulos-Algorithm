@@ -38,11 +38,13 @@ public class ALUStation extends ReservationStation {
     public ALUStation(String sName)
     {
         super(sName);
-        this.vj = null;
-        this.vk = null;
-        this.A = null;
-        this.qj = null;
-        this.qk = null;
+        //this.vj = null;
+        //this.vk = null;
+        //this.A = null;
+        //this.qj = null;
+        //this.qk = null;
+
+        clear();
     }
 
     /**
@@ -70,7 +72,8 @@ public class ALUStation extends ReservationStation {
     public boolean isReady()
     {
         return busy
-            && qj == null && qk == null
+            && qj == null
+            && qk == null
             && !resultReady;
     }
 
@@ -243,9 +246,6 @@ public class ALUStation extends ReservationStation {
         int vjAsInt;
         int vkAsInt;
 
-        //default result if the parsing fails
-        result = "R(" + vj + "," + vk + ")";
-
         //attempt to parse the values as integers
         try {
             //parse vj
@@ -266,8 +266,12 @@ public class ALUStation extends ReservationStation {
 
             result = "" + vjAsInt + vkAsInt;
         }
-        catch (Exception e) {
+        catch (NumberFormatException e) {
+            //default result if the parsing fails
+            result = "R(" + vj + "," + vk + ")";
 
+            isInt1 = false;
+            isInt2 = false;
         }
     }
 
