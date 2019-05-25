@@ -5,11 +5,30 @@ package edu.odu.cs.cs665.tomasulosalgorithm;
  */
 public class ALUStation extends ReservationStation {
 
-    private String vj;          ///<value of operand
-    private String vk;          ///<value of operand
-    private String qj;          ///<name of reservation station producing Vj
-    private String qk;          ///<name of reservation station producing Vk
-    private String A;           ///<used to hold immediate field or off address
+    /**
+     * Value of operand (first).
+     */
+    private String vj;
+
+    /**
+     * Value of operand (Second).
+     */
+    private String vk;
+
+    /**
+     * Name of reservation station producing Vj.
+     */
+    private String qj;
+
+    /**
+     * Name of reservation station producing Vk.
+     */
+    private String qk;
+
+    /**
+     * Used to hold immediate field or off address.
+     */
+    private String A;
 
     /**
      * Calls superclass constructor and initializes vj, vk, qj and qk.

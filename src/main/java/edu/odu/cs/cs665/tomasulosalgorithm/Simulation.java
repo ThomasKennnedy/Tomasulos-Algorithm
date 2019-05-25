@@ -1,6 +1,5 @@
 package edu.odu.cs.cs665.tomasulosalgorithm;
 
-import java.io.IOException;
 import java.io.File;
 import java.io.FileReader;
 
@@ -12,24 +11,24 @@ import java.util.HashMap;
 public class Simulation {
     private OperationList operations;                          ///< List of instructions
     private RegisterFiles registers;                           ///< Register Files
-    private ALUStation[] alu_rs;                               ///< ALU and Integer Reservation Stations
-    private MemStation[] mem_rs;                               ///< Memory Reservation Stations
+    private ALUStation[] aluRs;                               ///< ALU and Integer Reservation Stations
+    private MemStation[] memRs;                               ///< Memory Reservation Stations
 
-    private HashMap<String, Integer[]> instruction_to_station; ///< Mapping of instructions to Reservation Stations
-    private HashMap<String, Integer> instruction_to_time;      ///< Mapping of instructions to Execution Time
-    private HashMap<String, String> alias_to_register;         ///< Mapping of placeholder to Register
+    private HashMap<String, Integer[]> instructionToStation; ///< Mapping of instructions to Reservation Stations
+    private HashMap<String, Integer> instructionToTime;      ///< Mapping of instructions to Execution Time
+    private HashMap<String, String> aliasToRegister;         ///< Mapping of placeholder to Register
 
-    private HashMap<String, Integer> memory_buffer;            ///< Mapping of operation issue numbers to ,emory locations
+    private HashMap<String, Integer> memoryBuffer;            ///< Mapping of operation issue numbers to ,emory locations
 
     private Clock clock;                                       ///< Clock Cycle Object
-    private boolean is_initialized;                            ///< Whether the Simulation Instance is initialized
+    private boolean isInitialized;                            ///< Whether the Simulation Instance is initialized
 
     /**
      * Simulation Constructor
      */
     public Simulation()
     {
-        is_initialized = false;
+        isInitialized = false;
     }
 
     /**
@@ -44,105 +43,105 @@ public class Simulation {
         clock = Clock.getInstance();
 
         FileReader dataFileReader = new FileReader(dataFile);
-        OperationFileParser file_parser = new OperationFileParser(dataFileReader);
+        OperationFileParser fileParser = new OperationFileParser(dataFileReader);
 
         //Iniatialize containers for instructions and registers
         operations = new OperationList();
         registers = new RegisterFiles();
 
-        file_parser.parseFile(operations);
+        fileParser.parseFile(operations);
 
         //Create and intialize Reservation Stations
-        alu_rs = new ALUStation[7];
-        mem_rs = new MemStation[4];
+        aluRs = new ALUStation[7];
+        memRs = new MemStation[4];
 
-        alu_rs[0] = new ALUStation("Int1");
-        alu_rs[1] = new ALUStation("Add1");
-        alu_rs[2] = new ALUStation("Add2");
-        alu_rs[3] = new ALUStation("Mul1");
-        alu_rs[4] = new ALUStation("Mul2");
-        alu_rs[5] = new ALUStation("Div1");
-        alu_rs[6] = new ALUStation("Div2");
+        aluRs[0] = new ALUStation("Int1");
+        aluRs[1] = new ALUStation("Add1");
+        aluRs[2] = new ALUStation("Add2");
+        aluRs[3] = new ALUStation("Mul1");
+        aluRs[4] = new ALUStation("Mul2");
+        aluRs[5] = new ALUStation("Div1");
+        aluRs[6] = new ALUStation("Div2");
 
-        mem_rs[0] = new MemStation("Load1");
-        mem_rs[1] = new MemStation("Load2");
-        mem_rs[2] = new MemStation("Store1");
-        mem_rs[3] = new MemStation("Store2");
+        memRs[0] = new MemStation("Load1");
+        memRs[1] = new MemStation("Load2");
+        memRs[2] = new MemStation("Store1");
+        memRs[3] = new MemStation("Store2");
 
         // Create Mapping of instructions to the
         // appropiate Reservation Stations
-        instruction_to_station = new HashMap<String, Integer[]>();
+        instructionToStation = new HashMap<String, Integer[]>();
 
         //Memory Indices
-        instruction_to_station.put("L.D", new Integer[]{0, 1});
-        instruction_to_station.put("LD", new Integer[]{0, 1});
-        instruction_to_station.put("S.D", new Integer[]{2, 3});
-        instruction_to_station.put("SD", new Integer[]{2, 3});
+        instructionToStation.put("L.D", new Integer[]{0, 1});
+        instructionToStation.put("LD", new Integer[]{0, 1});
+        instructionToStation.put("S.D", new Integer[]{2, 3});
+        instructionToStation.put("SD", new Integer[]{2, 3});
 
         //ALU Indices
-        instruction_to_station.put("DADDI", new Integer[]{0});
-        instruction_to_station.put("DADDUI", new Integer[]{0});
-        instruction_to_station.put("DADD", new Integer[]{1, 2});
-        instruction_to_station.put("ADDD", new Integer[]{1, 2});
-        instruction_to_station.put("ADD.D", new Integer[]{1, 2});
-        instruction_to_station.put("DSUB", new Integer[]{1, 2});
-        instruction_to_station.put("SUBD", new Integer[]{1, 2});
-        instruction_to_station.put("SUB.D", new Integer[]{1, 2});
-        instruction_to_station.put("MULD", new Integer[]{3, 4});
-        instruction_to_station.put("MUL.D", new Integer[]{3, 4});
-        instruction_to_station.put("MULTD", new Integer[]{3, 4});
-        instruction_to_station.put("MULT.D", new Integer[]{3, 4});
-        instruction_to_station.put("DIVD", new Integer[]{5, 6});
-        instruction_to_station.put("DIV.D", new Integer[]{5, 6});
+        instructionToStation.put("DADDI", new Integer[]{0});
+        instructionToStation.put("DADDUI", new Integer[]{0});
+        instructionToStation.put("DADD", new Integer[]{1, 2});
+        instructionToStation.put("ADDD", new Integer[]{1, 2});
+        instructionToStation.put("ADD.D", new Integer[]{1, 2});
+        instructionToStation.put("DSUB", new Integer[]{1, 2});
+        instructionToStation.put("SUBD", new Integer[]{1, 2});
+        instructionToStation.put("SUB.D", new Integer[]{1, 2});
+        instructionToStation.put("MULD", new Integer[]{3, 4});
+        instructionToStation.put("MUL.D", new Integer[]{3, 4});
+        instructionToStation.put("MULTD", new Integer[]{3, 4});
+        instructionToStation.put("MULT.D", new Integer[]{3, 4});
+        instructionToStation.put("DIVD", new Integer[]{5, 6});
+        instructionToStation.put("DIV.D", new Integer[]{5, 6});
 
         //Create a mapping of instructions to execution time
-        instruction_to_time = new HashMap<String, Integer>();
+        instructionToTime = new HashMap<String, Integer>();
         //Memory Instructions
-        instruction_to_time.put("L.D", Integer.valueOf(2));
-        instruction_to_time.put("LD", Integer.valueOf(2));
-        instruction_to_time.put("S.D", Integer.valueOf(2));
-        instruction_to_time.put("SD", Integer.valueOf(2));
+        instructionToTime.put("L.D", Integer.valueOf(2));
+        instructionToTime.put("LD", Integer.valueOf(2));
+        instructionToTime.put("S.D", Integer.valueOf(2));
+        instructionToTime.put("SD", Integer.valueOf(2));
 
         //ALU Instructions
-        instruction_to_time.put("DADDI", Integer.valueOf(1));
-        instruction_to_time.put("DADDUI", Integer.valueOf(1));
-        instruction_to_time.put("DADD", Integer.valueOf(4));
-        instruction_to_time.put("ADDD", Integer.valueOf(4));
-        instruction_to_time.put("ADD.D", Integer.valueOf(4));
-        instruction_to_time.put("DSUB", Integer.valueOf(4));
-        instruction_to_time.put("SUBD", Integer.valueOf(4));
-        instruction_to_time.put("SUB.D", Integer.valueOf(4));
-        instruction_to_time.put("MULD", Integer.valueOf(7));
-        instruction_to_time.put("MUL.D", Integer.valueOf(7));
-        instruction_to_time.put("MULTD", Integer.valueOf(7));
-        instruction_to_time.put("MULT.D", Integer.valueOf(7));
-        instruction_to_time.put("DIVD", Integer.valueOf(25));
-        instruction_to_time.put("DIV.D", Integer.valueOf(25));
+        instructionToTime.put("DADDI", Integer.valueOf(1));
+        instructionToTime.put("DADDUI", Integer.valueOf(1));
+        instructionToTime.put("DADD", Integer.valueOf(4));
+        instructionToTime.put("ADDD", Integer.valueOf(4));
+        instructionToTime.put("ADD.D", Integer.valueOf(4));
+        instructionToTime.put("DSUB", Integer.valueOf(4));
+        instructionToTime.put("SUBD", Integer.valueOf(4));
+        instructionToTime.put("SUB.D", Integer.valueOf(4));
+        instructionToTime.put("MULD", Integer.valueOf(7));
+        instructionToTime.put("MUL.D", Integer.valueOf(7));
+        instructionToTime.put("MULTD", Integer.valueOf(7));
+        instructionToTime.put("MULT.D", Integer.valueOf(7));
+        instructionToTime.put("DIVD", Integer.valueOf(25));
+        instructionToTime.put("DIV.D", Integer.valueOf(25));
 
         //Mapping of aliases to Registers
-        alias_to_register = new HashMap<String, String>();
+        aliasToRegister = new HashMap<String, String>();
 
         //Initalize the Memory Buffer
-        memory_buffer = new HashMap<String, Integer>();
+        memoryBuffer = new HashMap<String, Integer>();
 
         //indicate that the simulation has been initialized
-        is_initialized = true;
+        isInitialized = true;
     }
 
     /**
-     * Returns true when the simulation has finished
+     * Returns true when the simulation has finished.
      */
     public boolean isComplete()
     {
         boolean complete = false;
         complete = !(operations.moreOperationsQueued());
 
-        for (int i = 0; i < mem_rs.length && complete; i++) {
-            complete = !mem_rs[i].isBusy();
+        for (int i = 0; i < memRs.length && complete; i++) {
+            complete = !memRs[i].isBusy();
         }
 
-        for (int i = 0; i < alu_rs.length && complete; i++) {
-            complete = !alu_rs[i].isBusy();
+        for (int i = 0; i < aluRs.length && complete; i++) {
+            complete = !aluRs[i].isBusy();
         }
 
         return complete;
@@ -153,14 +152,14 @@ public class Simulation {
      */
     public void performStep()
     {
-        Operation to_schedule;
-        boolean op_scheduled = false;
+        Operation toSchedule;
+        boolean opScheduled = false;
 
         //increment the clock
         clock.increment();
 
         //Broadcast Reservation Station Results
-        for (ALUStation it : alu_rs) {
+        for (ALUStation it : aluRs) {
             if (it.isResultReady()) {
                 it.finalizeResult();
                 broadcast(it.getName(), it.getResult());
@@ -169,7 +168,7 @@ public class Simulation {
                 it.clear();
             }
         }
-        for (MemStation it : mem_rs) {
+        for (MemStation it : memRs) {
             if (it.isResultReady()) {
                 broadcast(it.getName(), it.getResult());
             }
@@ -180,13 +179,13 @@ public class Simulation {
         }
 
         //Update Reservation Stations -- perform cycle
-        for (ALUStation it : alu_rs) {
+        for (ALUStation it : aluRs) {
             if (it.isReady() && it.isBusy()) {
                 it.performCycle();
             }
         }
-        for (MemStation it : mem_rs) {
-            if (it.isBusy() && it.hasPriority(memory_buffer) && it.isReady()) {
+        for (MemStation it : memRs) {
+            if (it.isBusy() && it.hasPriority(memoryBuffer) && it.isReady()) {
                 it.performCycle();
             }
         }
@@ -194,56 +193,56 @@ public class Simulation {
         //Get an instruction from the head of the list
         //if the list has not been exhausted
         if (operations.moreOperationsQueued()) {
-            to_schedule = operations.getNextOperation();
+            toSchedule = operations.getNextOperation();
 
             //Parse the Instruction Comment
-            if (to_schedule.hasComment()) {
-                 parseComment(to_schedule.getComment());
+            if (toSchedule.hasComment()) {
+                 parseComment(toSchedule.getComment());
             }
 
             //Determine which set of Reservations Station(s) are
             //appropiate for an instruction
-            Integer[] rs_indices = instruction_to_station.get(to_schedule.getOpcode());
+            Integer[] rsIndices = instructionToStation.get(toSchedule.getOpcode());
             //Memory Stations
-            if (classify(to_schedule.getOpcode())) {
-                for (int i = rs_indices[0]; i <= rs_indices[rs_indices.length - 1] && !op_scheduled; i++) {
-                    if (!mem_rs[i].isBusy()) {
-                        mem_rs[i].scheduleInstruction(to_schedule, registers, 2);
-                        op_scheduled = true;
+            if (classify(toSchedule.getOpcode())) {
+                for (int i = rsIndices[0]; i <= rsIndices[rsIndices.length - 1] && !opScheduled; i++) {
+                    if (!memRs[i].isBusy()) {
+                        memRs[i].scheduleInstruction(toSchedule, registers, 2);
+                        opScheduled = true;
 
                         //Set the placeholder in the Register Files
                         //if the instruction is not a store
-                        if (!MemStation.isStore(to_schedule.getOpcode())) {
-                            registers.setRegister(to_schedule.getOperand(1), mem_rs[i].getName());
-                            alias_to_register.put(mem_rs[i].getName(), to_schedule.getOperand(1));
+                        if (!MemStation.isStore(toSchedule.getOpcode())) {
+                            registers.setRegister(toSchedule.getOperand(1), memRs[i].getName());
+                            aliasToRegister.put(memRs[i].getName(), toSchedule.getOperand(1));
 
                         }
-                        mem_rs[i].hasPriority(memory_buffer);
+                        memRs[i].hasPriority(memoryBuffer);
                     }
                 }
             }
             //ALU Stations
             else {
-                for (int i = rs_indices[0]; i <= rs_indices[rs_indices.length - 1] && !op_scheduled; i++) {
-                    if (!alu_rs[i].isBusy()) {
-                        alu_rs[i].scheduleInstruction(to_schedule, registers,
-                                                      instruction_to_time.get(to_schedule.getOpcode()));
-                        op_scheduled = true;
+                for (int i = rsIndices[0]; i <= rsIndices[rsIndices.length - 1] && !opScheduled; i++) {
+                    if (!aluRs[i].isBusy()) {
+                        aluRs[i].scheduleInstruction(toSchedule, registers,
+                                                      instructionToTime.get(toSchedule.getOpcode()));
+                        opScheduled = true;
 
-                        registers.setRegister(to_schedule.getOperand(1), alu_rs[i].getName());
-                        alias_to_register.put(alu_rs[i].getName(), to_schedule.getOperand(1));
+                        registers.setRegister(toSchedule.getOperand(1), aluRs[i].getName());
+                        aliasToRegister.put(aluRs[i].getName(), toSchedule.getOperand(1));
                     }
                 }
             }
 
-            if (op_scheduled) {
+            if (opScheduled) {
                 operations.increment();
             }
         }
     }
 
     /**
-     * Return the current clock cycle
+     * Return the current clock cycle.
      */
     public int getCurrentCycle()
     {
@@ -251,7 +250,7 @@ public class Simulation {
     }
 
     /**
-     * Return the Instruction List
+     * Return the Instruction List.
      */
     public OperationList getOperationList()
     {
@@ -259,7 +258,7 @@ public class Simulation {
     }
 
     /**
-     *Return the Regieter Files
+     * Return the Regieter Files.
      */
     public RegisterFiles getRegisterFiles()
     {
@@ -267,42 +266,42 @@ public class Simulation {
     }
 
     /**
-     * Return the Memory Reservation Stations
+     * Return the Memory Reservation Stations.
      */
     public MemStation[] getMemStations()
     {
-        return mem_rs;
+        return memRs;
     }
 
     /**
-     * Return the ALU Reservation Stations
+     * Return the ALU Reservation Stations.
      */
     public ALUStation[] getALUStations()
     {
-        return alu_rs;
+        return aluRs;
     }
 
     //Utility Functions
 
     /**
-     * Parse the comment and update the Register Files Accordingly
+     * Parse the comment and update the Register Files Accordingly.
      */
     private void parseComment(String comment)
     {
-        String[] split_1; //split on ","
-        String[] split_2; //split on "="
+        String[] split1; //split on ","
+        String[] split2; //split on "="
 
-        split_1 = comment.split(",");
+        split1 = comment.split(",");
 
         //Parse each register assignent in comment
-        for (String split_1_sub : split_1) {
-            split_2 = split_1_sub.trim().split("=");
-            registers.setRegister(split_2[0].trim(), split_2[1].trim());
+        for (String split1Sub : split1) {
+            split2 = split1Sub.trim().split("=");
+            registers.setRegister(split2[0].trim(), split2[1].trim());
         }
     }
 
     /**
-     * Classify an Instruction as Memory or Other
+     * Classify an Instruction as Memory or Other.
      */
     private boolean classify(String opcode)
     {
@@ -313,18 +312,18 @@ public class Simulation {
 
     /**
      * Broadcast the Result to all Reservation Stations
-     * Update the Register File
+     * Update the Register File.
      */
     private void broadcast(String alias, String result) {
         String register; // the register to update
 
         //remove the mapping from the memory buffer
-        if (memory_buffer.containsKey(result)) {
-            memory_buffer.remove(result);
+        if (memoryBuffer.containsKey(result)) {
+            memoryBuffer.remove(result);
         }
 
         //broadcast to all Reservation Stations
-        for (ALUStation it : alu_rs) {
+        for (ALUStation it : aluRs) {
             if (it.getQj().equals(alias)) {
                 it.setVj(result);
                 it.setQj(null);
@@ -335,22 +334,23 @@ public class Simulation {
             }
         }
 
-        for (MemStation it : mem_rs) {
+        for (MemStation it : memRs) {
             if (it.isBusy()) {
                 it.updateAddrComponents(alias, result);
             }
         }
 
          //Update the Registers
-        if (alias_to_register.containsKey(alias)) {
-            //get the register that is mapped to the alias
-            register = alias_to_register.get(alias);
+        if (aliasToRegister.containsKey(alias)) {
+            // get the register that is mapped to the alias
+            register = aliasToRegister.get(alias);
 
-            //overwrite the current register valu if the station name matched the alias
+            // overwrite the current register valu if the station name matched
+            // the alias
             if (alias.equals(registers.getRegister(register))) {
                 registers.setRegister(register, result);
             }
-            alias_to_register.remove(alias);
+            aliasToRegister.remove(alias);
         }
     }
 }

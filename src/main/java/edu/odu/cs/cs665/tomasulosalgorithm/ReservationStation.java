@@ -40,7 +40,7 @@ public abstract class ReservationStation {
      * Abstract Function to schedule the instruction.
      */
     abstract void scheduleInstruction(Operation op,
-                                      RegisterFiles reg_in, int cycles);
+                                      RegisterFiles regIn, int cycles);
 
     /**
      * Return the result.
@@ -55,7 +55,6 @@ public abstract class ReservationStation {
 
         return result;
     }
-
 
     /**
      * Function return the value of resultready.
@@ -134,12 +133,12 @@ public abstract class ReservationStation {
     /**
      * Utility function to check if the Register Value is an alias.
      */
-    protected boolean isPlaceHolder(String to_check)
+    protected boolean isPlaceHolder(String toCheck)
     {
-        return to_check.equals("Add1") || to_check.equals("Add2")
-            || to_check.equals("Mul1") || to_check.equals("Mul1")
-            || to_check.equals("Div1") || to_check.equals("Div2")
-            || to_check.equals("Load1") || to_check.equals("Load2")
-            || to_check.equals("Int1");
+        return toCheck.equals("Add1") || toCheck.equals("Add2")
+            || toCheck.equals("Mul1") || toCheck.equals("Mul1")
+            || toCheck.equals("Div1") || toCheck.equals("Div2")
+            || toCheck.equals("Load1") || toCheck.equals("Load2")
+            || toCheck.equals("Int1");
     }
 }

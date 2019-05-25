@@ -14,22 +14,22 @@ import java.io.File;
  * will be generated.
  */
 public class OperationFileParser {
-    private BufferedReader data_file; ///< The input file
+    private BufferedReader dataFile; ///< The input file
 
     /**
      * Set the input file to the default value of "a.in".
      */
     private OperationFileParser()
     {
-        this.data_file = null; //new File("a.in");
+        this.dataFile = null; //new File("a.in");
     }
 
     /**
      * Set the input file to the specified filename.
      */
-    public OperationFileParser(Reader file_in)
+    public OperationFileParser(Reader fileIn)
     {
-        this.data_file = new BufferedReader(file_in);
+        this.dataFile = new BufferedReader(fileIn);
     }
 
     /**
@@ -38,51 +38,51 @@ public class OperationFileParser {
     public void parseFile(OperationList oplist)
          throws Exception
     {
-        //FileReader in_file = new FileReader(data_file);
-        BufferedReader file_buff = new BufferedReader(data_file);
+        //FileReader inFile = new FileReader(dataFile);
+        BufferedReader fileBuff = new BufferedReader(dataFile);
 
-        String[] split_1, split_2, operands;
-        String op_portion, comment_portion = "";
+        String[] split1, split2, operands;
+        String opPortion, commentPortion = "";
         String line, operation;
         int issue = 0;
 
-        boolean comment_exists;
+        boolean commentExists;
 
-        while ((line = file_buff.readLine()) != null) {
+        while ((line = fileBuff.readLine()) != null) {
             //trim line
             line = line.trim();
 
             //only process non-empty lines
             if (line != null && !line.equals("")) {
-                //increment the issue_number
+                //increment the issueNumber
                 issue++;
 
                 //Check for comment
                 if (line.indexOf(";") >= 0) {
-                    split_1         = line.split(";");
-                    comment_portion = split_1[1].trim();
-                    comment_exists = true;
+                    split1         = line.split(";");
+                    commentPortion = split1[1].trim();
+                    commentExists = true;
                 }
                 else {
-                    split_1 = new String[1];
-                    split_1[0] = line;
-                    comment_exists = false;
-                    op_portion = line;
+                    split1 = new String[1];
+                    split1[0] = line;
+                    commentExists = false;
+                    opPortion = line;
                 }
 
                 //Split/Prse the operation & operands
-                split_2 = split_1[0].trim().split("\\s+");
-                operation = split_2[0].trim();
+                split2 = split1[0].trim().split("\\s+");
+                operation = split2[0].trim();
 
-                operands = new String[split_2.length - 1];
+                operands = new String[split2.length - 1];
 
-                for (int i = 1; i < split_2.length; i++) {
+                for (int i = 1; i < split2.length; i++) {
                     //temporary index
-                    int temp_index = split_2[i].indexOf(',');
+                    int tempIndex = split2[i].indexOf(',');
                     //check for a comma
-                    temp_index = (temp_index == -1 ? split_2[i].length() : temp_index);
+                    tempIndex = (tempIndex == -1 ? split2[i].length() : tempIndex);
 
-                    operands[i - 1] = split_2[i].substring(0, temp_index);
+                    operands[i - 1] = split2[i].substring(0, tempIndex);
                 }
 
                 if (operands.length == 3) {
@@ -90,13 +90,13 @@ public class OperationFileParser {
                                                       operands[0],
                                                       operands[1],
                                                       operands[2],
-                                                      comment_exists));
+                                                      commentExists));
                 }
                 else if (operands.length == 2) {
                         oplist.addOperation(new Operation(operation,
                                                           operands[0],
                                                           operands[1],
-                                                          comment_exists));
+                                                          commentExists));
                 }
                 else {
                     throw new Exception() {
@@ -106,8 +106,8 @@ public class OperationFileParser {
                     };
                 }
 
-                if (comment_exists) {
-                    oplist.getLastOperation().setComment(comment_portion);
+                if (commentExists) {
+                    oplist.getLastOperation().setComment(commentPortion);
                 }
 
                 oplist.getLastOperation().setIssueNum(issue);

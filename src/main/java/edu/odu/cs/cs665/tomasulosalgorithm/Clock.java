@@ -3,7 +3,7 @@ package edu.odu.cs.cs665.tomasulosalgorithm;
 /**
  * This class provides all clock cycle functionality.
  */
-public class Clock {
+public final class Clock {
     /**
      * The global clock instance.
      */

@@ -7,25 +7,25 @@ import java.util.ArrayList;
  * This class provides all operation queueing and storage funtionality.
  */
 public class OperationList {
-    private List<Operation> op_list; ///< The list op Operations
-    private int curr_op;             ///< The current Operation
+    private List<Operation> opList; ///< The list op Operations
+    private int currOp;             ///< The current Operation
 
     /**
-     * Initialize the op_list.
+     * Initialize the opList.
      */
     public OperationList()
     {
-        op_list = new ArrayList<Operation>();
-        curr_op = 1;
+        opList = new ArrayList<Operation>();
+        currOp = 1;
     }
 
     /**
      * Generate a new OperationList from the specified OperationList.
      */
-    public OperationList(OperationList to_copy)
+    public OperationList(OperationList toCopy)
     {
-        this.op_list = new ArrayList<Operation>(to_copy.op_list);
-        this.curr_op = to_copy.curr_op;
+        this.opList = new ArrayList<Operation>(toCopy.opList);
+        this.currOp = toCopy.currOp;
     }
 
     /**
@@ -33,7 +33,7 @@ public class OperationList {
      */
     public List<Operation> getOperationList()
     {
-        return new ArrayList<Operation>(op_list);
+        return new ArrayList<Operation>(opList);
     }
 
     /**
@@ -41,7 +41,7 @@ public class OperationList {
      */
     public Operation getOperation(int num)
     {
-        return op_list.get(num - 1);
+        return opList.get(num - 1);
     }
 
     /**
@@ -49,7 +49,7 @@ public class OperationList {
      */
     public Operation getNextOperation()
     {
-        return op_list.get(curr_op - 1);
+        return opList.get(currOp - 1);
     }
 
     /**
@@ -57,24 +57,26 @@ public class OperationList {
      */
     public Operation getLastOperation()
     {
-        return op_list.get(op_list.size() - 1);
+        return opList.get(opList.size() - 1);
     }
 
     /**
-     * Returns true when there is at least one Operation that hs not been scheduled.
+     * Returns true when there is at least one Operation that hs not been
+     * scheduled.
+     *
      * @return false if there is not an Operation to schedule.
      */
     public boolean moreOperationsQueued()
     {
-        return curr_op <= op_list.size();
+        return currOp <= opList.size();
     }
 
     /**
      * Add an operation to the OperationList.
      */
-    public void addOperation(Operation to_add)
+    public void addOperation(Operation toAdd)
     {
-        op_list.add(to_add);
+        opList.add(toAdd);
     }
 
     /**
@@ -82,15 +84,15 @@ public class OperationList {
      */
     public int getNumberOfOperations()
     {
-        return op_list.size();
+        return opList.size();
     }
 
     /**
-     * Set the iterator to the next Operation in the List
+     * Set the iterator to the next Operation in the List.
      */
     public void increment()
     {
-        curr_op++;
+        currOp++;
     }
 
     /**
@@ -99,10 +101,10 @@ public class OperationList {
     public String toString()
     {
         StringBuilder bld = new StringBuilder();
-        bld.append("# Operations: " + op_list.size());
+        bld.append("# Operations: " + opList.size());
 
-        for (Operation to_print : op_list) {
-            bld.append("\n" + to_print);
+        for (Operation toPrint : opList) {
+            bld.append("\n" + toPrint);
         }
 
         return bld.toString();

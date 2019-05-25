@@ -6,80 +6,98 @@ import java.util.LinkedHashMap;
  * This class provides all register functionality for
  * integer and floating point register files.
  */
-public class RegisterFiles{
-    public static final int NUM_INT_REGISTERS = 32;  ///< Total number of integer registers-- not including R0.
-    public static final int NUM_FP_REGISTERS  = 32;  ///< Total number of floating point registers.
-
-    private LinkedHashMap<String, String> registers_int; ///< Consists of all integer registers.
-    private LinkedHashMap<String, String> registers_fp;  ///< Consists of all floating point registers.
+public class RegisterFiles {
+    /**
+     * Total number of integer registers-- not including R0.
+     */
+    public static final int NUM_INT_REGISTERS = 32;
 
     /**
-     * Constructs the register files; initializes all floating point and integer registers to "0";
+     * Total number of floating point registers.
+     */
+    public static final int NUM_FP_REGISTERS  = 32;
+
+    /**
+     * All integer registers.
+     */
+    private LinkedHashMap<String, String> registersInt;
+
+    /**
+     * All floating point registers.
+     */
+    private LinkedHashMap<String, String> registersFp;
+
+    /**
+     * Constructs the register files; initializes all floating point and
+     * integer registers to "0".
      */
     public RegisterFiles()
     {
-        registers_int = new LinkedHashMap<String, String>();
-        registers_fp  = new LinkedHashMap<String, String>();
+        registersInt = new LinkedHashMap<String, String>();
+        registersFp  = new LinkedHashMap<String, String>();
 
         //Initialize R0
-        registers_int.put("R0", "0");
+        registersInt.put("R0", "0");
 
         //Initialize the Integer Registers R1 to Rn
         for (int i = 0; i < NUM_INT_REGISTERS; i++) {
-            String temp_reg =  "R" + (i + 1);
-            registers_int.put(temp_reg, "");
+            String tempReg =  "R" + (i + 1);
+            registersInt.put(tempReg, "");
         }
 
         //Initialize the FP Registers f0 to Fn
         for (int i = 0; i < NUM_FP_REGISTERS; i++) {
-            String temp_reg =  "F" + (2 * i);
-            registers_fp.put(temp_reg, "");
+            String tempReg =  "F" + (2 * i);
+            registersFp.put(tempReg, "");
         }
     }
 
     /**
      * Generates a copy of an existing RegisterFiles object.
      */
-    public RegisterFiles(RegisterFiles to_copy)
+    public RegisterFiles(RegisterFiles toCopy)
     {
-        registers_int = new LinkedHashMap<String, String>();
-        registers_fp  = new LinkedHashMap<String, String>();
+        registersInt = new LinkedHashMap<String, String>();
+        registersFp  = new LinkedHashMap<String, String>();
 
         //Copy Integer and FP Register Files
-        this.registers_int = new LinkedHashMap<String, String>(to_copy.registers_int);
-        this.registers_fp  = new LinkedHashMap<String, String>(to_copy.registers_fp);
+        this.registersInt = new LinkedHashMap<>(toCopy.registersInt);
+        this.registersFp  = new LinkedHashMap<>(toCopy.registersFp);
     }
 
     /**
-     *  Returns a LinkedHashMap that conatins a copy of the current integer register file.
+     * Returns a LinkedHashMap that conatins a copy of the current integer
+     * register file.
      */
     public LinkedHashMap<String, String> getIntegerRegisters()
     {
-        return new LinkedHashMap<String, String>(registers_int);
+        return new LinkedHashMap<String, String>(registersInt);
     }
 
     /**
-     *  Returns a LinkedHashMap that conatins a copy of the current floating point register file.
+     * Returns a LinkedHashMap that conatins a copy of the current floating
+     * point register file.
      */
     public LinkedHashMap<String, String> getFPRegisters()
     {
-        return new LinkedHashMap<String, String>(registers_fp);
+        return new LinkedHashMap<String, String>(registersFp);
     }
 
     /**
-     * Returns the current value of the specified register. An "Invalid register ID" exception is thrown if
-     * the specified register does not exist.
+     * Returns the current value of the specified register. An "Invalid
+     * register ID" exception is thrown if the specified register does not
+     * exist.
      */
-    public String getRegister(String r_id)
+    public String getRegister(String rId)
          /*throws Exception*/
     {
-        String to_return = "";
+        String toReturn = "";
 
-        if (r_id.charAt(0) == 'R') {
-            to_return = registers_int.get(r_id);
+        if (rId.charAt(0) == 'R') {
+            toReturn = registersInt.get(rId);
         }
-        else if (r_id.charAt(0) == 'F') {
-            to_return = registers_fp.get(r_id);
+        else if (rId.charAt(0) == 'F') {
+            toReturn = registersFp.get(rId);
         }
         /*else{
             throw new Exception(){
@@ -89,25 +107,25 @@ public class RegisterFiles{
             };
         }*/
 
-        if (to_return.equals("")) {
-            to_return = r_id;
+        if (toReturn.equals("")) {
+            toReturn = rId;
         }
 
-        return to_return;
+        return toReturn;
     }
 
     /**
-     * Sets a new value for the specified register. An "Invalid register ID" exception is thrown if
-     * the specified register does not exist.
+     * Sets a new value for the specified register. An "Invalid register ID"
+     * exception is thrown if the specified register does not exist.
      */
-    public void setRegister(String r_id, String val_in)
+    public void setRegister(String rId, String valIn)
         /*throws Exception*/
     {
-        if (r_id.charAt(0) == 'R' && registers_int.containsKey(r_id)) {
-            registers_int.put(r_id, val_in);
+        if (rId.charAt(0) == 'R' && registersInt.containsKey(rId)) {
+            registersInt.put(rId, valIn);
         }
-        else if (r_id.charAt(0) == 'F' && registers_fp.containsKey(r_id)) {
-            registers_fp.put(r_id, val_in);
+        else if (rId.charAt(0) == 'F' && registersFp.containsKey(rId)) {
+            registersFp.put(rId, valIn);
         }
         /*
         else{
@@ -118,7 +136,7 @@ public class RegisterFiles{
             };
         }*/
 
-        //System.out.println( r_id + " " + val_in);
+        //System.out.println( rId + " " + valIn);
     }
 
     /**
@@ -127,8 +145,8 @@ public class RegisterFiles{
     public String toString()
     {
         return "Integer Registers: " + NUM_INT_REGISTERS + "\n"
-             + "    Values: \n" + registers_int.toString() + "\n"
+             + "    Values: \n" + registersInt.toString() + "\n"
              + "FP Registers:      " + NUM_FP_REGISTERS + "\n"
-             + "    Values: \n" + registers_fp.toString() + "\n";
+             + "    Values: \n" + registersFp.toString() + "\n";
     }
 }

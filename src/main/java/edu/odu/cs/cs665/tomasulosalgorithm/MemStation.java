@@ -84,11 +84,11 @@ public class MemStation extends ReservationStation {
     /**
      * Sets the address.
      *
-     * @param address replacement address value
+     * @param addr replacement address value
      */
-    public void setAddress(String address)
+    public void setAddress(String addr)
     {
-        this.address = address;
+        this.address = addr;
     }
 
     /**
@@ -157,24 +157,20 @@ public class MemStation extends ReservationStation {
 
     /**
      * Utility function to update the address.
+     *
+     * @throws NumberFormatException if addrComp elements are not integers.
      */
     private void updateAddress()
         throws NumberFormatException
     {
-        // temporary integers to hold the intermediate parsing results
-        int tempInt1, tempInt2;
-
         //default result if the parsing fails
         result = "M(" + addrComp[0]  + "," + addrComp[1]  + ")";
 
         //attempt to parse the values as integers
-
-        tempInt1 = Integer.parseInt(addrComp[0]);
-
-        tempInt2 = Integer.parseInt(addrComp[1]);
+        int tempInt1 = Integer.parseInt(addrComp[0]);
+        int tempInt2 = Integer.parseInt(addrComp[1]);
 
         result = "M(" + tempInt1 + tempInt2 + ")";
-        
 
         address = result;
     }
@@ -196,22 +192,20 @@ public class MemStation extends ReservationStation {
      */
     public boolean hasPriority(HashMap<String, Integer> memoryBuffer)
     {
-        boolean  toReturn = false;
-
         if (memoryBuffer.containsKey(result)) {
             if (memoryBuffer.get(result).intValue() >= operation.getIssueNum()) {
-                 toReturn = true;
+                 return true;
             }
         }
         else {
             if (operation != null) {
                 memoryBuffer.put(result,
                                  Integer.valueOf(operation.getIssueNum()));
-                toReturn = true;
+                return true;
             }
         }
 
-        return toReturn;
+        return false;
     }
 
     /**

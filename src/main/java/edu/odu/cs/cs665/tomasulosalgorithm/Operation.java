@@ -4,16 +4,16 @@ package edu.odu.cs.cs665.tomasulosalgorithm;
  * This class provides all Operation functionality.
  */
 public class Operation {
-    private String opcode;           ///< Contains the opcode.
-    private String comment;          ///< Stores the comment.
-    private String[] operands;       ///< Stores all operands.
-    private int exec_start, exec_end;///< start and end of executions respectively
-    private int time_write;          ///< Write time
-    private int issue;               ///< issue number
+    private String opcode;     ///< Contains the opcode.
+    private String comment;    ///< Stores the comment.
+    private String[] operands; ///< Stores all operands.
+    private int execStart;     ///< Start of execution
+    private int execEnd;       ///< End of execution
+    private int timeWrite;     ///< Write time
+    private int issue;         ///< issue number
 
-    private boolean has_comment; ///< Specifies the existance of a comment
+    private boolean commentExists; ///< Specifies the existance of a comment
     private boolean scheduled;    ///< Set to true when the instruction has been scheduled
-
 
     public Operation()
     {
@@ -23,15 +23,17 @@ public class Operation {
     /**
      * Construct an Operation object give 1 opcode, 3 operands and a boolean.
      */
-    public Operation(String opcode, String operand_1, String operand_2,
-                     String operand_3, boolean has_comment)
+    public Operation(String opcode, String operand1, String operand2,
+                     String operand3, boolean commentExists)
     {
         this.opcode      = opcode;
-        this.operands    = new String[]{operand_1, operand_2, operand_3};
+        this.operands    = new String[]{operand1, operand2, operand3};
         this.comment     = "";
-        this.has_comment = has_comment;
+        this.commentExists = commentExists;
 
-        exec_start = exec_end = time_write = -1;
+        execStart = -1;
+        execEnd   = -1;
+        timeWrite = -1;
         scheduled = false;
         issue = 0;
     }
@@ -39,24 +41,27 @@ public class Operation {
     /**
      * Construct an Operation object give 1 opcode, 2 operands and a boolean.
      */
-    public Operation(String opcode, String operand_1, String operand_2, boolean has_comment)
+    public Operation(String opcode,
+                     String operand1, String operand2, boolean commentExists)
     {
         //break apart the second operand
-        String temp = operand_2; //temporary string
-        String operand_3;
+        String temp = operand2; //temporary string
+        String operand3;
 
-        int temp_index;          // temporary index
-        temp_index = temp.indexOf('(');
+        int tempIndex;          // temporary index
+        tempIndex = temp.indexOf('(');
 
-        operand_3 = temp.substring(temp_index + 1, temp.indexOf(')'));
-        operand_2 = temp.substring(0, temp_index);
+        operand3 = temp.substring(tempIndex + 1, temp.indexOf(')'));
+        operand2 = temp.substring(0, tempIndex);
 
         this.opcode      = opcode;
-        this.operands    = new String[]{operand_1, operand_2, operand_3};
+        this.operands    = new String[]{operand1, operand2, operand3};
         this.comment     = "";
-        this.has_comment = has_comment;
+        this.commentExists = commentExists;
 
-        exec_start = exec_end = time_write = -1;
+        execStart = -1;
+        execEnd   = -1;
+        timeWrite = -1;
         scheduled = false;
         issue = 0;
     }
@@ -64,23 +69,24 @@ public class Operation {
     /**
      * Construct an Operation object given an existing Operation object.
      */
-    public Operation(Operation to_copy)
+    public Operation(Operation toCopy)
     {
-        this.opcode   = to_copy.opcode;
+        this.opcode   = toCopy.opcode;
 
-        this.operands = new String[ to_copy.operands.length ];
-        System.arraycopy(to_copy.operands, 0, this.operands, 0, to_copy.operands.length);
+        this.operands = new String[toCopy.operands.length];
+        System.arraycopy(toCopy.operands, 0,
+                         this.operands, 0, toCopy.operands.length);
 
-        this.comment  = to_copy.comment;
-        this.issue = to_copy.issue;
+        this.comment  = toCopy.comment;
+        this.issue = toCopy.issue;
     }
 
     /**
-     * Return whether a comment exists
+     * Return whether a comment exists.
      */
     public boolean hasComment()
     {
-        return has_comment;
+        return commentExists;
     }
 
     /**
@@ -100,7 +106,7 @@ public class Operation {
     }
 
     /**
-     *Get the operand at the specified position. Positions start at "1".
+     * Get the operand at the specified position. Positions start at "1".
      */
     public String getOperand(int number)
     {
@@ -108,7 +114,7 @@ public class Operation {
     }
 
     /**
-     * Return the number of operands
+     * Return the number of operands.
      */
     public int getNumberOfOperands()
     {
@@ -131,23 +137,23 @@ public class Operation {
     }
 
     /**
-     * Get execution start
+     * Get execution start.
      */
     public int getExecStart()
     {
-        return exec_start;
+        return execStart;
     }
 
     /**
-     *Get execution end
+     * Get execution end.
      */
     public int getExecEnd()
     {
-        return exec_end;
+        return execEnd;
     }
 
     /**
-     *Get the issue number
+     * Get the issue number.
      */
     public int getIssueNum()
     {
@@ -155,34 +161,34 @@ public class Operation {
     }
 
     /**
-     *Get execution description
+     * Get execution description.
      */
     public String getExecution()
     {
-        String to_return = "";
+        String toReturn = "";
 
-        if (exec_start > 0) {
-            to_return += exec_start;
+        if (execStart > 0) {
+            toReturn += execStart;
 
-            if (exec_end > -1)
+            if (execEnd > -1)
             {
-                to_return += "--" + exec_end;
+                toReturn += "--" + execEnd;
             }
         }
 
-        return to_return;
+        return toReturn;
     }
 
     /**
-     *Get the time the result was written
+     * Get the time the result was written.
      */
     public int getWriteTime()
     {
-        return time_write;
+        return timeWrite;
     }
 
     /**
-     * Return whether the instruction has been scheduled
+     * Return whether the instruction has been scheduled.
      */
     boolean isScheduled()
     {
@@ -198,7 +204,7 @@ public class Operation {
     }
 
     /**
-     * Set a comment
+     * Set a comment.
      */
     public void setComment(String comment)
     {
@@ -209,7 +215,7 @@ public class Operation {
      *Set the operand at the specified position. Positions start at "1".
     ///Return an error if the position is invalid.
      */
-    public void setOperand(int number, String operand_in)
+    public void setOperand(int number, String operandIn)
          throws Exception
     {
         if (number < 1 || number > operands.length) {
@@ -221,35 +227,35 @@ public class Operation {
             };
         }
 
-        operands[number - 1] = operand_in;
+        operands[number - 1] = operandIn;
     }
 
     /**
-     * Set execution start
+     * Set execution start.
      */
     public void setExecStart(int n)
     {
-        exec_start = n;
+        execStart = n;
     }
 
     /**
-     * Set execution end
+     * Set execution end.
      */
     public void setExecEnd(int n)
     {
-        exec_end = n;
+        execEnd = n;
     }
 
     /**
-     * Set the time the result was written
+     * Set the time the result was written.
      */
     public void setWriteTime(int n)
     {
-        time_write = n;
+        timeWrite = n;
     }
 
     /**
-     * Set the scheduled flag
+     * Set the scheduled flag.
      */
     public void setScheduled()
     {
@@ -257,7 +263,7 @@ public class Operation {
     }
 
     /**
-     * Set the issue number
+     * Set the issue number.
      */
     public void setIssueNum(int i)
     {
@@ -276,7 +282,7 @@ public class Operation {
             bld.append(" " + operands[i]);
         }
 
-        if (has_comment) {
+        if (commentExists) {
             bld.append(" ; " + comment);
         }
 
