@@ -11,7 +11,7 @@ import java.io.BufferedReader;
 public class OperationFileParser {
 
     /**
-     * Input file containg operations.
+     * Input file containing operations.
      */
     private BufferedReader dataFile;
 
@@ -42,26 +42,23 @@ public class OperationFileParser {
     public void parseFile(OperationList oplist)
          throws Exception
     {
-        //FileReader inFile = new FileReader(dataFile);
-        BufferedReader fileBuff = new BufferedReader(dataFile);
+        BufferedReader fileBuff = dataFile;
 
         String[] split1, split2, operands;
         String opPortion, commentPortion = "";
         String line, operation;
-        int issue = 0;
+        int issue = 0; // Issue Number
 
         boolean commentExists;
 
         while ((line = fileBuff.readLine()) != null) {
-            //trim line
             line = line.trim();
 
             //only process non-empty lines
-            if (line != null && !line.equals("")) {
-                //increment the issueNumber
+            if (line != null && !line.isEmpty()) {
                 issue++;
 
-                //Check for comment
+                // Check for comment
                 if (line.indexOf(";") >= 0) {
                     split1         = line.split(";");
                     commentPortion = split1[1].trim();
@@ -74,7 +71,7 @@ public class OperationFileParser {
                     opPortion = line;
                 }
 
-                //Split/Prse the operation & operands
+                //Split/Parse the operation & operands
                 split2 = split1[0].trim().split("\\s+");
                 operation = split2[0].trim();
 
@@ -120,13 +117,5 @@ public class OperationFileParser {
                 oplist.getLastOperation().setIssueNum(issue);
             }
         }
-    }
-
-    /**
-     * Generates the string representation of the OperationFileParser Object.
-     */
-    public String toString()
-    {
-        return "Operation File Parser";
     }
 }
